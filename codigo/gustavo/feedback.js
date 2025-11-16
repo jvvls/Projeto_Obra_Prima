@@ -1,8 +1,62 @@
-const API_URL = 'http://localhost:3000/feedbacks';
-const feedbackForm = document.getElementById('feedbackForm');
+// URLs da API
+const API_URL_FEEDBACKS = 'http://localhost:3000/feedbacks';
+const API_URL_CIDADAOS = 'http://localhost:3000/cidadaos';
 
+// Elementos do Formulário
+const feedbackForm = document.getElementById('feedbackForm');
+const searchCpfBtn = document.getElementById('searchCpfBtn');
+const cpfInput = document.getElementById('cpf');
+const nomeInput = document.getElementById('nome');
+const emailInput = document.getElementById('email');
+
+// --- NOVO: Evento para buscar o Cidadão por CPF ---
+searchCpfBtn.addEventListener('click', async () => {
+  const cpf = cpfInput.value;
+  if (!cpf || cpf.length < 14) {
+    alert('Por favor, digite um CPF válido.');
+    return;
+  }
+
+  try {
+    // Busca no db.json por um cidadão com este CPF
+    // A URL fica: http://localhost:3000/cidadaos?dadosPessoais.cpf=178.197.816-61
+    // ATENÇÃO: json-server pode ter dificuldade com campos aninhados.
+    // Vamos buscar TODOS e filtrar no front-end, é mais garantido.
+
+    const response = await fetch(API_URL_CIDADAOS);
+    if (!response.ok) throw new Error('Erro ao buscar cidadãos.');
+
+    const cidadaos = await response.json();
+
+    // Filtra pelo CPF exato
+    const cidadao = cidadaos.find((c) => c.dadosPessoais.cpf === cpf);
+
+    if (cidadao) {
+      // Encontrou!
+      nomeInput.value = cidadao.dadosPessoais.nomeCompleto.trim();
+      emailInput.value = cidadao.contato.email;
+      alert('Cidadão encontrado e dados preenchidos!');
+    } else {
+      // Não encontrou
+      alert('CPF não encontrado. Verifique o CPF ou cadastre-se primeiro.');
+      nomeInput.value = '';
+      emailInput.value = '';
+    }
+  } catch (error) {
+    console.error('Erro:', error);
+    alert('Não foi possível conectar ao banco de dados para verificar o CPF.');
+  }
+});
+
+// --- Evento de SUBMIT (Enviar Feedback) ---
 feedbackForm.addEventListener('submit', async function (e) {
   e.preventDefault();
+
+  // Verifica se o nome e email foram preenchidos (após a busca)
+  if (!nomeInput.value || !emailInput.value) {
+    alert('Por favor, busque e valide seu CPF antes de enviar.');
+    return;
+  }
 
   const anexoInput = document.getElementById('anexo');
   // Simula o caminho do anexo como no db.json
@@ -12,9 +66,9 @@ feedbackForm.addEventListener('submit', async function (e) {
   // Monta o objeto conforme a estrutura do db.json
   const formData = {
     obra: document.getElementById('obra').value,
-    nome: document.getElementById('nome').value,
-    cpf: document.getElementById('cpf').value,
-    email: document.getElementById('email').value,
+    nome: nomeInput.value,
+    cpf: cpfInput.value,
+    email: emailInput.value,
     tipo: document.getElementById('tipo').value,
     titulo: document.getElementById('titulo').value,
     descricao: document.getElementById('descricao').value,
@@ -23,7 +77,8 @@ feedbackForm.addEventListener('submit', async function (e) {
   };
 
   try {
-    const response = await fetch(API_URL, {
+    const response = await fetch(API_URL_FEEDBACKS, {
+      // URL correta
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(formData),
@@ -32,9 +87,7 @@ feedbackForm.addEventListener('submit', async function (e) {
     if (!response.ok) throw new Error('Erro ao enviar os dados.');
 
     alert('Solicitação/Feedback enviado com sucesso!');
-    // Limpa o formulário após o envio
     feedbackForm.reset();
-    // Opcional: Redireciona para a tela inicial ou de listagem
     window.location.href = 'listagem.html';
   } catch (error) {
     console.error('Erro:', error);
@@ -42,7 +95,7 @@ feedbackForm.addEventListener('submit', async function (e) {
   }
 });
 
-// --- Formatador de CPF (Reutilizado do seu script.js) ---
+// --- Formatador de CPF (Seu código original, está correto) ---
 document.getElementById('cpf').addEventListener('input', function (e) {
   let value = e.target.value.replace(/\D/g, '');
   if (value.length > 11) value = value.substring(0, 11);
