@@ -1,8 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Certifique-se de que seu server.js está rodando na porta 3000
     const API_URL = "http://localhost:3000/feedbacks"; 
-
-    // === 1. Função para Excluir feedback ===
     async function excluirFeedback(id, nome) {
         if (!confirm(`Tem certeza que deseja excluir o feedback de ${nome} (ID: ${id})? Essa ação é irreversível.`)) {
             return;
@@ -14,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (resposta.ok) {
                 const data = await resposta.json();
                 alert(data.message || `Feedback (ID: ${id}) de ${nome} removido com sucesso!`);
-                carregarFeedbacks(); // Recarrega a lista
+                carregarFeedbacks(); 
             } else {
                 const erro = await resposta.json();
                 alert(erro.error || "Erro ao excluir feedback.");
@@ -25,7 +22,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // === 2. Carregar e Renderizar Feedbacks ===
     async function carregarFeedbacks() {
         try {
             const resposta = await fetch(API_URL);
@@ -67,7 +63,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 container.appendChild(card);
             });
 
-            // Inicializa listeners para os novos elementos
             inicializarLikesDislikes();
             inicializarExclusao();
 
@@ -80,7 +75,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function inicializarExclusao() {
         document.querySelectorAll(".delete-btn").forEach(btn => {
-            // Usa e.currentTarget para garantir que o listener é o botão
             btn.addEventListener("click", (e) => { 
                 const id = parseInt(e.currentTarget.dataset.id);
                 const nome = e.currentTarget.dataset.nome;
@@ -90,11 +84,8 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     }
-
-    // === 3. Sistema de Like/Dislike ===
     function inicializarLikesDislikes() {
         const extractCount = (btn) => {
-            // Extrai o número do texto do botão, ignorando o ícone
             const textContent = btn.textContent.trim().replace(/[^0-9]/g, ''); 
             return parseInt(textContent) || 0;
         };
@@ -123,7 +114,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         updateCount(otherBtn, otherCount - 1);
                     }
                 }
-                // Nota: Para salvar o voto permanentemente, você precisaria de uma rota PUT/PATCH na API aqui.
+               
             };
 
             if (likeBtn && dislikeBtn) {
@@ -133,6 +124,5 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Inicializa o carregamento da API
     carregarFeedbacks();
 });

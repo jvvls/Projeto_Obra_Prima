@@ -1,4 +1,3 @@
-/* Variáveis de Cores */
 :root {
     --color-primary: #38A169;
     --color-secondary: #E6F7E9;
@@ -11,8 +10,6 @@
     --color-sugestao: #FFC107;
     --color-info: #2196F3;
 }
-
-/* Reset Básico */
 * {
     margin: 0;
     padding: 0;
@@ -24,8 +21,6 @@ body {
     background-color: var(--color-background);
     color: var(--color-text-dark);
 }
-
-/* ---------------- HEADER & NAV ---------------- */
 
 .header {
     background-color: var(--color-primary);
@@ -76,8 +71,6 @@ body {
     margin-right: 10px;
 }
 
-/* ---------------- LAYOUT PRINCIPAL ---------------- */
-
 .main-container {
     display: flex;
     min-height: calc(100vh - 50px); 
@@ -98,8 +91,6 @@ body {
     gap: 30px; 
     align-items: flex-start; 
 }
-
-/* ---------------- COLUNA DETALHES DA OBRA ---------------- */
 
 .obra-details { 
     width: 350px; 
@@ -136,8 +127,6 @@ body {
     border-top: 1px solid #ddd;
 }
 
-/* ---------------- COLUNA DE FEEDBACKS ---------------- */
-
 .feedback-section { 
     flex-grow: 1; 
     max-width: 650px;
@@ -170,7 +159,6 @@ body {
     gap: 15px; 
 }
 
-/* Estilo do Cartão de Feedback Individual */
 .feedback-card-detail {
     background-color: #fff;
     border-radius: 8px;
@@ -179,7 +167,6 @@ body {
     border-left: 5px solid var(--color-primary);
 }
 
-/* Cores de Borda por Tipo */
 .type-elogio { border-left-color: var(--color-elogio); }
 .type-reclamacao { border-left-color: var(--color-reclamacao); }
 .type-sugestao { border-left-color: var(--color-sugestao); }
@@ -239,10 +226,10 @@ body {
     font-size: 0.9rem;
 }
 
-/* Rodapé e Controles de Voto e Exclusão */
+
 .card-footer {
     display: flex;
-    justify-content: space-between; /* Alinha Like/Dislike à esquerda e Excluir à direita */
+    justify-content: space-between; 
     border-top: 1px solid #eee;
     padding-top: 10px; 
 }
@@ -278,9 +265,8 @@ body {
 .like-btn i { color: var(--color-elogio); }
 .dislike-btn i { color: var(--color-reclamacao); }
 
-/* Estilo do Botão de Excluir (CRÍTICO para o layout) */
 .delete-btn {
-    background-color: #dc3545; /* Vermelho */
+    background-color: #dc3545;
     color: var(--color-text-light);
     border: none !important; 
     padding: 6px 12px !important;
@@ -291,14 +277,13 @@ body {
     align-items: center;
     gap: 5px;
     transition: background-color 0.2s;
-    font-size: 0.9rem; /* Ajuste o tamanho da fonte para manter a proporção */
+    font-size: 0.9rem;
 }
 
 .delete-btn:hover {
     background-color: #c82333;
 }
 
-/* ---------------- RESPONSIVIDADE ---------------- */
 @media (max-width: 900px) {
     .content {
         flex-direction: column;
