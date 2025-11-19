@@ -58,11 +58,17 @@ Empresas e órgãos públicos responsáveis pelas obras, que terão um canal mod
 - **Matriz CSD:**
 
 ![CSD](images/CSD.png)
+
 - **Mapa de stakeholders:**
+
 ![stakeholders](images/stakeholders.png)
+
 - **Entrevista qualitativa:**
+
 ![entrevistas](images/entrevistas.png)
+
 - **Highlights de pesquisa:**
+
 ![highlight](images/highlights.png)
 
 
