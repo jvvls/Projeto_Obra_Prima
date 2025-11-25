@@ -11,6 +11,8 @@ const obrasGrid = document.getElementById('obrasGrid');
 const API = "http://localhost:3000/obras";
 const userDropdownToggle = document.getElementById('userDropdownToggle');
 const userDropdown = document.getElementById('userDropdown');
+const userNameSpan = document.querySelector('.user span');
+const logoutBtn = document.getElementById('logoutBtn');
 const toggleFontBtn = document.getElementById('toggleFont');
 const mapsBox = document.querySelector('.maps-box');
 const mapContainer = document.getElementById('map');
@@ -86,6 +88,24 @@ function updateView(obras) {
 }
 
 // === GRID ===
+function resolveImageUrl(rawUrl) {
+  if (!rawUrl || typeof rawUrl !== 'string') return './img/Logo2.png';
+  const cleanUrl = rawUrl.trim();
+  try {
+    if (
+      cleanUrl.startsWith('http://localhost') ||
+      cleanUrl.startsWith('https://') ||
+      cleanUrl.startsWith('http://')
+    ) {
+      return cleanUrl;
+    }
+    const localAsset = cleanUrl.replace(/^\.?\//, '');
+    return `./${localAsset}`;
+  } catch (e) {
+    return './img/Logo2.png';
+  }
+}
+
 function renderGrid(obras) {
   obrasGrid.innerHTML = '';
   if (!obras.length) {
@@ -98,7 +118,7 @@ function renderGrid(obras) {
     card.classList.add('card');
 
     const imgSrc = Array.isArray(obra.anexos)
-      ? (obra.anexos.find(a => a.tipo === "imagem")?.url || './img/Logo2.png')
+      ? resolveImageUrl(obra.anexos.find(a => a.tipo === "imagem")?.url)
       : './img/Logo2.png';
 
     card.innerHTML = `
@@ -109,7 +129,6 @@ function renderGrid(obras) {
 
     obrasGrid.appendChild(card);
 
-    // Evento do botão de detalhes
     const detalhesBtn = card.querySelector('.detalhesBtn');
     detalhesBtn.addEventListener('click', () => showDetalhesSidebar(obra));
   });
@@ -132,16 +151,18 @@ function renderMap(obras) {
     const lng = parseFloat(obra.longitude || obra.endereco?.lng);
 
     if (!isNaN(lat) && !isNaN(lng)) {
-      const marker = L.marker([lat, lng]).addTo(markersLayer);
+      const marker = L.marker([lat, lng]);
       marker.bindPopup(`
         <b>${obra.titulo}</b><br>
         ${obra.endereco?.bairro || ''}, ${obra.endereco?.cidade || ''}<br>
         <small>${obra.status}</small>
       `);
+      markersLayer.addLayer(marker);
     }
   });
 
-  if (markersLayer.getLayers().length > 0) {
+  const markerList = markersLayer.getLayers ? markersLayer.getLayers() : [];
+  if (markerList.length > 0 && mapInstance && markersLayer.getBounds) {
     mapInstance.fitBounds(markersLayer.getBounds());
   }
 }
@@ -198,6 +219,43 @@ toggleFontBtn.addEventListener('click', () => {
   const isLarge = document.body.classList.toggle('font-large');
   localStorage.setItem('fontLarge', isLarge);
 });
+
+// === SESSÃO E LOGOUT ===
+function redirectToLogin() {
+  window.location.href = 'login.html';
+}
+
+function loadUserFromSession() {
+  try {
+    const stored = localStorage.getItem('obraPrimaUser');
+    if (!stored) {
+      redirectToLogin();
+      return;
+    }
+    const user = JSON.parse(stored);
+    if (!user || !user.nome) {
+      redirectToLogin();
+      return;
+    }
+    if (userNameSpan) {
+      userNameSpan.textContent = user.nome;
+    }
+  } catch (error) {
+    console.error('Falha ao carregar sessão:', error);
+    redirectToLogin();
+  }
+}
+
+function handleLogout() {
+  localStorage.removeItem('obraPrimaUser');
+  redirectToLogin();
+}
+
+loadUserFromSession();
+
+if (logoutBtn) {
+  logoutBtn.addEventListener('click', handleLogout);
+}
 
 // === TROCAR ENTRE GRID E MAPA ===
 mapsBox.addEventListener('click', () => {
