@@ -139,37 +139,548 @@ async function loadTimelineContent() {
 async function loadPublicacoesContent() {
   const container = document.getElementById('publicacoes');
   if (!container) return;
-  container.innerHTML = '<div class="detalhes-card"><p>Carregando publicações...</p></div>';
+  container.innerHTML = '<div class="detalhes-card"><p>Carregando feedbacks...</p></div>';
+
+  if (!currentObraDetalhe || !currentObraDetalhe.titulo) {
+    container.innerHTML = '<div class="detalhes-card"><p>Nenhuma obra selecionada.</p></div>';
+    return;
+  }
+
   try {
-    const res = await fetch('../lucas/sprint02/feed.html');
-    if (!res.ok) throw new Error('Falha ao carregar publicações');
+    const API_URL = 'http://localhost:3000/feedbacks';
+    const res = await fetch(API_URL);
+    if (!res.ok) throw new Error('Falha ao buscar feedbacks');
+    
+    const todosFeedbacks = await res.json();
+    
+    // Filtra feedbacks pela obra atual (compara o título da obra com o campo "obra" do feedback)
+    const obraTitulo = currentObraDetalhe.titulo;
+    const feedbacksFiltrados = todosFeedbacks.filter(fb => 
+      fb.obra && fb.obra.trim().toLowerCase() === obraTitulo.trim().toLowerCase()
+    );
+
+    // Renderiza os feedbacks
+    renderFeedbacks(container, feedbacksFiltrados, obraTitulo);
+  } catch (e) {
+    container.innerHTML = '<div class="detalhes-card"><p>Não foi possível carregar os feedbacks. Verifique se o servidor está rodando.</p></div>';
+    console.error('Erro ao carregar feedbacks:', e);
+  }
+}
+
+function renderFeedbacks(container, feedbacks, obraTitulo) {
+  container.innerHTML = '';
+
+  // Cria o cabeçalho da seção
+  const header = document.createElement('div');
+  header.style.marginBottom = '20px';
+  header.style.display = 'flex';
+  header.style.justifyContent = 'space-between';
+  header.style.alignItems = 'center';
+  header.innerHTML = `
+    <h3 style="margin-bottom: 10px; margin: 0;">Feedbacks da Obra: ${escapeHtmlValue(obraTitulo)}</h3>
+    <button id="btnAdicionarFeedback" type="button" style="background: #27ae60; color: white; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-weight: bold; transition: background-color 0.2s;">
+      + Adicionar Feedback
+    </button>
+  `;
+  container.appendChild(header);
+  
+  // Adiciona event listener ao botão
+  const btnAdicionar = header.querySelector('#btnAdicionarFeedback');
+  if (btnAdicionar) {
+    btnAdicionar.addEventListener('click', () => {
+      showFeedbackForm(obraTitulo);
+    });
+  }
+
+  // Cria o container de feedbacks
+  const feedbackList = document.createElement('div');
+  feedbackList.className = 'feedback-list';
+  feedbackList.style.display = 'flex';
+  feedbackList.style.flexDirection = 'column';
+  feedbackList.style.gap = '15px';
+
+  if (feedbacks.length === 0) {
+    feedbackList.innerHTML = '<div class="detalhes-card"><p>Nenhum feedback cadastrado para esta obra.</p></div>';
+    container.appendChild(feedbackList);
+    return;
+  }
+
+  // Renderiza cada feedback
+  feedbacks.forEach(fb => {
+    const card = document.createElement('div');
+    card.className = `feedback-card-detail type-${(fb.tipo || 'geral').toLowerCase()}`;
+    card.style.cssText = `
+      background: #fff;
+      border-radius: 8px;
+      padding: 15px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      border-left: 4px solid ${getTipoColor(fb.tipo)};
+    `;
+
+    const tipoFormatado = formatTipo(fb.tipo);
+    const dataFormatada = formatFeedbackDate(fb.dataEnvio);
+    const feedbackId = fb.id;
+    const currentLikes = fb.likes || 0;
+    const currentDislikes = fb.dislikes || 0;
+
+    card.innerHTML = `
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+        <span style="background: ${getTipoColor(fb.tipo)}; color: white; padding: 4px 12px; border-radius: 12px; font-size: 0.85em; font-weight: bold;">
+          ${tipoFormatado}
+        </span>
+        <span style="font-size: 0.85em; color: #666;">Postado por: ${escapeHtmlValue(fb.nome || 'Anônimo')}</span>
+      </div>
+      <h4 style="margin: 10px 0 5px 0; color: #333; font-size: 1.1em;">${escapeHtmlValue(fb.titulo || 'Sem Título')}</h4>
+      <p style="margin: 10px 0; color: #555; line-height: 1.5;">${escapeHtmlValue(fb.descricao || '')}</p>
+      ${fb.anexo ? `<img src="${fb.anexo}" alt="Anexo" style="max-width: 100%; border-radius: 4px; margin-top: 10px;" onerror="this.style.display='none'">` : ''}
+      <div style="margin-top: 10px; font-size: 0.85em; color: #888;">
+        ${dataFormatada}
+      </div>
+      <div style="display: flex; gap: 10px; margin-top: 15px; align-items: center;">
+        <button class="like-btn" data-feedback-id="${feedbackId}" data-action="like" style="background: #4CAF50; color: white; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; transition: background-color 0.2s;">
+          👍 <span class="like-count">${currentLikes}</span>
+        </button>
+        <button class="dislike-btn" data-feedback-id="${feedbackId}" data-action="dislike" style="background: #F44336; color: white; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; transition: background-color 0.2s;">
+          👎 <span class="dislike-count">${currentDislikes}</span>
+        </button>
+      </div>
+    `;
+
+    feedbackList.appendChild(card);
+  });
+
+  container.appendChild(feedbackList);
+  
+  // Adiciona event listeners aos botões de like/dislike
+  setupLikeDislikeButtons(container);
+}
+
+async function setupLikeDislikeButtons(container) {
+  const likeButtons = container.querySelectorAll('.like-btn');
+  const dislikeButtons = container.querySelectorAll('.dislike-btn');
+
+  likeButtons.forEach(btn => {
+    btn.addEventListener('click', async (e) => {
+      e.preventDefault();
+      const feedbackId = btn.getAttribute('data-feedback-id');
+      const dislikeBtn = container.querySelector(`.dislike-btn[data-feedback-id="${feedbackId}"]`);
+      
+      // Verifica se já está ativo (já deu like)
+      const isActive = btn.classList.contains('active');
+      
+      if (isActive) {
+        // Remove o like
+        await updateFeedbackReaction(feedbackId, 'like', -1);
+        btn.classList.remove('active');
+        updateButtonCount(btn, -1);
+      } else {
+        // Adiciona like e remove dislike se existir
+        if (dislikeBtn && dislikeBtn.classList.contains('active')) {
+          await updateFeedbackReaction(feedbackId, 'dislike', -1);
+          dislikeBtn.classList.remove('active');
+          updateButtonCount(dislikeBtn, -1);
+        }
+        await updateFeedbackReaction(feedbackId, 'like', 1);
+        btn.classList.add('active');
+        updateButtonCount(btn, 1);
+      }
+    });
+  });
+
+  dislikeButtons.forEach(btn => {
+    btn.addEventListener('click', async (e) => {
+      e.preventDefault();
+      const feedbackId = btn.getAttribute('data-feedback-id');
+      const likeBtn = container.querySelector(`.like-btn[data-feedback-id="${feedbackId}"]`);
+      
+      // Verifica se já está ativo (já deu dislike)
+      const isActive = btn.classList.contains('active');
+      
+      if (isActive) {
+        // Remove o dislike
+        await updateFeedbackReaction(feedbackId, 'dislike', -1);
+        btn.classList.remove('active');
+        updateButtonCount(btn, -1);
+      } else {
+        // Adiciona dislike e remove like se existir
+        if (likeBtn && likeBtn.classList.contains('active')) {
+          await updateFeedbackReaction(feedbackId, 'like', -1);
+          likeBtn.classList.remove('active');
+          updateButtonCount(likeBtn, -1);
+        }
+        await updateFeedbackReaction(feedbackId, 'dislike', 1);
+        btn.classList.add('active');
+        updateButtonCount(btn, 1);
+      }
+    });
+  });
+}
+
+async function updateFeedbackReaction(feedbackId, type, change) {
+  try {
+    const API_URL = `http://localhost:3000/feedbacks/${feedbackId}`;
+    
+    // Busca o feedback atual
+    const res = await fetch(API_URL);
+    if (!res.ok) throw new Error('Erro ao buscar feedback');
+    
+    const feedback = await res.json();
+    
+    // Atualiza o contador
+    const currentValue = feedback[type === 'like' ? 'likes' : 'dislikes'] || 0;
+    const newValue = Math.max(0, currentValue + change);
+    
+    // Atualiza no backend
+    const updateRes = await fetch(API_URL, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        [type === 'like' ? 'likes' : 'dislikes']: newValue
+      })
+    });
+    
+    if (!updateRes.ok) throw new Error('Erro ao atualizar feedback');
+    
+    return newValue;
+  } catch (error) {
+    console.error('Erro ao atualizar reação:', error);
+    throw error;
+  }
+}
+
+function updateButtonCount(button, change) {
+  const countSpan = button.querySelector('span.like-count, span.dislike-count');
+  if (countSpan) {
+    const currentCount = parseInt(countSpan.textContent) || 0;
+    const newCount = Math.max(0, currentCount + change);
+    countSpan.textContent = newCount;
+  }
+}
+
+async function showFeedbackForm(obraTitulo) {
+  if (!detalhesContent) return;
+  
+  detalhesContent.innerHTML = '<div class="detalhes-card"><p>Carregando formulário...</p></div>';
+  
+  try {
+    const res = await fetch('../gustavo/feedback.html');
+    if (!res.ok) throw new Error('Falha ao carregar formulário de feedback');
     const html = await res.text();
     const parser = new DOMParser();
     const doc = parser.parseFromString(html, 'text/html');
 
-    // Seleciona a seção de publicações (sem cabeçalho e sem outros blocos)
-    let piece = doc.querySelector('.feedback-section');
-    if (!piece) {
-      // fallback: tenta o main content
-      piece = doc.querySelector('main.content') || doc.body;
+    // Seleciona apenas o formulário (sem header)
+    let formContainer = doc.querySelector('.form-container');
+    if (!formContainer) {
+      formContainer = doc.querySelector('form#feedbackForm') || doc.body;
     }
 
-    // Ajusta caminhos relativos para assets dentro do bloco
-    fixRelativeAssets(piece, '../lucas/sprint02/');
+    // Ajusta caminhos relativos para assets
+    fixRelativeAssets(formContainer, '../gustavo/');
 
-    // Isola em Shadow DOM e injeta CSS localmente
-    container.innerHTML = '';
-    const host = document.createElement('div');
-    host.setAttribute('data-shadow-host', 'publicacoes');
-    container.appendChild(host);
-    const shadow = host.attachShadow({ mode: 'open' });
-
-    const styleHrefs = collectExternalStyleHrefs(doc, '../lucas/sprint02/');
-    await injectStylesIntoShadow(shadow, styleHrefs);
-    shadow.appendChild(piece.cloneNode(true));
+    // Cria wrapper com botão de voltar e ID único para isolar estilos
+    const wrapper = document.createElement('div');
+    wrapper.id = 'feedback-form-wrapper';
+    wrapper.style.cssText = 'padding: 20px; max-height: calc(100vh - 100px); overflow-y: auto;';
+    
+    const header = document.createElement('div');
+    header.style.cssText = 'display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;';
+    header.innerHTML = `
+      <h2 style="margin: 0; color: #333;">Adicionar Feedback</h2>
+      <button id="btnVoltarFeedbacks" type="button" style="background: #666; color: white; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-weight: bold;">
+        ← Voltar
+      </button>
+    `;
+    
+    wrapper.appendChild(header);
+    
+    // Clona o formulário e ajusta IDs para evitar conflitos
+    const formClone = formContainer.cloneNode(true);
+    const form = formClone.querySelector('form#feedbackForm');
+    if (form) {
+      form.id = 'feedbackFormDetalhes';
+      
+      // Preenche o campo obra com o título da obra atual
+      const obraInput = form.querySelector('#obra');
+      if (obraInput) {
+        obraInput.value = obraTitulo;
+        obraInput.readOnly = true;
+      }
+      
+      // Remove o botão "Ver Listagem Cidadãos" se existir
+      const listagemBtn = form.querySelector('a[href*="listagem"]');
+      if (listagemBtn) {
+        listagemBtn.remove();
+      }
+    }
+    
+    wrapper.appendChild(formClone);
+    
+    // Injeta CSS do feedback de forma isolada
+    const styleHrefs = collectExternalStyleHrefs(doc, '../gustavo/');
+    await injectStylesIntoContainer(wrapper, styleHrefs);
+    
+    detalhesContent.innerHTML = '';
+    detalhesContent.appendChild(wrapper);
+    
+    // Configura os event listeners
+    setupFeedbackFormListeners(obraTitulo);
   } catch (e) {
-    container.innerHTML = '<div class="detalhes-card"><p>Não foi possível carregar as publicações.</p></div>';
-    console.error(e);
+    detalhesContent.innerHTML = '<div class="detalhes-card"><p>Não foi possível carregar o formulário de feedback.</p></div>';
+    console.error('Erro ao carregar formulário:', e);
+  }
+}
+
+async function injectStylesIntoContainer(container, hrefs) {
+  if (!container || !hrefs || !hrefs.length) return;
+  const containerId = container.id || 'feedback-form-wrapper';
+  
+  const stylePromises = hrefs.map(async (href) => {
+    try {
+      const res = await fetch(href);
+      if (!res.ok) return null;
+      let cssText = await res.text();
+      
+      // Escopa o CSS para dentro do container, evitando conflitos globais
+      cssText = scopeCSS(cssText, `#${containerId}`);
+      
+      const styleEl = document.createElement('style');
+      styleEl.textContent = cssText;
+      return styleEl;
+    } catch (e) {
+      console.error('Falha ao importar CSS:', href, e);
+      return null;
+    }
+  });
+  
+  const styles = await Promise.all(stylePromises);
+  styles.forEach(style => {
+    if (style) container.insertBefore(style, container.firstChild);
+  });
+}
+
+function scopeCSS(css, scopeSelector) {
+  // Remove regras globais problemáticas que afetam o layout da página
+  let scoped = css
+    // Remove completamente regras globais de * (reset CSS)
+    .replace(/^\*\s*\{[^}]*\}/gm, '')
+    // Remove regras de body que afetam layout (mantém apenas dentro do escopo se necessário)
+    .replace(/^body\s*\{[^}]*\}/gm, function(match) {
+      // Extrai apenas propriedades de texto que são seguras
+      const textProps = match.match(/(font-family|color|font-size|line-height):[^;]+/g);
+      if (textProps && textProps.length > 0) {
+        return scopeSelector + ' { ' + textProps.join('; ') + ' }';
+      }
+      return '';
+    })
+    // Remove regras de html
+    .replace(/^html\s*\{[^}]*\}/gm, '')
+    // Escopa seletores de classe e ID para dentro do container
+    .replace(/(^|\n)(\.[a-zA-Z][a-zA-Z0-9_-]*|#[a-zA-Z][a-zA-Z0-9_-]*)\s*\{/g, function(match, before, selector) {
+      // Ignora se já tem o escopo
+      if (selector.indexOf(scopeSelector) !== -1) {
+        return match;
+      }
+      // Adiciona escopo
+      return before + scopeSelector + ' ' + selector + ' {';
+    });
+  
+  return scoped;
+}
+
+function setupFeedbackFormListeners(obraTitulo) {
+  const form = document.getElementById('feedbackFormDetalhes');
+  if (!form) return;
+  
+  const searchCpfBtn = form.querySelector('#searchCpfBtn');
+  const cpfInput = form.querySelector('#cpf');
+  const nomeInput = form.querySelector('#nome');
+  const emailInput = form.querySelector('#email');
+  const btnVoltar = document.getElementById('btnVoltarFeedbacks');
+  const btnCancelar = form.querySelector('.btn.btn-secondary') || form.querySelector('a[href*="listagem"]');
+  
+  // Formatação de CPF
+  if (cpfInput) {
+    cpfInput.addEventListener('input', function(e) {
+      let value = e.target.value.replace(/\D/g, '');
+      if (value.length > 11) value = value.substring(0, 11);
+      if (value.length > 9) {
+        value = value.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
+      } else if (value.length > 6) {
+        value = value.replace(/(\d{3})(\d{3})(\d{1,3})/, '$1.$2.$3');
+      } else if (value.length > 3) {
+        value = value.replace(/(\d{3})(\d{1,3})/, '$1.$2');
+      }
+      e.target.value = value;
+    });
+  }
+  
+  // Buscar CPF
+  if (searchCpfBtn && cpfInput) {
+    searchCpfBtn.addEventListener('click', async () => {
+    const cpf = cpfInput.value;
+    if (!cpf || cpf.length < 14) {
+      alert('Por favor, digite um CPF válido.');
+      return;
+    }
+    
+    try {
+      const response = await fetch('http://localhost:3000/cidadaos');
+      if (!response.ok) throw new Error('Erro ao buscar cidadãos.');
+      
+      const cidadaos = await response.json();
+      const cidadao = cidadaos.find((c) => c.dadosPessoais.cpf === cpf);
+      
+      if (cidadao) {
+        nomeInput.value = cidadao.dadosPessoais.nomeCompleto.trim();
+        emailInput.value = cidadao.contato.email;
+        alert('Cidadão encontrado e dados preenchidos!');
+      } else {
+        alert('CPF não encontrado. Verifique o CPF ou cadastre-se primeiro.');
+        nomeInput.value = '';
+        emailInput.value = '';
+      }
+    } catch (error) {
+      console.error('Erro:', error);
+      alert('Não foi possível conectar ao banco de dados para verificar o CPF.');
+    }
+    });
+  }
+  
+  // Voltar para feedbacks
+  const voltarParaFeedbacks = async () => {
+    // Primeiro, restaura a estrutura original da sidebar se necessário
+    if (currentObraDetalhe) {
+      // Garante que a estrutura de tabs está presente
+      const tabsContainer = detalhesContent.querySelector('.tabs');
+      if (!tabsContainer) {
+        // Se não tem tabs, precisa restaurar a estrutura completa
+        await showDetalhesSidebar(currentObraDetalhe);
+        // Aguarda um pouco para garantir que a estrutura foi criada
+        await new Promise(resolve => setTimeout(resolve, 100));
+      }
+    }
+    
+    // Ativa a aba de publicações
+    const tabPublicacoes = document.querySelector('.tab[data-tab="publicacoes"]');
+    if (tabPublicacoes) {
+      // Remove active de todas as abas e conteúdos
+      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+      
+      // Ativa a aba de publicações
+      tabPublicacoes.classList.add('active');
+      const publicacoesContent = document.getElementById('publicacoes');
+      if (publicacoesContent) {
+        publicacoesContent.classList.add('active');
+        // Recarrega os feedbacks
+        await loadPublicacoesContent();
+      }
+    } else {
+      // Se não encontrou a aba, recarrega a sidebar completa
+      if (currentObraDetalhe) {
+        await showDetalhesSidebar(currentObraDetalhe);
+        await new Promise(resolve => setTimeout(resolve, 200));
+        const tabPub = document.querySelector('.tab[data-tab="publicacoes"]');
+        if (tabPub) {
+          tabPub.click();
+        }
+      }
+    }
+  };
+  
+  if (btnVoltar) {
+    btnVoltar.addEventListener('click', voltarParaFeedbacks);
+  }
+  
+  if (btnCancelar) {
+    btnCancelar.addEventListener('click', (e) => {
+      e.preventDefault();
+      voltarParaFeedbacks();
+    });
+  }
+  
+  // Submit do formulário
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    
+    if (!nomeInput || !nomeInput.value || !emailInput || !emailInput.value) {
+      alert('Por favor, busque e valide seu CPF antes de enviar.');
+      return;
+    }
+    
+    const anexoInput = form.querySelector('#anexo');
+    const anexo = anexoInput && anexoInput.files.length > 0 ? `img/${anexoInput.files[0].name}` : null;
+    
+    const formData = {
+      obra: form.querySelector('#obra').value,
+      nome: nomeInput.value,
+      cpf: cpfInput.value,
+      email: emailInput.value,
+      tipo: form.querySelector('#tipo').value,
+      titulo: form.querySelector('#titulo').value,
+      descricao: form.querySelector('#descricao').value,
+      dataEnvio: new Date().toISOString(),
+      anexo: anexo,
+      likes: 0,
+      dislikes: 0
+    };
+    
+    try {
+      const response = await fetch('http://localhost:3000/feedbacks', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData)
+      });
+      
+      if (!response.ok) throw new Error('Erro ao enviar os dados.');
+      
+      alert('Feedback enviado com sucesso!');
+      form.reset();
+      
+      // Volta para a visualização de feedbacks e recarrega
+      voltarParaFeedbacks();
+      // Aguarda um pouco para garantir que a aba foi ativada
+      setTimeout(() => {
+        loadPublicacoesContent();
+      }, 100);
+    } catch (error) {
+      console.error('Erro:', error);
+      alert('Ocorreu um erro ao enviar. Tente novamente.');
+    }
+  });
+}
+
+function getTipoColor(tipo) {
+  const tipoLower = (tipo || '').toLowerCase();
+  if (tipoLower === 'elogio') return '#4CAF50';
+  if (tipoLower === 'reclamacao') return '#F44336';
+  if (tipoLower === 'sugestao') return '#FFC107';
+  return '#2196F3';
+}
+
+function formatTipo(tipo) {
+  const tipoLower = (tipo || '').toLowerCase();
+  if (tipoLower === 'elogio') return 'Elogio';
+  if (tipoLower === 'reclamacao') return 'Reclamação';
+  if (tipoLower === 'sugestao') return 'Sugestão';
+  return tipo || 'Geral';
+}
+
+function formatFeedbackDate(dateStr) {
+  if (!dateStr) return '';
+  try {
+    const date = new Date(dateStr);
+    if (Number.isNaN(date.getTime())) return dateStr;
+    return date.toLocaleDateString('pt-BR', { 
+      day: '2-digit', 
+      month: '2-digit', 
+      year: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit'
+    });
+  } catch (e) {
+    return dateStr;
   }
 }
 
