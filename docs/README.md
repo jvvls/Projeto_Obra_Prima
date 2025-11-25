@@ -327,7 +327,7 @@ Esta seção apresenta os módulos e APIs utilizados na solução
 
 **Images**:
 
-**Fonts:**
+Todas as imagens foram geradas por meio do Sora do chatGPT e não tem autoria direta.
 
 **Scripts:**
 
