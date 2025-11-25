@@ -7,7 +7,6 @@ Informações básicas do projeto.
 - **Membros da equipe:**
 
   - [Gustavo Henrique de Lima](https://github.com/Gustavo21hl)
-  - [Cezar Augusto Azevedo Nunes](https://github.com/czzareal)
   - [João Victor Vial Leite Soares](https://github.com/jvvls)
   - [Esdras Manassés Borges de Oliveira](https://github.com/)
   - [Guilherme Augusto Martins de Carvalho](https://github.com/)
