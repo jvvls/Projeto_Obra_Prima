@@ -132,9 +132,7 @@ As tabelas que se seguem apresentam os requisitos funcionais e não funcionais q
 | RF-007 | O sistema deve permitir a exibição de fotos atualizadas das obras.                                                         | ALTA       |
 | RF-008 | O sistema deve permitir o upload de fotos das obras por usuários autorizados (gestores públicos).                          | BAIXA      |
 | RF-009 | O sistema deve permitir que os gestores atualizem o status e os detalhes de uma obra.                                      | ALTA       |
-| RF-010 | O sistema deve gerar relatórios de obras concluídas em determinado período, apresentando custos e prazos.                  | MÉDIA      |
-| RF-011 | O sistema deve permitir ao usuário cadastrar-se utilizando e-mail e senha.                                                 | BAIXA      |
-| RF-012 | O sistema deve enviar notificações por e-mail para usuários cadastrados quando uma obra do seu bairro tiver atualização.   | BAIXA      |
+| RF-110 | O sistema deve permitir ao usuário cadastrar-se utilizando e-mail e senha.                                                 | BAIXA      |
 
 ### Requisitos não Funcionais
 
@@ -142,8 +140,6 @@ As tabelas que se seguem apresentam os requisitos funcionais e não funcionais q
 | ------- | ------------------------------------------------------------------------------------------------------------------- | ---------- |
 | RNF-001 | O sistema deve estar disponível 24 horas por dia, 7 dias por semana.                                                | ALTA       |
 | RNF-002 | O site deve ser responsivo, permitindo acesso adequado tanto em computadores quanto em dispositivos móveis.         | ALTA       |
-| RNF-003 | O sistema deve carregar a página principal com a lista de obras em até 5 segundos em uma conexão banda larga comum. | MÉDIA      |
-| RNF-004 | Os dados de autenticação dos usuários devem ser armazenados de forma criptografada.                                 | MÉDIA      |
 
 ## Projeto de Interface
 
