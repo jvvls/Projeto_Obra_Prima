@@ -327,15 +327,11 @@ Esta seção apresenta os módulos e APIs utilizados na solução
 
 **Images**:
 
-- Unsplash - [https://unsplash.com/](https://unsplash.com/) ⚠️ EXEMPLO ⚠️
-
 **Fonts:**
-
-- Icons Font Face - [https://fontawesome.com/](https://fontawesome.com/) ⚠️ EXEMPLO ⚠️
 
 **Scripts:**
 
-- Leaflet - [http://https://leafletjs.com/](http://https://leafletjs.com/) ⚠️ EXEMPLO ⚠️
+- Leaflet - [http://https://leafletjs.com/](http://https://leafletjs.com/) 
 
 # Referências
 
