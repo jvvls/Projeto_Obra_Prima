@@ -131,9 +131,7 @@ As tabelas que se seguem apresentam os requisitos funcionais e não funcionais q
 | RF-007 | O sistema deve permitir a exibição de fotos atualizadas das obras.                                                         | ALTA       |
 | RF-008 | O sistema deve permitir o upload de fotos das obras por usuários autorizados (gestores públicos).                          | BAIXA      |
 | RF-009 | O sistema deve permitir que os gestores atualizem o status e os detalhes de uma obra.                                      | ALTA       |
-| RF-010 | O sistema deve gerar relatórios de obras concluídas em determinado período, apresentando custos e prazos.                  | MÉDIA      |
-| RF-011 | O sistema deve permitir ao usuário cadastrar-se utilizando e-mail e senha.                                                 | BAIXA      |
-| RF-012 | O sistema deve enviar notificações por e-mail para usuários cadastrados quando uma obra do seu bairro tiver atualização.   | BAIXA      |
+| RF-110 | O sistema deve permitir ao usuário cadastrar-se utilizando e-mail e senha.                                                 | BAIXA      |
 
 ### Requisitos não Funcionais
 
@@ -141,8 +139,6 @@ As tabelas que se seguem apresentam os requisitos funcionais e não funcionais q
 | ------- | ------------------------------------------------------------------------------------------------------------------- | ---------- |
 | RNF-001 | O sistema deve estar disponível 24 horas por dia, 7 dias por semana.                                                | ALTA       |
 | RNF-002 | O site deve ser responsivo, permitindo acesso adequado tanto em computadores quanto em dispositivos móveis.         | ALTA       |
-| RNF-003 | O sistema deve carregar a página principal com a lista de obras em até 5 segundos em uma conexão banda larga comum. | MÉDIA      |
-| RNF-004 | Os dados de autenticação dos usuários devem ser armazenados de forma criptografada.                                 | MÉDIA      |
 
 ## Projeto de Interface
 
@@ -330,20 +326,11 @@ Esta seção apresenta os módulos e APIs utilizados na solução
 
 **Images**:
 
-- Unsplash - [https://unsplash.com/](https://unsplash.com/) ⚠️ EXEMPLO ⚠️
-
-**Fonts:**
-
-- Icons Font Face - [https://fontawesome.com/](https://fontawesome.com/) ⚠️ EXEMPLO ⚠️
+Todas as imagens foram geradas por meio do Sora do chatGPT e não tem autoria direta.
 
 **Scripts:**
 
-- jQuery - [http://www.jquery.com/](http://www.jquery.com/) ⚠️ EXEMPLO ⚠️
-- Bootstrap 4 - [http://getbootstrap.com/](http://getbootstrap.com/) ⚠️ EXEMPLO ⚠️
-
-> ⚠️ **APAGUE ESSA PARTE ANTES DE ENTREGAR SEU TRABALHO**
->
-> Apresente os módulos e APIs utilizados no desenvolvimento da solução. Inclua itens como: (1) Frameworks, bibliotecas, módulos, etc. utilizados no desenvolvimento da solução; (2) APIs utilizadas para acesso a dados, serviços, etc.
+- Leaflet - [http://https://leafletjs.com/](http://https://leafletjs.com/) 
 
 # Referências
 

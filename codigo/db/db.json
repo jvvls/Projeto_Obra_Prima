@@ -96,7 +96,26 @@
         "cep": "33675-748"
       },
       "anexos": [],
-      "marcos": []
+      "marcos": [
+        {
+          "titulo": "Mobilização do canteiro",
+          "descricao": "Limpeza da praça e montagem do canteiro principal.",
+          "percentual": 10,
+          "data": "2024-06-05"
+        },
+        {
+          "titulo": "Demolições controladas",
+          "descricao": "Retirada de estruturas antigas e nivelamento.",
+          "percentual": 35,
+          "data": "2024-07-12"
+        },
+        {
+          "titulo": "Instalação de pisos drenantes",
+          "descricao": "Execução da nova pavimentação nas áreas de convivência.",
+          "percentual": 55,
+          "data": "2024-08-22"
+        }
+      ]
     },
     {
       "id": "2",
@@ -128,6 +147,26 @@
           "tipo": "documento",
           "nomeArquivo": "documento-2.pdf",
           "url": "https://exemplo.com/uploads/documento-2.pdf"
+        }
+      ],
+      "marcos": [
+        {
+          "titulo": "Terraplenagem",
+          "descricao": "Correção do greide e preparação do solo.",
+          "percentual": 20,
+          "data": "2024-04-10"
+        },
+        {
+          "titulo": "Estrutura do bloco clínico",
+          "descricao": "Concretagem das vigas e pilares principais.",
+          "percentual": 48,
+          "data": "2024-06-18"
+        },
+        {
+          "titulo": "Fechamento em alvenaria",
+          "descricao": "Execução das paredes externas do bloco 1.",
+          "percentual": 62,
+          "data": "2024-08-01"
         }
       ]
     },
@@ -162,6 +201,26 @@
           "nomeArquivo": "documento-3.pdf",
           "url": "https://exemplo.com/uploads/documento-3.pdf"
         }
+      ],
+      "marcos": [
+        {
+          "titulo": "Fresagem do pavimento antigo",
+          "descricao": "Retirada do asfalto comprometido.",
+          "percentual": 30,
+          "data": "2024-02-07"
+        },
+        {
+          "titulo": "Base de brita graduada",
+          "descricao": "Aplicação e compactação da nova base.",
+          "percentual": 55,
+          "data": "2024-03-14"
+        },
+        {
+          "titulo": "Sinalização provisória",
+          "descricao": "Delimitação de faixas e rotas alternativas.",
+          "percentual": 65,
+          "data": "2024-04-03"
+        }
       ]
     },
     {
@@ -194,6 +253,26 @@
           "tipo": "documento",
           "nomeArquivo": "documento-4.pdf",
           "url": "https://exemplo.com/uploads/documento-4.pdf"
+        }
+      ],
+      "marcos": [
+        {
+          "titulo": "Fundação blocada",
+          "descricao": "Concretagem dos blocos e vigas baldrame.",
+          "percentual": 25,
+          "data": "2024-03-21"
+        },
+        {
+          "titulo": "Estrutura metálica",
+          "descricao": "Montagem dos pórticos das salas de aula.",
+          "percentual": 50,
+          "data": "2024-05-02"
+        },
+        {
+          "titulo": "Cobertura termoacústica",
+          "descricao": "Instalação das telhas e rufos.",
+          "percentual": 70,
+          "data": "2024-06-17"
         }
       ]
     },
@@ -229,7 +308,26 @@
           "url": "https://exemplo.com/uploads/documento-5.pdf"
         }
       ],
-      "marcos": []
+      "marcos": [
+        {
+          "titulo": "Escoramento do tabuleiro",
+          "descricao": "Instalação de escoras e inspeção estrutural.",
+          "percentual": 15,
+          "data": "2024-06-11"
+        },
+        {
+          "titulo": "Recuperação das juntas",
+          "descricao": "Substituição das juntas de dilatação.",
+          "percentual": 45,
+          "data": "2024-08-04"
+        },
+        {
+          "titulo": "Nova iluminação cênica",
+          "descricao": "Instalação dos projetores LED e cabeamento.",
+          "percentual": 80,
+          "data": "2024-09-19"
+        }
+      ]
     },
     {
       "id": "6",
@@ -250,7 +348,26 @@
         "cep": "32988-220"
       },
       "anexos": [],
-      "marcos": []
+      "marcos": [
+        {
+          "titulo": "Ampliação da UTI",
+          "descricao": "Demolições internas e novas divisórias da UTI.",
+          "percentual": 22,
+          "data": "2025-02-10"
+        },
+        {
+          "titulo": "Instalação de chillers",
+          "descricao": "Atualização do sistema de climatização hospitalar.",
+          "percentual": 40,
+          "data": "2025-03-07"
+        },
+        {
+          "titulo": "Acabamentos da enfermaria",
+          "descricao": "Revestimentos e instalações de gases medicinais.",
+          "percentual": 58,
+          "data": "2025-04-25"
+        }
+      ]
     },
     {
       "id": "7",
@@ -284,7 +401,26 @@
           "url": "https://exemplo.com/uploads/documento-7.pdf"
         }
       ],
-      "marcos": []
+      "marcos": [
+        {
+          "titulo": "Requalificação dos boxes",
+          "descricao": "Reparo estrutural e pintura das lojas internas.",
+          "percentual": 28,
+          "data": "2025-05-09"
+        },
+        {
+          "titulo": "Modernização elétrica",
+          "descricao": "Troca completa dos quadros e alimentadores.",
+          "percentual": 52,
+          "data": "2025-06-14"
+        },
+        {
+          "titulo": "Cobertura translúcida",
+          "descricao": "Instalação de telhas novas e calhas.",
+          "percentual": 71,
+          "data": "2025-07-30"
+        }
+      ]
     },
     {
       "id": "8",
@@ -316,6 +452,26 @@
           "tipo": "documento",
           "nomeArquivo": "documento-8.pdf",
           "url": "https://exemplo.com/uploads/documento-8.pdf"
+        }
+      ],
+      "marcos": [
+        {
+          "titulo": "Placa de fundação",
+          "descricao": "Lançamento da laje do pavimento térreo.",
+          "percentual": 18,
+          "data": "2025-02-03"
+        },
+        {
+          "titulo": "Elevação das salas",
+          "descricao": "Alvenaria estrutural até o nível da cobertura.",
+          "percentual": 47,
+          "data": "2025-04-22"
+        },
+        {
+          "titulo": "Paisagismo externo",
+          "descricao": "Playground e jardins concluídos.",
+          "percentual": 75,
+          "data": "2025-07-11"
         }
       ]
     },
@@ -350,6 +506,26 @@
           "nomeArquivo": "documento-9.pdf",
           "url": "https://exemplo.com/uploads/documento-9.pdf"
         }
+      ],
+      "marcos": [
+        {
+          "titulo": "Ensaios de laboratório",
+          "descricao": "Verificação da mistura asfáltica.",
+          "percentual": 12,
+          "data": "2024-10-01"
+        },
+        {
+          "titulo": "Pavimentação faixa 1",
+          "descricao": "Aplicação da nova capa asfáltica sentido centro.",
+          "percentual": 38,
+          "data": "2024-12-05"
+        },
+        {
+          "titulo": "Remarcação das faixas",
+          "descricao": "Aplicação da sinalização horizontal definitiva.",
+          "percentual": 80,
+          "data": "2025-02-14"
+        }
       ]
     },
     {
@@ -382,6 +558,26 @@
           "tipo": "documento",
           "nomeArquivo": "documento-10.pdf",
           "url": "https://exemplo.com/uploads/documento-10.pdf"
+        }
+      ],
+      "marcos": [
+        {
+          "titulo": "Cravação de estacas",
+          "descricao": "Conferência topográfica e execução das estacas raiz.",
+          "percentual": 26,
+          "data": "2025-08-06"
+        },
+        {
+          "titulo": "Laje do pronto atendimento",
+          "descricao": "Concretagem da laje do primeiro pavimento.",
+          "percentual": 49,
+          "data": "2025-09-18"
+        },
+        {
+          "titulo": "Fechamento em pele de vidro",
+          "descricao": "Instalação dos caixilhos da fachada principal.",
+          "percentual": 68,
+          "data": "2025-10-27"
         }
       ]
     },
@@ -416,6 +612,26 @@
           "nomeArquivo": "documento-11.pdf",
           "url": "https://exemplo.com/uploads/documento-11.pdf"
         }
+      ],
+      "marcos": [
+        {
+          "titulo": "Dragagem inicial",
+          "descricao": "Remoção do lodo acumulado na margem norte.",
+          "percentual": 15,
+          "data": "2026-09-14"
+        },
+        {
+          "titulo": "Instalação das estações filtrantes",
+          "descricao": "Montagem dos módulos de tratamento flotofloculador.",
+          "percentual": 42,
+          "data": "2026-11-28"
+        },
+        {
+          "titulo": "Reurbanização do entorno",
+          "descricao": "Execução de calçadas, ciclovias e mobiliário urbano.",
+          "percentual": 63,
+          "data": "2027-02-06"
+        }
       ]
     },
     {
@@ -448,6 +664,26 @@
           "tipo": "documento",
           "nomeArquivo": "documento-12.pdf",
           "url": "https://exemplo.com/uploads/documento-12.pdf"
+        }
+      ],
+      "marcos": [
+        {
+          "titulo": "Terraplenagem esportiva",
+          "descricao": "Preparação do terreno para quadra poliesportiva.",
+          "percentual": 22,
+          "data": "2024-02-05"
+        },
+        {
+          "titulo": "Estrutura da arquibancada",
+          "descricao": "Montagem dos degraus pré-moldados.",
+          "percentual": 47,
+          "data": "2024-04-03"
+        },
+        {
+          "titulo": "Cobertura do palco cultural",
+          "descricao": "Instalação da lona tensionada e iluminação.",
+          "percentual": 68,
+          "data": "2024-05-22"
         }
       ]
     },
@@ -482,6 +718,26 @@
           "nomeArquivo": "documento-13.pdf",
           "url": "https://exemplo.com/uploads/documento-13.pdf"
         }
+      ],
+      "marcos": [
+        {
+          "titulo": "Restauração da fachada",
+          "descricao": "Limpeza e recomposição dos elementos em cantaria.",
+          "percentual": 30,
+          "data": "2026-01-19"
+        },
+        {
+          "titulo": "Adequação acústica",
+          "descricao": "Troca de forros e aplicação de painéis difusores.",
+          "percentual": 55,
+          "data": "2026-03-08"
+        },
+        {
+          "titulo": "Instalação de cenotecnia",
+          "descricao": "Atualização dos varais motorizados e sistemas de luz.",
+          "percentual": 78,
+          "data": "2026-05-11"
+        }
       ]
     },
     {
@@ -515,6 +771,26 @@
           "nomeArquivo": "documento-14.pdf",
           "url": "https://exemplo.com/uploads/documento-14.pdf"
         }
+      ],
+      "marcos": [
+        {
+          "titulo": "Fundação profunda",
+          "descricao": "Cravação das estacas metálicas e concretagem das transições.",
+          "percentual": 25,
+          "data": "2026-07-28"
+        },
+        {
+          "titulo": "Lançamento das vigas",
+          "descricao": "Posicionamento das vigas pré-moldadas sobre os pilares.",
+          "percentual": 53,
+          "data": "2026-09-05"
+        },
+        {
+          "titulo": "Execução das alças de acesso",
+          "descricao": "Implantação das alças norte e sul com pavimentação.",
+          "percentual": 72,
+          "data": "2026-10-18"
+        }
       ]
     },
     {
@@ -547,6 +823,26 @@
           "tipo": "documento",
           "nomeArquivo": "documento-15.pdf",
           "url": "https://exemplo.com/uploads/documento-15.pdf"
+        }
+      ],
+      "marcos": [
+        {
+          "titulo": "Rede de drenagem",
+          "descricao": "Assentamento das novas adutoras e bocas de lobo.",
+          "percentual": 18,
+          "data": "2025-04-09"
+        },
+        {
+          "titulo": "Calçadas acessíveis",
+          "descricao": "Construção de passeios com piso tátil e rampas.",
+          "percentual": 44,
+          "data": "2025-06-02"
+        },
+        {
+          "titulo": "Iluminação LED",
+          "descricao": "Substituição completa dos postes e relés fotoelétricos.",
+          "percentual": 69,
+          "data": "2025-07-27"
         }
       ]
     }
