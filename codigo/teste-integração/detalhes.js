@@ -13,6 +13,7 @@ const detalhesSidebar = document.getElementById('detalhesSidebar');
 const detalhesContent = document.getElementById('detalhesContent');
 const closeDetalhes = document.getElementById('closeDetalhes');
 let currentObraDetalhe = null;
+let timelineShadowRoot = null;
 
 async function showDetalhesSidebar(obraOrId) {
   sidebar.classList.remove('open');
@@ -90,6 +91,13 @@ async function showDetalhesSidebar(obraOrId) {
 async function loadTimelineContent() {
   const container = document.getElementById('timeline');
   if (!container) return;
+
+  // Se já carregamos a estrutura uma vez, apenas reidrata com a obra atual
+  if (container.dataset.timelineLoaded === 'true' && timelineShadowRoot) {
+    hydrateTimelineForCurrentObra();
+    return;
+  }
+
   container.innerHTML = '<div class="detalhes-card"><p>Carregando timeline...</p></div>';
   try {
     const res = await fetch('../guilherme/timeline/timeline.html');
@@ -117,7 +125,11 @@ async function loadTimelineContent() {
 
     const styleHrefs = collectExternalStyleHrefs(doc, '../guilherme/timeline/');
     await injectStylesIntoShadow(shadow, styleHrefs);
+
     shadow.appendChild(piece.cloneNode(true));
+    timelineShadowRoot = shadow;
+    container.dataset.timelineLoaded = 'true';
+    hydrateTimelineForCurrentObra();
   } catch (e) {
     container.innerHTML = '<div class="detalhes-card"><p>Não foi possível carregar a timeline.</p></div>';
     console.error(e);
@@ -234,6 +246,139 @@ if (closeDetalhes) {
   closeDetalhes.addEventListener('click', () => {
     detalhesSidebar.classList.remove('open');
   });
+}
+
+function hydrateTimelineForCurrentObra() {
+  if (!timelineShadowRoot) return;
+  const titleEl = timelineShadowRoot.querySelector('#obraTitulo');
+  const infoEl = timelineShadowRoot.querySelector('#obraInfo');
+  const listEl = timelineShadowRoot.querySelector('#timelineList');
+  const emptyStateEl = timelineShadowRoot.querySelector('#emptyState');
+  const progressFill = timelineShadowRoot.querySelector('#progressFill');
+  const progressText = timelineShadowRoot.querySelector('#progressText');
+
+  if (!listEl || !titleEl || !infoEl || !progressFill || !progressText) return;
+
+  if (!currentObraDetalhe) {
+    titleEl.textContent = 'Progresso da Obra';
+    infoEl.innerHTML = '<p style="margin: 0;">Selecione uma obra para visualizar a linha do tempo.</p>';
+    listEl.innerHTML = '';
+    if (emptyStateEl) {
+      emptyStateEl.style.display = 'flex';
+      emptyStateEl.innerHTML = '<div class="empty-icon">🕒</div>Selecione uma obra para ver os marcos.';
+    }
+    progressFill.style.width = '0%';
+    progressText.textContent = '0%';
+    return;
+  }
+
+  const marcos = buildTimelineEntries(currentObraDetalhe);
+
+  titleEl.textContent = currentObraDetalhe.titulo || 'Progresso da Obra';
+  infoEl.innerHTML = `
+    <div><strong>Status:</strong> ${currentObraDetalhe.status || '-'}</div>
+    <div><strong>Valor:</strong> ${formatCurrency(currentObraDetalhe.valorContratado || 0)}</div>
+    <div><strong>Data de início:</strong> ${formatTimelineDate(currentObraDetalhe.dataInicio)}</div>
+    <div><strong>Previsão de término:</strong> ${formatTimelineDate(currentObraDetalhe.previsaoTermino)}</div>
+  `;
+
+  listEl.innerHTML = '';
+  if (!marcos.length) {
+    if (emptyStateEl) {
+      emptyStateEl.style.display = 'flex';
+      emptyStateEl.innerHTML = '<div class="empty-icon">🕒</div>Nenhuma etapa registrada para esta obra.';
+    }
+    progressFill.style.width = '0%';
+    progressText.textContent = '0%';
+    return;
+  }
+
+  if (emptyStateEl) emptyStateEl.style.display = 'none';
+
+  marcos.forEach((marco) => {
+    const marcoEl = document.createElement('div');
+    marcoEl.className = 'marco';
+    if (marco.percentual != null) {
+      marcoEl.setAttribute('data-porcentagem', marco.percentual);
+    }
+    marcoEl.innerHTML = `
+      <div class="marco-info">
+        <div class="marco-title">${marco.titulo}</div>
+        <div class="marco-desc">${marco.descricao || ''}</div>
+        <div class="marco-meta">
+          <span>${marco.percentual != null ? `Concluído: ${marco.percentual}%` : ''}</span>
+          ${marco.data ? `<span style="margin-left:12px;">Data: ${formatTimelineDate(marco.data)}</span>` : ''}
+        </div>
+      </div>
+    `;
+    listEl.appendChild(marcoEl);
+  });
+
+  const media = marcos.reduce((acc, m) => acc + (m.percentual || 0), 0) / marcos.length;
+  const progresso = Math.min(100, Math.max(0, Math.round(media || 0)));
+  progressFill.style.width = `${progresso}%`;
+  progressText.textContent = `${progresso}%`;
+}
+
+function buildTimelineEntries(obra) {
+  if (!obra) return [];
+
+  if (Array.isArray(obra.marcos) && obra.marcos.length) {
+    return obra.marcos.map((marco, index) => ({
+      titulo: escapeHtmlValue(marco.titulo || `Marco ${index + 1}`),
+      descricao: escapeHtmlValue(marco.descricao || ''),
+      percentual: normalizePercent(marco.percentual, index, obra.marcos.length),
+      data: marco.data || null
+    }));
+  }
+
+  if (Array.isArray(obra.etapas) && obra.etapas.length) {
+    return obra.etapas.map((etapa, index) => {
+      if (typeof etapa === 'string') {
+        return {
+          titulo: escapeHtmlValue(etapa),
+          descricao: '',
+          percentual: Math.round(((index + 1) / obra.etapas.length) * 100),
+          data: null
+        };
+      }
+      if (typeof etapa === 'object' && etapa) {
+        return {
+          titulo: escapeHtmlValue(etapa.titulo || etapa.nome || `Etapa ${index + 1}`),
+          descricao: escapeHtmlValue(etapa.descricao || etapa.texto || ''),
+          percentual: normalizePercent(etapa.percentual, index, obra.etapas.length),
+          data: etapa.data || null
+        };
+      }
+      return null;
+    }).filter(Boolean);
+  }
+
+  return [];
+}
+
+function normalizePercent(percentual, index, total) {
+  if (percentual == null || Number.isNaN(Number(percentual))) {
+    return Math.round(((index + 1) / total) * 100);
+  }
+  const value = Number(percentual);
+  return Math.min(100, Math.max(0, Math.round(value)));
+}
+
+function formatTimelineDate(dateStr) {
+  if (!dateStr) return '-';
+  const date = new Date(dateStr);
+  if (Number.isNaN(date.getTime())) return dateStr;
+  return date.toLocaleDateString('pt-BR');
+}
+
+function escapeHtmlValue(str) {
+  return String(str || '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
 }
 
 
