@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Obra Prima — Cadastro de Obras (com filtros)</title>
+  <link rel="stylesheet" href="../css/style.css" />
+</head>
+
+<body>
+  <header class="topbar">
+    <a href="#">
+      <div class="logo"><img src="../img/Logo.png" alt="Logo Obra Prima" /></div>
+    </a>
+    <div class="title">Obra Prima</div>
+    <div class="right">
+      <button class="bell" title="Notificações"><img src="../img/Bell.png" alt="Sininho" /></button>
+      <div class="user">
+        <div class="avatar" aria-hidden="true"></div>
+        <span class="username">Fulano Silva</span>
+        <span class="arrow">▼</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section id="cadastro" class="card">
+      <h2 class="form-title">Cadastrar / Editar Obra</h2>
+      <form id="obraForm" autocomplete="off" enctype="multipart/form-data">
+        <div class="field">
+          <label for="titulo">Título *</label>
+          <input id="titulo" name="titulo" type="text" required />
+        </div>
+
+        <div class="field">
+          <label for="descricao">Descrição</label>
+          <textarea id="descricao" name="descricao"></textarea>
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <label for="valorContratado">Valor Contratado (R$)</label>
+            <input id="valorContratado" name="valorContratado" type="number" step="0.01" />
+          </div>
+          <div class="col">
+            <label for="status">Status</label>
+            <select id="status" name="status">
+              <option>Planejada</option>
+              <option>Em andamento</option>
+              <option>Paralisada</option>
+              <option>Concluída</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <label for="dataInicio">Data de Início</label>
+            <input id="dataInicio" name="dataInicio" type="date" />
+          </div>
+          <div class="col">
+            <label for="previsaoTermino">Previsão de Término</label>
+            <input id="previsaoTermino" name="previsaoTermino" type="date" />
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <label for="orgaoResponsavel">Órgão Responsável</label>
+            <input id="orgaoResponsavel" name="orgaoResponsavel" type="text" />
+          </div>
+          <div class="col">
+            <label for="empresaExecutora">Empresa Executora</label>
+            <input id="empresaExecutora" name="empresaExecutora" type="text" />
+          </div>
+        </div>
+
+        <fieldset class="fieldset">
+          <legend>Endereço</legend>
+          <div class="row">
+            <div class="col">
+              <label for="logradouro">Logradouro</label>
+              <input id="logradouro" name="logradouro" type="text" />
+            </div>
+            <div style="width:120px">
+              <label for="numero">Número</label>
+              <input id="numero" name="numero" type="text" />
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col">
+              <label for="bairro">Bairro</label>
+              <input id="bairro" name="bairro" type="text" />
+            </div>
+            <div class="col">
+              <label for="cidade">Cidade</label>
+              <input id="cidade" name="cidade" type="text" />
+            </div>
+          </div>
+
+          <div class="row">
+            <div style="width:120px">
+              <label for="estado">Estado</label>
+              <input id="estado" name="estado" type="text" />
+            </div>
+            <div style="width:160px">
+              <label for="cep">CEP</label>
+              <input id="cep" name="cep" type="text" />
+            </div>
+          </div>
+        </fieldset>
+
+        <div class="field">
+          <label for="anexos">Anexos (imagens / documentos)</label>
+          <input id="anexos" name="anexos" type="file" multiple />
+          <div class="small muted">Protótipo - Arquivos não são enviados: apenas os nomes são registrados.</div>
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary">Salvar</button>
+          <button type="button" id="limpar" class="btn btn-ghost">Limpar</button>
+        </div>
+      </form>
+    </section>
+
+    <section id="listaObras" class="card">
+      <h2 class="form-title">Obras Cadastradas</h2>
+
+      <div class="filtros" id="filtros">
+        <div class="col" style="flex:1;min-width:200px">
+          <label for="q">Pesquisa</label>
+          <input id="q" placeholder="Título, empresa, cidade..." />
+        </div>
+
+        <div class="col">
+          <label for="filterStatus">Status</label>
+          <select id="filterStatus">
+            <option value="">Todos</option>
+          </select>
+        </div>
+
+        <div class="col">
+          <label for="filterCidade">Cidade</label>
+          <select id="filterCidade">
+            <option value="">Todas</option>
+          </select>
+        </div>
+
+        <div class="col">
+          <label for="orgaoDropdown">Órgão Responsável</label>
+          <div class="orgao-dropdown" id="orgaoDropdown" tabindex="0" aria-haspopup="listbox" aria-expanded="false">
+            <button type="button" class="orgao-toggle dropdown-button" id="orgaoToggle">
+              Todos os órgãos <span class="arrow">&#9662;</span>
+            </button>
+            <div class="orgao-panel dropdown-panel" id="orgaoPanel" role="listbox" aria-multiselectable="true"
+              style="display:none;">
+              <input type="search" id="orgaoSearch" placeholder="Buscar órgão..." class="orgao-search">
+              <div class="orgao-actions">
+                <button id="orgaoSelecionarTudo" class="btn small btn-ghost">Selecionar todos</button>
+                <button id="orgaoLimpar" class="btn small btn-ghost">Limpar</button>
+              </div>
+              <div class="orgao-list" id="orgaoList"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col">
+          <label for="empresaDropdown">Empresa Executora</label>
+          <div class="empresa-dropdown" id="empresaDropdown" tabindex="0" aria-haspopup="listbox" aria-expanded="false">
+            <button type="button" class="empresa-toggle dropdown-button" id="empresaToggle">
+              Todas as empresas <span class="arrow">&#9662;</span>
+            </button>
+            <div class="empresa-panel dropdown-panel" id="empresaPanel" role="listbox" aria-multiselectable="true"
+              style="display:none;">
+              <input type="search" id="empresaSearch" placeholder="Buscar empresa..." class="empresa-search">
+              <div class="empresa-list" id="empresaList"></div>
+              <div class="empresa-actions">
+                <button id="empresaSelecionarTudo" class="btn small btn-ghost">Selecionar tudo</button>
+                <button id="empresaLimpar" class="btn small btn-ghost">Limpar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col">
+          <label for="sortBy">Ordenar por</label>
+          <select id="sortBy">
+            <option value="titulo">Título</option>
+            <option value="dataInicio">Data de Início</option>
+          </select>
+        </div>
+
+        <div class="actions">
+          <button class="btn btn-ghost" id="resetFiltros">Resetar</button>
+          <button class="btn btn-primary" id="aplicarFiltros">Aplicar</button>
+        </div>
+      </div>
+
+      <div id="obrasContainer"></div>
+      <p id="msgNenhuma" class="small muted" style="display:none;margin-top:12px">Nenhuma obra encontrada com os filtros
+        aplicados.</p>
+    </section>
+  </main>
+
+  <script src="../js/cadastroObras.js" defer></script>
+</body>
+
+</html>

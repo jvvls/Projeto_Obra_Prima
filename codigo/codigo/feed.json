@@ -1,0 +1,48 @@
+{
+  "obra": {
+    "id": "obra-001",
+    "nome": "Reforça Central",
+    "status": "Paralisada",
+    "custo": 5810099.00,
+    "custoFormatado": "R$ 5.810.099",
+    "construtora": "Construtora Bairro",
+    "construtoraAlternativa": "Construtrouta Bairro",
+    "descricao": "Projeto de rejeito de reforma de praça central vasimo de melhoras estuturas nus la Banitiro.",
+    "urlImagem": "caminho/para/imagem-da-obra.jpg"
+  },
+  "feedbacks": [
+    {
+      "id": 1,
+      "obraId": "obra-001",
+      "tipo": "Elogio",
+      "autor": "João Silva",
+      "dataPostagem": "2025-10-25T10:00:00Z",
+      "descricao": "A nova praça ficou muito bonita e funcional. Agradeço pela iluminação e área de lazer.",
+      "urlImagemAnexada": "https://via.placeholder.com/100x70/E6F7E9/333?text=Imagem+Anexada",
+      "likes": 15,
+      "dislikes": 2
+    },
+    {
+      "id": 2,
+      "obraId": "obra-001",
+      "tipo": "Reclamação",
+      "autor": "Maria Souza",
+      "dataPostagem": "2025-10-24T15:30:00Z",
+      "descricao": "O status 'Paralisada' está afetando o comércio local. Gostaríamos de uma previsão atualizada para a retomada.",
+      "urlImagemAnexada": null,
+      "likes": 8,
+      "dislikes": 20
+    },
+    {
+      "id": 3,
+      "obraId": "obra-002",
+      "tipo": "Sugestão",
+      "autor": "Carlos Andrade",
+      "dataPostagem": "2025-10-23T09:15:00Z",
+      "descricao": "Sugiro a inclusão de um bicicletário na nova escola para incentivar o transporte sustentável.",
+      "urlImagemAnexada": null,
+      "likes": 5,
+      "dislikes": 0
+    }
+  ]
+}
