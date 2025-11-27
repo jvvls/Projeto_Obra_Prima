@@ -1,31 +1,35 @@
 cff-version: 1.0.1
 message: Please cite this software using these metadata.
-title: 
+title: Obra Prima
 authors:
-  - family-names: 
-    given-names: 
-  - family-names: 
-    given-names: 
-  - family-names: 
-    given-names: 
-  - family-names: 
-    given-names: 
-  - family-names: 
-    given-names: 
-  - family-names: 
-    given-names:
+  - family-names: Azevedo Nunes
+    given-names: Cezar Augusto
+  - family-names: Borges de Oliveira
+    given-names: Esdras Manassés
+  - family-names: Martins de Carvalho
+    given-names: Guilherme Augusto
+  - family-names: Henrique de Lima
+    given-names: Gustavo
+  - family-names: Vial Leite Soares
+    given-names: João Victor
+  - family-names: Damacena de Souza
+    given-names: Lucas
   - name-suffix: Professor
     affiliation: PUC Minas
-    family-names: 
-    given-names: 
+    family-names: Andrade
+    given-names: Michelle Hanne Soares de
   - name-suffix: Professor
     affiliation: PUC Minas
-    family-names: 
-    given-names: 
+    family-names: Lacerda
+    given-names: Lucca Soares de Paiva
+  - name-suffix: Professor
+    affiliation: PUC Minas
+    family-names: Pereira
+    given-names: Daniel Machado Osório
 keywords:
-  - 
-  - 
-repository-code: 
+  - obras públicas
+  - transparência
+repository-code: https://github.com/ICEI-PUC-Minas-PMGES-TI/pmg-es-2025-2-ti1-2401100-obraspublicas.git
 license: CC-BY-4.0
 version: 1.0.0
-date-released: 2022-07-14
+date-released: 2025-11-27
