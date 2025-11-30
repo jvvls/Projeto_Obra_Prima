@@ -250,7 +250,22 @@
         "cep": "32988-220"
       },
       "anexos": [],
-      "marcos": []
+      "marcos": [
+        {
+          "id": "1763341264120-5755",
+          "titulo": "Exemplo 1",
+          "descricao": "Exemplo",
+          "percentual": 25,
+          "data": "2025-11-17"
+        },
+        {
+          "id": "1763341295043-8071",
+          "titulo": "Exemplo 2",
+          "descricao": "Exemplo",
+          "percentual": 80,
+          "data": "2025-11-17"
+        }
+      ]
     },
     {
       "id": "7",
