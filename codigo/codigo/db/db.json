@@ -350,18 +350,6 @@
       "anexos": [],
       "marcos": [
         {
-          "id": "1763341264120-5755",
-          "titulo": "Exemplo 1",
-          "descricao": "Exemplo",
-          "percentual": 25,
-          "data": "2025-11-17"
-        },
-        {
-          "id": "1763341295043-8071",
-          "titulo": "Exemplo 2",
-          "descricao": "Exemplo",
-          "percentual": 80,
-          "data": "2025-11-17",
           "titulo": "Ampliação da UTI",
           "descricao": "Demolições internas e novas divisórias da UTI.",
           "percentual": 22,
@@ -1323,7 +1311,7 @@
       "dataEnvio": "2025-10-28T10:15:00",
       "anexo": null,
       "likes": 13,
-      "dislikes": 0
+      "dislikes": 1
     },
     {
       "id": "22",

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lista de Cidadãos</title>
+    <link rel="stylesheet" href="../css/style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <div class="logo-container">
+          <img src="../img/Logo.png" alt="Obra Prima" class="logo-image" />
+          <div class="site-name">Obra Prima</div>
+        </div>
+        <div class="header-content">
+          <h1>Lista de Cidadãos</h1>
+        </div>
+      </div>
+
+      <div class="form-container">
+        <div class="list-controls">
+          <div class="search-container">
+            <label for="searchInput">Pesquisar</label>
+            <input
+              type="search"
+              id="searchInput"
+              placeholder="Digite nome, CPF ou e-mail..."
+            />
+          </div>
+          <a href="cadastroCidadao.html" class="btn btn-primary btn-add-new"
+            >Adicionar Novo</a
+          >
+        </div>
+
+        <div class="table-container">
+          <table id="citizenTable">
+            <thead>
+              <tr>
+                <th>Nome Completo</th>
+                <th>CPF</th>
+                <th>E-mail</th>
+                <th>Telefone</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+            <tbody id="citizenTableBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <script src="../js/listagem.js"></script>
+  </body>
+</html>

@@ -8,11 +8,10 @@ const statusFilter = document.getElementById('status');
 const nomeFilter = document.getElementById('nome');
 const clearFiltersBtn = document.getElementById('clearFilters');
 const obrasGrid = document.getElementById('obrasGrid');
+const detalhesBtn = document.querySelector('.detalhes');
 const API = "http://localhost:3000/obras";
 const userDropdownToggle = document.getElementById('userDropdownToggle');
 const userDropdown = document.getElementById('userDropdown');
-const userNameSpan = document.querySelector('.user span');
-const logoutBtn = document.getElementById('logoutBtn');
 const toggleFontBtn = document.getElementById('toggleFont');
 const mapsBox = document.querySelector('.maps-box');
 const mapContainer = document.getElementById('map');
@@ -21,6 +20,7 @@ let obrasData = [];
 let allBairros = [];
 let allConstrutoras = [];
 let allStatus = [];
+let detalhesBar = false;
 let mapInstance = null;
 let markersLayer = null;
 
@@ -88,24 +88,6 @@ function updateView(obras) {
 }
 
 // === GRID ===
-function resolveImageUrl(rawUrl) {
-  if (!rawUrl || typeof rawUrl !== 'string') return './img/Logo2.png';
-  const cleanUrl = rawUrl.trim();
-  try {
-    if (
-      cleanUrl.startsWith('http://localhost') ||
-      cleanUrl.startsWith('https://') ||
-      cleanUrl.startsWith('http://')
-    ) {
-      return cleanUrl;
-    }
-    const localAsset = cleanUrl.replace(/^\.?\//, '');
-    return `./${localAsset}`;
-  } catch (e) {
-    return './img/Logo2.png';
-  }
-}
-
 function renderGrid(obras) {
   obrasGrid.innerHTML = '';
   if (!obras.length) {
@@ -118,7 +100,7 @@ function renderGrid(obras) {
     card.classList.add('card');
 
     const imgSrc = Array.isArray(obra.anexos)
-      ? resolveImageUrl(obra.anexos.find(a => a.tipo === "imagem")?.url)
+      ? (obra.anexos.find(a => a.tipo === "imagem")?.url || './img/Logo2.png')
       : './img/Logo2.png';
 
     card.innerHTML = `
@@ -129,10 +111,86 @@ function renderGrid(obras) {
 
     obrasGrid.appendChild(card);
 
+    // Evento do botão de detalhes
     const detalhesBtn = card.querySelector('.detalhesBtn');
     detalhesBtn.addEventListener('click', () => showDetalhesSidebar(obra));
   });
 }
+const detalhesSidebar = document.getElementById('detalhesSidebar');
+const detalhesContent = document.getElementById('detalhesContent');
+const closeDetalhes = document.getElementById('closeDetalhes');
+
+function showDetalhesSidebar(obra) {
+  sidebar.classList.remove('open');
+  sidebar.classList.add('closed');
+
+  detalhesContent.innerHTML = `
+    <h2>${obra.titulo}</h2>
+
+    <div class="tabs">
+      <button class="tab active" data-tab="resumo">Resumo</button>
+      <button class="tab" data-tab="timeline">Linha do tempo</button>
+      <button class="tab" data-tab="publicacoes">Publicações</button>
+    </div>
+
+    <div class="tab-content active" id="resumo">
+      <div class="detalhes-card">
+        <img src="${obra.anexos?.find(a => a.tipo === "imagem")?.url || './img/Logo2.png'}" />
+        <p><strong>Bairro:</strong> ${obra.endereco?.bairro || '-'}</p>
+        <p><strong>Construtora:</strong> ${obra.empresaExecutora || '-'}</p>
+        <p><strong>Status:</strong> ${obra.status || '-'}</p>
+        <p><strong>Valor Total:</strong> ${formatCurrency(obra.valorContratado || 0)}</p>
+        <p>${obra.descricao || ''}</p>
+      </div>
+    </div>
+
+    <div class="tab-content" id="timeline">
+      <div class="detalhes-card">
+        <p><strong>Etapas executadas:</strong></p>
+        <ul class="timeline-list">
+          ${(obra.etapas || []).map(etapa => `<li>${etapa}</li>`).join('') || "<li>Nenhuma etapa registrada</li>"}
+        </ul>
+      </div>
+    </div>
+
+    <div class="tab-content" id="publicacoes">
+      <div class="detalhes-card">
+        ${(obra.publicacoes || []).map(pub => `
+          <div class="pub-card">
+            <img src="${pub.img || './img/placeholder.jpg'}"/>
+            <p>${pub.texto || ''}</p>
+          </div>
+        `).join('') || "<p>Nenhuma publicação registrada</p>"}
+      </div>
+    </div>
+  `;
+
+  detalhesSidebar.classList.add('open');
+  setupTabs(); // importante
+}
+
+function setupTabs() {
+  const tabs = document.querySelectorAll(".tab");
+  const contents = document.querySelectorAll(".tab-content");
+
+  tabs.forEach(tab => {
+    tab.addEventListener("click", () => {
+      tabs.forEach(t => t.classList.remove("active"));
+      contents.forEach(c => c.classList.remove("active"));
+
+      tab.classList.add("active");
+      document.getElementById(tab.dataset.tab).classList.add("active");
+    });
+  });
+}
+
+
+// Fechar sidebar
+closeDetalhes.addEventListener('click', () => {
+  detalhesSidebar.classList.remove('open');
+});
+
+
 
 // === MAPA ===
 function renderMap(obras) {
@@ -151,18 +209,16 @@ function renderMap(obras) {
     const lng = parseFloat(obra.longitude || obra.endereco?.lng);
 
     if (!isNaN(lat) && !isNaN(lng)) {
-      const marker = L.marker([lat, lng]);
+      const marker = L.marker([lat, lng]).addTo(markersLayer);
       marker.bindPopup(`
         <b>${obra.titulo}</b><br>
         ${obra.endereco?.bairro || ''}, ${obra.endereco?.cidade || ''}<br>
         <small>${obra.status}</small>
       `);
-      markersLayer.addLayer(marker);
     }
   });
 
-  const markerList = markersLayer.getLayers ? markersLayer.getLayers() : [];
-  if (markerList.length > 0 && mapInstance && markersLayer.getBounds) {
+  if (markersLayer.getLayers().length > 0) {
     mapInstance.fitBounds(markersLayer.getBounds());
   }
 }
@@ -181,6 +237,14 @@ clearFiltersBtn.addEventListener('click', () => {
 // === EVENTOS ===
 nomeFilter.addEventListener('input', filterObras);
 [bairroFilter, construtoraFilter, statusFilter].forEach(select => select.addEventListener('change', filterObras));
+
+if(detalhesBtn){
+  detalhesBtn.addEventListener('click', () =>{
+    detalhesBar = !detalhesBar;
+    detalhesBtn.classList.toggle('active', detalhesBar);
+    console.log("Clique no detalhes!");
+  })
+}
 
 // === INIT ===
 async function init() {
@@ -220,43 +284,6 @@ toggleFontBtn.addEventListener('click', () => {
   localStorage.setItem('fontLarge', isLarge);
 });
 
-// === SESSÃO E LOGOUT ===
-function redirectToLogin() {
-  window.location.href = 'login.html';
-}
-
-function loadUserFromSession() {
-  try {
-    const stored = localStorage.getItem('obraPrimaUser');
-    if (!stored) {
-      redirectToLogin();
-      return;
-    }
-    const user = JSON.parse(stored);
-    if (!user || !user.nome) {
-      redirectToLogin();
-      return;
-    }
-    if (userNameSpan) {
-      userNameSpan.textContent = user.nome;
-    }
-  } catch (error) {
-    console.error('Falha ao carregar sessão:', error);
-    redirectToLogin();
-  }
-}
-
-function handleLogout() {
-  localStorage.removeItem('obraPrimaUser');
-  redirectToLogin();
-}
-
-loadUserFromSession();
-
-if (logoutBtn) {
-  logoutBtn.addEventListener('click', handleLogout);
-}
-
 // === TROCAR ENTRE GRID E MAPA ===
 mapsBox.addEventListener('click', () => {
   const isMapVisible = mapContainer.style.display === 'block';
@@ -269,5 +296,6 @@ mapsBox.addEventListener('click', () => {
     setTimeout(() => mapInstance.invalidateSize(), 200);
   }
 });
+
 
 

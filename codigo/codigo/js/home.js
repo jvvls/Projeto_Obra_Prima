@@ -89,22 +89,37 @@ function updateView(obras) {
 
 // === GRID ===
 function resolveImageUrl(rawUrl) {
-  if (!rawUrl || typeof rawUrl !== 'string') return './img/Logo2.png';
+  const placeholder = "../img/Logo2.png";
+
+  // Nada enviado / valor inválido
+  if (!rawUrl || typeof rawUrl !== "string" || rawUrl.trim() === "") {
+    return placeholder;
+  }
+
   const cleanUrl = rawUrl.trim();
+
   try {
+    // Se for URL externa ou localhost: mantém
     if (
-      cleanUrl.startsWith('http://localhost') ||
-      cleanUrl.startsWith('https://') ||
-      cleanUrl.startsWith('http://')
+      cleanUrl.startsWith("http://") ||
+      cleanUrl.startsWith("https://") ||
+      cleanUrl.startsWith("http://localhost")
     ) {
       return cleanUrl;
     }
-    const localAsset = cleanUrl.replace(/^\.?\//, '');
-    return `./${localAsset}`;
+
+    // Se for caminho local → força ../img/<arquivo>
+    const fileName = cleanUrl.split("/").pop();
+    if (!fileName) return placeholder;
+
+    return `../img/${fileName}`;
+
   } catch (e) {
-    return './img/Logo2.png';
+    return placeholder;
   }
 }
+
+
 
 function renderGrid(obras) {
   obrasGrid.innerHTML = '';
@@ -119,10 +134,10 @@ function renderGrid(obras) {
 
     const imgSrc = Array.isArray(obra.anexos)
       ? resolveImageUrl(obra.anexos.find(a => a.tipo === "imagem")?.url)
-      : './img/Logo2.png';
+      : '../img/Logo2.png';
 
     card.innerHTML = `
-      <img src="${imgSrc}" alt="obra" onerror="this.onerror=null; this.src='./img/Logo2.png'">
+      <img src="${imgSrc}" alt="obra" onerror="this.onerror=null; this.src='../img/Logo2.png'">
       <h3>${obra.titulo}</h3>
       <button class="detalhesBtn">Ver detalhes</button>
     `;
@@ -222,7 +237,7 @@ toggleFontBtn.addEventListener('click', () => {
 
 // === SESSÃO E LOGOUT ===
 function redirectToLogin() {
-  window.location.href = 'login.html';
+  window.location.href = '../html/login.html';
 }
 
 function loadUserFromSession() {

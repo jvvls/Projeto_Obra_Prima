@@ -1,0 +1,175 @@
+{
+  "tela": {
+    "nome": "Cadastro de Gestor",
+    "descricao": "Tela responsável pelo cadastro de novos gestores no sistema Obra Prima. Permite inserir dados pessoais, profissionais, de acesso e endereço, com validação e envio para a API REST.",
+    "tecnologias": {
+      "frontend": [
+        "HTML5",
+        "CSS3",
+        "JavaScript (ES6)",
+        "Bootstrap 5"
+      ],
+      "backend": [
+        "API RESTful (JSON)",
+        "JSON Server (mock de testes)"
+      ],
+      "frameworks_auxiliares": [
+        "Font Awesome (ícones)",
+        "Google Fonts (tipografia)"
+      ]
+    },
+    "estrutura": {
+      "header": {
+        "logo": "Logo Obra Prima",
+        "cor_de_fundo": "#1b7742",
+        "navegacao": []
+      },
+      "formulario": {
+        "titulo": "Cadastro de Gestor",
+        "descricao": "Preencha os dados abaixo para criar sua conta de gestor no sistema.",
+        "secoes": {
+          "dados_pessoais": {
+            "campos": [
+              {
+                "nome": "nomeCompleto",
+                "tipo": "texto",
+                "placeholder": "Digite seu nome completo",
+                "obrigatorio": true
+              },
+              {
+                "nome": "cpf",
+                "tipo": "texto",
+                "placeholder": "000.000.000-00",
+                "mascara": "CPF",
+                "obrigatorio": true
+              },
+              {
+                "nome": "email",
+                "tipo": "email",
+                "placeholder": "seu@email.com",
+                "obrigatorio": true
+              },
+              {
+                "nome": "telefone",
+                "tipo": "texto",
+                "placeholder": "(00) 00000-0000",
+                "mascara": "telefone"
+              }
+            ]
+          },
+          "dados_profissionais": {
+            "campos": [
+              {
+                "nome": "orgaoInstituicao",
+                "tipo": "texto",
+                "placeholder": "Nome da instituição"
+              },
+              {
+                "nome": "cargo",
+                "tipo": "texto",
+                "placeholder": "Seu cargo atual"
+              },
+              {
+                "nome": "experiencia",
+                "tipo": "select",
+                "opcoes": [
+                  "1 a 3 anos",
+                  "4 a 6 anos",
+                  "7+ anos"
+                ]
+              },
+              {
+                "nome": "areaAtuacao",
+                "tipo": "select",
+                "opcoes": [
+                  "Engenharia",
+                  "Gestão Pública",
+                  "Infraestrutura",
+                  "Outros"
+                ]
+              }
+            ]
+          },
+          "dados_acesso": {
+            "campos": [
+              {
+                "nome": "senha",
+                "tipo": "password",
+                "placeholder": "Mínimo 8 caracteres",
+                "validacao": "mínimo 8 caracteres"
+              },
+              {
+                "nome": "confirmarSenha",
+                "tipo": "password",
+                "placeholder": "Digite novamente"
+              }
+            ]
+          },
+          "endereco": {
+            "campos": [
+              {
+                "nome": "enderecoCompleto",
+                "tipo": "texto",
+                "placeholder": "Rua, número, bairro, cidade - UF"
+              }
+            ]
+          },
+          "aceite_termos": {
+            "opcoes": [
+              "Aceito os termos de uso e política de privacidade do sistema",
+              "Desejo receber notificações sobre atualizações do sistema"
+            ]
+          }
+        },
+        "botoes": [
+          {
+            "nome": "limparFormulario",
+            "texto": "🧹 Limpar Formulário",
+            "cor": "cinza",
+            "acao": "reset()"
+          },
+          {
+            "nome": "cadastrarGestor",
+            "texto": "👤 Cadastrar Gestor",
+            "cor": "verde",
+            "acao": "submit()"
+          }
+        ],
+        "links": {
+          "login": "Já possui uma conta? Faça login aqui",
+          "suporte": "Entre em contato com o suporte técnico"
+        }
+      },
+      "footer": {
+        "texto": "Precisa de ajuda? Entre em contato com o suporte técnico."
+      }
+    },
+    "interacao": {
+      "validacoes": [
+        "Todos os campos obrigatórios devem ser preenchidos",
+        "E-mail válido exigido",
+        "Senhas devem coincidir",
+        "CPF deve seguir formato 000.000.000-00"
+      ],
+      "integracao_api": {
+        "endpoint": "https://api.obraprima.com/gestores",
+        "metodo": "POST",
+        "corpo_exemplo": {
+          "nomeCompleto": "João da Silva",
+          "cpf": "123.456.789-00",
+          "email": "joao@exemplo.com",
+          "telefone": "(31) 99999-9999",
+          "orgaoInstituicao": "Prefeitura Municipal",
+          "cargo": "Gestor de Obras",
+          "experiencia": "4 a 6 anos",
+          "areaAtuacao": "Infraestrutura",
+          "senha": "senha1234",
+          "enderecoCompleto": "Rua das Flores, 123, Centro - MG",
+          "aceitouTermos": true,
+          "receberNotificacoes": false
+        }
+      }
+    }
+  },
+  "gestores": []
+}
