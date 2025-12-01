@@ -5,7 +5,7 @@ body {
 }
 
 .topbar {
-  background-color: #28a745;
+  background-color: #27ae60;
   color: white;
   display: flex;
   align-items: center;
@@ -43,7 +43,7 @@ body {
 
 h1 {
   text-align: center;
-  color: #28a745;
+  color: #27ae60;
   margin-bottom: 25px;
 }
 
@@ -67,13 +67,13 @@ input, select, textarea {
 
 input:focus, select:focus, textarea:focus {
   outline: none;
-  border-color: #28a745;
+  border-color: #27ae60;
 }
 
 .btn-enviar {
   margin-top: 25px;
   padding: 12px;
-  background-color: #28a745;
+  background-color: #27ae60;
   color: white;
   font-size: 16px;
   border: none;
@@ -83,5 +83,5 @@ input:focus, select:focus, textarea:focus {
 }
 
 .btn-enviar:hover {
-  background-color: #218838;
+  background-color: #27ae60;
 }
