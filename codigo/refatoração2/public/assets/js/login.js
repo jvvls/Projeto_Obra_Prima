@@ -4,6 +4,7 @@ const ENDPOINTS = {
   gestor: 'usuarios'
 };
 
+const HOME_URL = '/public/home.html';
 const loginForm = document.getElementById('loginForm');
 const profileSelect = document.getElementById('profile');
 const identifierInput = document.getElementById('identifier');
@@ -44,7 +45,8 @@ async function handleLoginSubmit(event) {
       persistSession(profile, match);
       setStatus(`Bem-vindo(a), ${match.nome || match.dadosPessoais?.nomeCompleto}!`, 'success');
       setTimeout(() => {
-        window.location.href = '../html/home.html';
+        // Uso da variável de caminho HOME_URL
+        window.location.href = HOME_URL;
       }, 600);
       return;
     }
@@ -101,4 +103,3 @@ function persistSession(profile, user) {
 if (loginForm) {
   loginForm.addEventListener('submit', handleLoginSubmit);
 }
-

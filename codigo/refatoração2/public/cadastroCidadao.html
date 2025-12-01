@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gestão de Cidadão</title>
+    <link rel="stylesheet" href="../public/assets/css/styleIntegracao.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <div class="logo-container">
+          <img src="../public/assets/images/Logo.png" alt="Obra Prima" class="logo-image" />
+          <div class="site-name">Obra Prima</div>
+        </div>
+        <div class="header-content">
+          <h1 id="formTitle">Cadastro de Cidadão</h1>
+        </div>
+      </div>
+
+      <div class="form-container">
+        <form id="citizenForm">
+          <div class="form-section">
+            <h3 class="section-title">Dados Pessoais</h3>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="fullName">Nome Completo</label>
+                <input type="text" id="fullName" name="fullName" required />
+              </div>
+              <div class="form-group">
+                <label for="cpf">CPF</label>
+                <input
+                  type="text"
+                  id="cpf"
+                  name="cpf"
+                  placeholder="000.000.000-00"
+                  required
+                />
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="birthDate">Data de Nascimento</label>
+                <input type="date" id="birthDate" name="birthDate" required />
+              </div>
+              <div class="form-group">
+                <label>Gênero</label>
+                <div class="radio-group">
+                  <div class="radio-option">
+                    <input type="radio" id="male" name="gender" value="male" />
+                    <label for="male">Masculino</label>
+                  </div>
+                  <div class="radio-option">
+                    <input
+                      type="radio"
+                      id="female"
+                      name="gender"
+                      value="female"
+                    />
+                    <label for="female">Feminino</label>
+                  </div>
+                  <div class="radio-option">
+                    <input
+                      type="radio"
+                      id="other"
+                      name="gender"
+                      value="other"
+                    />
+                    <label for="other">Outro</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-section">
+            <h3 class="section-title">Contato</h3>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="email">E-mail</label>
+                <input type="email" id="email" name="email" required />
+              </div>
+              <div class="form-group">
+                <label for="phone">Telefone/Celular</label>
+                <input
+                  type="tel"
+                  id="phone"
+                  name="phone"
+                  placeholder="(00) 00000-0000"
+                  required
+                />
+              </div>
+            </div>
+          </div>
+
+          <div class="form-section">
+            <h3 class="section-title">Endereço</h3>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="cep">CEP</label>
+                <div class="cep-search">
+                  <input
+                    type="text"
+                    id="cep"
+                    name="cep"
+                    placeholder="00000-000"
+                    required
+                  />
+                  <button type="button" id="searchCep">Buscar</button>
+                </div>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="street">Logradouro</label>
+                <input type="text" id="street" name="street" required />
+              </div>
+              <div class="form-group">
+                <label for="number">Número</label>
+                <input type="text" id="number" name="number" required />
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="complement">Complemento</label>
+                <input type="text" id="complement" name="complement" />
+              </div>
+              <div class="form-group">
+                <label for="neighborhood">Bairro</label>
+                <input
+                  type="text"
+                  id="neighborhood"
+                  name="neighborhood"
+                  required
+                />
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="city">Cidade</label>
+                <input type="text" id="city" name="city" required />
+              </div>
+              <div class="form-group">
+                <label for="state">Estado</label>
+                <select id="state" name="state" required>
+                  <option value="">Selecione</option>
+                  <option value="AC">Acre</option>
+                  <option value="AL">Alagoas</option>
+                  <option value="AP">Amapá</option>
+                  <option value="AM">Amazonas</option>
+                  <option value="BA">Bahia</option>
+                  <option value="CE">Ceará</option>
+                  <option value="DF">Distrito Federal</option>
+                  <option value="ES">Espírito Santo</option>
+                  <option value="GO">Goiás</option>
+                  <option value="MA">Maranhão</option>
+                  <option value="MT">Mato Grosso</option>
+                  <option value="MS">Mato Grosso do Sul</option>
+                  <option value="MG">Minas Gerais</option>
+                  <option value="PA">Pará</option>
+                  <option value="PB">Paraíba</option>
+                  <option value="PR">Paraná</option>
+                  <option value="PE">Pernambuco</option>
+                  <option value="PI">Piauí</option>
+                  <option value="RJ">Rio de Janeiro</option>
+                  <option value="RN">Rio Grande do Norte</option>
+                  <option value="RS">Rio Grande do Sul</option>
+                  <option value="RO">Rondônia</option>
+                  <option value="RR">Roraima</option>
+                  <option value="SC">Santa Catarina</option>
+                  <option value="SP">São Paulo</option>
+                  <option value="SE">Sergipe</option>
+                  <option value="TO">Tocantins</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-section">
+            <h3 class="section-title">Segurança</h3>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="password">Senha</label>
+                <input type="password" id="password" name="password" required />
+              </div>
+              <div class="form-group">
+                <label for="confirmPassword">Confirmar Senha</label>
+                <input
+                  type="password"
+                  id="confirmPassword"
+                  name="confirmPassword"
+                  required
+                />
+              </div>
+            </div>
+          </div>
+
+          <div class="divider"></div>
+
+          <div class="btn-container">
+            <a href="listagemUsers.html" class="btn btn-secondary"> Ver Listagem </a>
+            <button type="submit" class="btn btn-primary">Salvar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <script src="../js/listagem2.js"></script>
+  </body>
+</html>
