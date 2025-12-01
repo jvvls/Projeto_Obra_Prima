@@ -330,7 +330,8 @@ Todas as imagens foram geradas por meio do Sora do chatGPT e não tem autoria di
 
 **Scripts:**
 
-- Leaflet - [http://https://leafletjs.com/](http://https://leafletjs.com/) 
+- Leaflet - [http://https://leafletjs.com/](http://https://leafletjs.com/)
+- Chart Js - [https://www.chartjs.org/](https://www.chartjs.org/)
 
 # Referências
 
