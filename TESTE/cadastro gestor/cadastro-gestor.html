@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial=1.0" />
+    <title>Cadastro de Gestor - Obra Prima</title>
+    <link rel="stylesheet" href="style-gestor.css" />
+
+    <style>
+        /* Correção para o botão LOGIN aparecer */
+        .topbar .btn-ghost {
+            color: #fff !important;
+            border-color: #fff !important;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- TOPBAR -->
+    <div class="topbar">
+        <div class="logo">
+            <img src="img/logo.png" alt="Logo Obra Prima">
+        </div>
+
+        <div class="title">Cadastro de Gestor</div>
+
+        <div class="right">
+            <button class="btn btn-ghost" onclick="window.location.href='login.html'">
+                🔐 Login
+            </button>
+        </div>
+    </div>
+
+    <!-- CONTEÚDO CENTRAL -->
+    <div class="container" style="max-width: 650px;">
+        <div id="cadastro" class="card" style="width: 100%;">
+
+            <h2 class="form-title">Cadastro de Gestor</h2>
+            <p class="muted small">Preencha os dados abaixo para criar seu acesso ao sistema.</p>
+
+            <form id="formGestor">
+
+                <!-- DADOS PESSOAIS -->
+                <div class="field">
+                    <label>Nome Completo *</label>
+                    <input type="text" id="nomeCompleto" required>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <label>CPF *</label>
+                        <input type="text" id="cpf" required>
+                    </div>
+                    <div class="col">
+                        <label>Telefone</label>
+                        <input type="text" id="telefone">
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label>Email *</label>
+                    <input type="email" id="email" required>
+                </div>
+
+
+                <!-- DADOS PROFISSIONAIS -->
+                <div class="field">
+                    <label>Órgão / Instituição</label>
+                    <input type="text" id="orgaoInstituicao">
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <label>Cargo</label>
+                        <input type="text" id="cargo">
+                    </div>
+
+                    <div class="col">
+                        <label>Experiência</label>
+                        <select id="experiencia">
+                            <option></option>
+                            <option>1 a 3 anos</option>
+                            <option>4 a 6 anos</option>
+                            <option>7+ anos</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label>Área de Atuação</label>
+                    <select id="areaAtuacao">
+                        <option></option>
+                        <option>Engenharia</option>
+                        <option>Gestão Pública</option>
+                        <option>Infraestrutura</option>
+                        <option>Outros</option>
+                    </select>
+                </div>
+
+
+                <!-- ENDEREÇO COMPLETO -->
+                <h3 class="form-title" style="margin-top: 20px;">Endereço</h3>
+
+                <div class="field">
+                    <label>Rua</label>
+                    <input type="text" id="rua">
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <label>Número</label>
+                        <input type="text" id="numero">
+                    </div>
+
+                    <div class="col">
+                        <label>Bairro</label>
+                        <input type="text" id="bairro">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <label>Cidade</label>
+                        <input type="text" id="cidade">
+                    </div>
+
+                    <div class="col">
+                        <label>Estado</label>
+                        <input type="text" id="estado">
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label>CEP</label>
+                    <input type="text" id="cep">
+                </div>
+
+
+                <!-- SENHA -->
+                <div class="row">
+                    <div class="col">
+                        <label>Senha *</label>
+                        <input type="password" id="senha" required>
+                    </div>
+                    <div class="col">
+                        <label>Confirmar Senha *</label>
+                        <input type="password" id="confirmarSenha" required>
+                    </div>
+                </div>
+
+
+                <!-- ACEITES -->
+                <label class="checkbox">
+                    <input type="checkbox" id="aceitouTermos" required>
+                    Aceito os termos de uso e política de privacidade
+                </label>
+
+                <label class="checkbox">
+                    <input type="checkbox" id="receberNotificacoes">
+                    Desejo receber notificações do sistema
+                </label>
+
+                <!-- BUTTONS -->
+                <div class="form-actions">
+                    <button type="reset" class="btn btn-ghost">Limpar</button>
+                    <button type="submit" class="btn btn-primary">Cadastrar Gestor</button>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+
+    <script src="script-gestor.js"></script>
+</body>
+
+</html>
