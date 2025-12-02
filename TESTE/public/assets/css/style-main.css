@@ -546,7 +546,7 @@ body.font-large span {
   position: fixed;
   top: 60px;
   right: 0;
-  width: 350px;
+  width: 480px;
   height: calc(100% - 60px);
   background: #ededf0; /* mesma cor da sidebar */
   box-shadow: -2px 0 8px rgba(0,0,0,0.15);
