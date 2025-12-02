@@ -198,7 +198,6 @@ function showDetalhesSidebar(obra) {
       </div>
     </div>
 
-    <!-- FEEDBACKS (CORRIGIDO) -->
     <div class="tab-content" id="publicacoes">
       <div class="detalhes-card">
 
@@ -213,12 +212,6 @@ function showDetalhesSidebar(obra) {
                 <small><b>${f.nome}</b></small>
                 <small>${new Date(f.dataEnvio).toLocaleDateString("pt-BR")}</small>
               </div>
-
-              <div class="fb-actions-mini">
-                <span>👍 ${f.likes ?? 0}</span>
-                <span>👎 ${f.dislikes ?? 0}</span>
-              </div>
-
             </div>
           `)
           .join('') || "<p>Nenhum feedback registrado</p>"}
