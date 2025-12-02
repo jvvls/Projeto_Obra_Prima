@@ -83,7 +83,7 @@ function gerarObrasDestaque(obras) {
     `;
 
     card.addEventListener('click', () => {
-      window.location.href = `detalhes-obras/obra-detalhe.html?id=${encodeURIComponent(obra.id)}`;
+      window.location.href = `obra-detalhe.html?id=${encodeURIComponent(obra.id)}`;
     });
 
     container.appendChild(card);

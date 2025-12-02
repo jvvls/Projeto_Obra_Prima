@@ -1,46 +1,52 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Detalhes da Obra</title>
-  <link rel="stylesheet" href="style-obra-detalhe.css">
+  <link rel="stylesheet" href="../assets/css/style-obra-detalhe.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
+
 <body>
 
-<header class="topbar">
-  <div class="logo"><img src="../img/logo.png" alt="Logo"></div>
-  <div class="title">Detalhes da Obra</div>
-  <div class="right">
-    <button class="btn btn-ghost" onclick="window.location.href='../index.html'">
-      <i class="fa fa-home"></i> Home
-    </button>
-  </div>
-</header>
-
-<section class="container">
-  <div class="card">
-    <h1 id="tituloObra">Carregando...</h1>
-    <p id="descricaoObra" class="descricao"></p>
-
-    <div class="info-grid">
-      <div><strong>Status:</strong> <span id="statusObra"></span></div>
-      <div><strong>Bairro:</strong> <span id="bairroObra"></span></div>
-      <div><strong>Cidade:</strong> <span id="cidadeObra"></span></div>
-      <div><strong>Valor Contratado:</strong> R$ <span id="valorObra"></span></div>
-      <div><strong>Data de Início:</strong> <span id="dataInicio"></span></div>
-      <div><strong>Previsão de Conclusão:</strong> <span id="dataFim"></span></div>
+  <header class="topbar">
+    <div class="logo">
+      <a href="index.html">
+        <img src="../assets/images/Logo.png" alt="Logo">
+      </a></div>
+    <div class="title">Detalhes da Obra</div>
+    <div class="right">
+      <button class="btn btn-ghost" onclick="window.location.href='../index.html'">
+        <i class="fa fa-home"></i> Home
+      </button>
     </div>
-  </div>
+  </header>
 
-  <div class="card">
-    <h2>Linha do Tempo (Marcos da Obra)</h2>
-    <div id="timeline" class="timeline"></div>
-  </div>
+  <section class="container">
+    <div class="card">
+      <h1 id="tituloObra">Carregando...</h1>
+      <p id="descricaoObra" class="descricao"></p>
 
-</section>
+      <div class="info-grid">
+        <div><strong>Status:</strong> <span id="statusObra"></span></div>
+        <div><strong>Bairro:</strong> <span id="bairroObra"></span></div>
+        <div><strong>Cidade:</strong> <span id="cidadeObra"></span></div>
+        <div><strong>Valor Contratado:</strong> R$ <span id="valorObra"></span></div>
+        <div><strong>Data de Início:</strong> <span id="dataInicio"></span></div>
+        <div><strong>Previsão de Conclusão:</strong> <span id="dataFim"></span></div>
+      </div>
+    </div>
 
-<script src="script-obra-detalhe.js"></script>
+    <div class="card">
+      <h2>Linha do Tempo (Marcos da Obra)</h2>
+      <div id="timeline" class="timeline"></div>
+    </div>
+
+  </section>
+
+  <script src="../assets/js/script-obra-detalhe.js"></script>
 </body>
+
 </html>
