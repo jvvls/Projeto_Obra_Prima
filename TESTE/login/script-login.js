@@ -7,14 +7,12 @@ async function fazerLogin(event) {
     const senha = document.getElementById("senha").value.trim();
     const tipo = document.getElementById("tipo").value;
     
-
     try {
         const resposta = await fetch(API);
         if (!resposta.ok) throw new Error("Erro ao carregar base de dados");
 
         const db = await resposta.json();
 
-        // 🔥 CONSULTA REAL DO SEU ARQUIVO db.json
         let usuario = null;
 
         if (tipo === "cidadao") {
@@ -32,7 +30,7 @@ async function fazerLogin(event) {
 
         if (usuario) {
             alert(`Login realizado com sucesso! Bem-vindo(a), ${email}`);
-            window.location.href = "../index.html";
+            window.location.href = "../home-main.html"; 
             return;
         }
 

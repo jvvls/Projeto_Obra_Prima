@@ -1731,5 +1731,29 @@
       "dislikes": 0
     }
   ],
-  "gestores": []
+  "gestores": [
+    {
+      "id": "8fd7",
+      "nomeCompleto": "Gestor teste",
+      "cpf": "999.999.999-99",
+      "telefone": "(99) 99999-9999",
+      "email": "teste@mail.com",
+      "orgaoInstituicao": "Sim",
+      "cargo": "Sim",
+      "experiencia": "7+ anos",
+      "areaAtuacao": "Gestão Pública",
+      "endereco": {
+        "rua": "",
+        "numero": "",
+        "bairro": "",
+        "cidade": "",
+        "estado": "",
+        "cep": "30431-051"
+      },
+      "senha": "123",
+      "aceitouTermos": true,
+      "receberNotificacoes": true,
+      "criadoEm": "2025-12-02T13:41:33.577Z"
+    }
+  ]
 }
