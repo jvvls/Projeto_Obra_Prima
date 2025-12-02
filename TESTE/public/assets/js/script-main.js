@@ -45,6 +45,41 @@ toggleSidebarBtn.addEventListener('click', () => {
   else sidebar.classList.toggle('closed');
 });
 
+// ======================================================
+// DROPDOWN DO USUÁRIO
+// ======================================================
+
+// Abrir/fechar dropdown
+userDropdownToggle.addEventListener('click', (e) => {
+  e.stopPropagation();
+  userDropdown.style.display = userDropdown.style.display === 'flex' ? 'none' : 'flex';
+});
+
+// Fechar dropdown ao clicar fora
+document.addEventListener('click', (e) => {
+  if (!userDropdown.contains(e.target) && !userDropdownToggle.contains(e.target)) {
+    userDropdown.style.display = 'none';
+  }
+});
+
+// Navegação e logout
+document.getElementById('homeBtn').addEventListener('click', () => {
+  window.location.href = 'index.html';
+});
+
+document.getElementById('logoutBtn').addEventListener('click', () => {
+  // Limpar dados de login do localStorage
+  localStorage.removeItem('usuarioLogado');
+  
+  // Redirecionar para a página de login
+  window.location.href = 'login.html';
+});
+
+// Alternar fonte
+toggleFontBtn.addEventListener('click', () => {
+  document.body.classList.toggle('font-large');
+  userDropdown.style.display = 'none';
+});
 
 // ======================================================
 // SLIDER
@@ -161,6 +196,9 @@ function showDetalhesSidebar(obra) {
   sidebar.classList.remove('open');
   sidebar.classList.add('closed');
 
+  // Calcular progresso total baseado nos marcos
+  const progressoTotal = calcularProgresso(obra.marcos || []);
+
   detalhesContent.innerHTML = `
     <h2>${obra.titulo}</h2>
 
@@ -185,29 +223,57 @@ function showDetalhesSidebar(obra) {
     <!-- TIMELINE -->
     <div class="tab-content" id="timeline">
       <div class="detalhes-card">
+        <!-- BARRA DE PROGRESSO -->
+        <div class="progresso-container">
+          <div class="progresso-header">
+            <strong>Progresso da Obra</strong>
+            <span class="progresso-percentual">${progressoTotal}%</span>
+          </div>
+          <div class="progresso-barra">
+            <div class="progresso-preenchimento" style="width: ${progressoTotal}%"></div>
+          </div>
+          <div class="progresso-legenda">
+            <small>Baseado nos marcos registrados</small>
+          </div>
+        </div>
+
+        <div class="timeline-separador"></div>
+
+        <!-- LISTA DE MARCOS -->
+        <h3>Marcos da Obra</h3>
         <ul class="timeline-list">
           ${(obra.marcos || [])
+            .sort((a, b) => (a.percentual || 0) - (b.percentual || 0))
             .map(m => `
-              <li>
-                <b>${m.titulo}</b> — ${m.percentual}%<br>
-                ${m.descricao}
+              <li class="marco-item">
+                <div class="marco-header">
+                  <strong>${m.titulo}</strong>
+                  <span class="marco-percentual">${m.percentual}%</span>
+                </div>
+                <div class="marco-progresso">
+                  <div class="marco-barra">
+                    <div class="marco-preenchimento" style="width: ${m.percentual}%"></div>
+                  </div>
+                </div>
+                <div class="marco-detalhes">
+                  <p>${m.descricao || ''}</p>
+                  ${m.data ? `<small><strong>Data:</strong> ${new Date(m.data).toLocaleDateString("pt-BR")}</small>` : ''}
+                </div>
               </li>
             `)
-            .join('') || "<li>Nenhum marco registrado</li>"}
+            .join('') || "<li class='sem-marcos'>Nenhum marco registrado</li>"}
         </ul>
       </div>
     </div>
 
+    <!-- FEEDBACKS -->
     <div class="tab-content" id="publicacoes">
       <div class="detalhes-card">
-
         ${(obra.feedbacks || [])
           .map(f => `
             <div class="pub-card">
-
               <h4>${f.titulo}</h4>
               <p>${f.descricao}</p>
-
               <div class="fb-info">
                 <small><b>${f.nome}</b></small>
                 <small>${new Date(f.dataEnvio).toLocaleDateString("pt-BR")}</small>
@@ -215,13 +281,24 @@ function showDetalhesSidebar(obra) {
             </div>
           `)
           .join('') || "<p>Nenhum feedback registrado</p>"}
-
       </div>
     </div>
   `;
 
   detalhesSidebar.classList.add('open');
   setupTabs();
+}
+
+// Função auxiliar para calcular o progresso total
+function calcularProgresso(marcos) {
+  if (!marcos || marcos.length === 0) return 0;
+  
+  const soma = marcos.reduce((total, marco) => {
+    return total + (Number(marco.percentual) || 0);
+  }, 0);
+  
+  const media = soma / marcos.length;
+  return Math.round(Math.max(0, Math.min(100, media)));
 }
 
 closeDetalhes.addEventListener('click', () => {
@@ -360,7 +437,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
     if (!usuario) {
         // Se não existir, volta pro login
-        window.location.href = "../login/login.html";
+        window.location.href = "login.html";
         return;
     }
 
@@ -375,6 +452,6 @@ window.addEventListener("DOMContentLoaded", () => {
 });
 document.getElementById("logoutBtn").addEventListener("click", () => {
     localStorage.removeItem("usuarioLogado");
-    window.location.href = "../login/login.html";
+    window.location.href = "login.html";
 });
 
