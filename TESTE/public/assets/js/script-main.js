@@ -354,3 +354,27 @@ mapsBox.addEventListener('click', () => {
     setTimeout(() => mapInstance.invalidateSize(), 200);
   }
 });
+
+window.addEventListener("DOMContentLoaded", () => {
+    const usuario = JSON.parse(localStorage.getItem("usuarioLogado"));
+
+    if (!usuario) {
+        // Se não existir, volta pro login
+        window.location.href = "../login/login.html";
+        return;
+    }
+
+    // Pegar primeiro nome
+    const primeiroNome = usuario.nomeCompleto.split(" ")[0];
+
+    // Alterar no header
+    const spanUsuario = document.querySelector(".user span");
+    if (spanUsuario) {
+        spanUsuario.textContent = primeiroNome;
+    }
+});
+document.getElementById("logoutBtn").addEventListener("click", () => {
+    localStorage.removeItem("usuarioLogado");
+    window.location.href = "../login/login.html";
+});
+
