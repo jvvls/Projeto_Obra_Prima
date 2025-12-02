@@ -1,7 +1,8 @@
 {
-  "cidadaos": [
+  "usuarios": [
     {
       "id": "b01f",
+      "gestor": false,
       "dadosPessoais": {
         "nomeCompleto": "Gustavo Henrique de Lima",
         "cpf": "178.197.816-61",
@@ -27,6 +28,7 @@
     },
     {
       "id": "999a",
+      "gestor": false,
       "dadosPessoais": {
         "nomeCompleto": "Ana Luiza Assunção",
         "cpf": "102.377.586-79",
@@ -52,6 +54,7 @@
     },
     {
       "id": "e581",
+      "gestor": false,
       "dadosPessoais": {
         "nomeCompleto": "Gui",
         "cpf": "153.890.766-64",
@@ -74,6 +77,116 @@
       "seguranca": {
         "password": "12345678"
       }
+    },
+    {
+      "id": "g1",
+      "gestor": true,
+      "dadosPessoais": {
+        "nomeCompleto": "Carlos Gestor da Silva",
+        "cpf": "111.111.111-11",
+        "dataNascimento": "1980-01-15",
+        "genero": "male"
+      },
+      "contato": {
+        "email": "carlos.gestor@prefeitura.gov",
+        "telefone": "(31) 90000-1111"
+      },
+      "endereco": {
+        "cep": "30000-000",
+        "logradouro": "Rua do Centro",
+        "numero": "100",
+        "complemento": "Bloco A",
+        "bairro": "Centro",
+        "cidade": "Belo Horizonte",
+        "estado": "MG"
+      },
+      "seguranca": {
+        "password": "gestor123"
+      }
+    },
+    {
+      "id": "g2",
+      "gestor": true,
+      "dadosPessoais": {
+        "nomeCompleto": "Adriana Gestora Souza",
+        "cpf": "222.222.222-22",
+        "dataNascimento": "1995-05-20",
+        "genero": "female"
+      },
+      "contato": {
+        "email": "adriana.gestora@prefeitura.gov",
+        "telefone": "(31) 90000-2222"
+      },
+      "endereco": {
+        "cep": "31000-000",
+        "logradouro": "Avenida Sul",
+        "numero": "250",
+        "complemento": "",
+        "bairro": "Funcionários",
+        "cidade": "Belo Horizonte",
+        "estado": "MG"
+      },
+      "seguranca": {
+        "password": "gestora456"
+      }
+    },
+    {
+      "id": "34b1",
+      "gestor": false,
+      "dadosPessoais": {
+        "nomeCompleto": "teste",
+        "cpf": "999.999.999-99",
+        "dataNascimento": "2025-12-02",
+        "genero": "male"
+      },
+      "contato": {
+        "email": "teste@mail.com",
+        "telefone": "(99) 99999-9999"
+      },
+      "endereco": {
+        "cep": "30431-051",
+        "logradouro": "999",
+        "numero": "999",
+        "complemento": "999",
+        "bairro": "teste",
+        "cidade": "teste",
+        "estado": "teste"
+      },
+      "seguranca": {
+        "password": "1"
+      }
+    },
+    {
+      "id": "699f",
+      "gestor": true,
+      "dadosPessoais": {
+        "nomeCompleto": "Gestor teste",
+        "cpf": "999.999.999-99"
+      },
+      "contato": {
+        "email": "gestor@teste.com",
+        "telefone": "(99) 99999-9999"
+      },
+      "endereco": {
+        "logradouro": "teste",
+        "numero": "999",
+        "bairro": "teste",
+        "cidade": "teste",
+        "estado": "teste",
+        "cep": "30431-051"
+      },
+      "dadosProfissionais": {
+        "orgaoInstituicao": "teste",
+        "cargo": "teste",
+        "experiencia": "7+ anos",
+        "areaAtuacao": "Engenharia"
+      },
+      "seguranca": {
+        "password": "1"
+      },
+      "aceitouTermos": true,
+      "receberNotificacoes": true,
+      "criadoEm": "2025-12-02T14:56:18.636Z"
     }
   ],
   "obras": [
@@ -116,6 +229,41 @@
           "descricao": "Execução da nova pavimentação nas áreas de convivência.",
           "percentual": 55,
           "data": "2024-08-22"
+        }
+      ],
+      "feedbacks": [
+        {
+          "id": "1",
+          "nome": "João Silva",
+          "cpf": "123.456.789-00",
+          "email": "joao.silva@example.com",
+          "tipo": "elogio",
+          "titulo": "Excelente revitalização!",
+          "descricao": "A nova praça ficou muito bonita e funcional. Agradeço pela iluminação e área de lazer.",
+          "dataEnvio": "2025-10-10T14:35:00",
+          "anexo": "img/praca_central.jpg"
+        },
+        {
+          "id": "5",
+          "nome": "Lucas Nascimento",
+          "cpf": "852.963.741-00",
+          "email": "lucas.nascimento@example.com",
+          "tipo": "reclamacao",
+          "titulo": "Falta de acessibilidade",
+          "descricao": "Os bancos da praça ficaram bons, mas faltam rampas de acesso para cadeirantes.",
+          "dataEnvio": "2025-10-14T08:50:00",
+          "anexo": "img/acessibilidade.jpg"
+        },
+        {
+          "id": "9",
+          "nome": "Paula Souza",
+          "cpf": "159.357.258-00",
+          "email": "paula.souza@example.com",
+          "tipo": "elogio",
+          "titulo": "Espaço para lazer em família",
+          "descricao": "A nova praça é ótima para passear com as crianças, ficou muito agradável.",
+          "dataEnvio": "2025-10-17T14:50:00",
+          "anexo": "img/praca_familia.png"
         }
       ]
     },
@@ -170,7 +318,8 @@
           "percentual": 62,
           "data": "2024-08-01"
         }
-      ]
+      ],
+      "feedbacks": []
     },
     {
       "id": "3",
@@ -222,6 +371,41 @@
           "descricao": "Delimitação de faixas e rotas alternativas.",
           "percentual": 65,
           "data": "2024-04-03"
+        }
+      ],
+      "feedbacks": [
+        {
+          "id": "3",
+          "nome": "Carlos Mendes",
+          "cpf": "321.654.987-00",
+          "email": "carlos.mendes@example.com",
+          "tipo": "sugestao",
+          "titulo": "Melhorar o escoamento de água",
+          "descricao": "Após a pavimentação, a rua ficou com pontos de acúmulo de água. Sugiro pequenas correções.",
+          "dataEnvio": "2025-10-12T16:45:00",
+          "anexo": "img/rua_flores.png"
+        },
+        {
+          "id": "7",
+          "nome": "Ricardo Lima",
+          "cpf": "963.741.852-00",
+          "email": "ricardo.lima@example.com",
+          "tipo": "elogio",
+          "titulo": "Trânsito mais seguro",
+          "descricao": "A pavimentação ajudou muito na fluidez do trânsito, parabéns pela execução.",
+          "dataEnvio": "2025-10-16T13:30:00",
+          "anexo": "img/rua_flores_ok.jpg"
+        },
+        {
+          "id": "11",
+          "nome": "Bruna Costa",
+          "cpf": "753.159.456-00",
+          "email": "bruna.costa@example.com",
+          "tipo": "elogio",
+          "titulo": "Serviço rápido e eficiente",
+          "descricao": "A obra terminou antes do prazo e o resultado ficou ótimo. Parabéns à equipe.",
+          "dataEnvio": "2025-10-18T17:10:00",
+          "anexo": "img/rua_flores_ok2.jpg"
         }
       ]
     },
@@ -276,6 +460,41 @@
           "percentual": 70,
           "data": "2024-06-17"
         }
+      ],
+      "feedbacks": [
+        {
+          "id": "2",
+          "nome": "Maria Oliveira",
+          "cpf": "987.654.321-00",
+          "email": "maria.oliveira@example.com",
+          "tipo": "reclamacao",
+          "titulo": "Atraso nas obras",
+          "descricao": "A escola ainda não foi entregue e há muito entulho no entorno. Solicito providências.",
+          "dataEnvio": "2025-10-11T09:20:00",
+          "anexo": "img/escola.jpg"
+        },
+        {
+          "id": "6",
+          "nome": "Juliana Torres",
+          "cpf": "741.852.963-00",
+          "email": "juliana.torres@example.com",
+          "tipo": "elogio",
+          "titulo": "Nova estrutura está ótima",
+          "descricao": "A escola reformada ficou moderna, com ótimas salas e área externa para os alunos.",
+          "dataEnvio": "2025-10-15T10:25:00",
+          "anexo": "img/escola_nova.jpg"
+        },
+        {
+          "id": "10",
+          "nome": "Eduardo Pereira",
+          "cpf": "258.369.147-00",
+          "email": "eduardo.pereira@example.com",
+          "tipo": "reclamacao",
+          "titulo": "Falta de ventilação nas salas",
+          "descricao": "Apesar da boa reforma, as salas continuam quentes e sem ventiladores suficientes.",
+          "dataEnvio": "2025-10-18T10:25:00",
+          "anexo": "img/escola_ventilacao.jpg"
+        }
       ]
     },
     {
@@ -329,7 +548,8 @@
           "percentual": 80,
           "data": "2024-09-19"
         }
-      ]
+      ],
+      "feedbacks": []
     },
     {
       "id": "6",
@@ -376,6 +596,30 @@
           "descricao": "Revestimentos e instalações de gases medicinais.",
           "percentual": 58,
           "data": "2025-04-25"
+        }
+      ],
+      "feedbacks": [
+        {
+          "id": "4",
+          "nome": "Fernanda Rocha",
+          "cpf": "654.987.321-00",
+          "email": "fernanda.rocha@example.com",
+          "tipo": "elogio",
+          "titulo": "Obra essencial para a comunidade",
+          "descricao": "Excelente iniciativa! O hospital ampliado vai ajudar muito no atendimento da região.",
+          "dataEnvio": "2025-10-13T11:10:00",
+          "anexo": "img/hospital.jpg"
+        },
+        {
+          "id": "8",
+          "nome": "Camila Duarte",
+          "cpf": "369.258.147-00",
+          "email": "camila.duarte@example.com",
+          "tipo": "sugestao",
+          "titulo": "Área de espera pequena",
+          "descricao": "O novo setor de atendimento ficou bom, mas a recepção ainda é muito pequena.",
+          "dataEnvio": "2025-10-17T09:40:00",
+          "anexo": "img/hospital_sala.jpg"
         }
       ]
     },
@@ -430,7 +674,8 @@
           "percentual": 71,
           "data": "2025-07-30"
         }
-      ]
+      ],
+      "feedbacks": []
     },
     {
       "id": "8",
@@ -483,7 +728,8 @@
           "percentual": 75,
           "data": "2025-07-11"
         }
-      ]
+      ],
+      "feedbacks": []
     },
     {
       "id": "9",
@@ -536,7 +782,8 @@
           "percentual": 80,
           "data": "2025-02-14"
         }
-      ]
+      ],
+      "feedbacks": []
     },
     {
       "id": "10",
@@ -589,7 +836,8 @@
           "percentual": 68,
           "data": "2025-10-27"
         }
-      ]
+      ],
+      "feedbacks": []
     },
     {
       "id": "11",
@@ -642,7 +890,8 @@
           "percentual": 63,
           "data": "2027-02-06"
         }
-      ]
+      ],
+      "feedbacks": []
     },
     {
       "id": "12",
@@ -695,7 +944,8 @@
           "percentual": 68,
           "data": "2024-05-22"
         }
-      ]
+      ],
+      "feedbacks": []
     },
     {
       "id": "13",
@@ -748,7 +998,8 @@
           "percentual": 78,
           "data": "2026-05-11"
         }
-      ]
+      ],
+      "feedbacks": []
     },
     {
       "id": "14",
@@ -801,7 +1052,8 @@
           "percentual": 72,
           "data": "2026-10-18"
         }
-      ]
+      ],
+      "feedbacks": []
     },
     {
       "id": "15",
@@ -854,906 +1106,8 @@
           "percentual": 69,
           "data": "2025-07-27"
         }
-      ]
-    }
-  ],
-  "cadastro_gestor": {
-    "tela": {
-      "nome": "Cadastro de Gestor",
-      "descricao": "Tela responsável pelo cadastro de novos gestores no sistema Obra Prima. Permite inserir dados pessoais, profissionais, de acesso e endereço, com validação e envio para a API REST.",
-      "tecnologias": {
-        "frontend": [
-          "HTML5",
-          "CSS3",
-          "JavaScript (ES6)",
-          "Bootstrap 5"
-        ],
-        "backend": [
-          "API RESTful (JSON)",
-          "JSON Server (mock de testes)"
-        ],
-        "frameworks_auxiliares": [
-          "Font Awesome (ícones)",
-          "Google Fonts (tipografia)"
-        ]
-      },
-      "gestores": [],
-      "estrutura": {
-        "header": {
-          "logo": "Logo Obra Prima",
-          "cor_de_fundo": "#1b7742",
-          "navegacao": []
-        },
-        "formulario": {
-          "titulo": "Cadastro de Gestor",
-          "descricao": "Preencha os dados abaixo para criar sua conta de gestor no sistema.",
-          "secoes": {
-            "dados_pessoais": {
-              "campos": [
-                {
-                  "nome": "nomeCompleto",
-                  "tipo": "texto",
-                  "placeholder": "Digite seu nome completo",
-                  "obrigatorio": true
-                },
-                {
-                  "nome": "cpf",
-                  "tipo": "texto",
-                  "placeholder": "000.000.000-00",
-                  "mascara": "CPF",
-                  "obrigatorio": true
-                },
-                {
-                  "nome": "email",
-                  "tipo": "email",
-                  "placeholder": "seu@email.com",
-                  "obrigatorio": true
-                },
-                {
-                  "nome": "telefone",
-                  "tipo": "texto",
-                  "placeholder": "(00) 00000-0000",
-                  "mascara": "telefone"
-                }
-              ]
-            },
-            "dados_profissionais": {
-              "campos": [
-                {
-                  "nome": "orgaoInstituicao",
-                  "tipo": "texto",
-                  "placeholder": "Nome da instituição"
-                },
-                {
-                  "nome": "cargo",
-                  "tipo": "texto",
-                  "placeholder": "Seu cargo atual"
-                },
-                {
-                  "nome": "experiencia",
-                  "tipo": "select",
-                  "opcoes": [
-                    "1 a 3 anos",
-                    "4 a 6 anos",
-                    "7+ anos"
-                  ]
-                },
-                {
-                  "nome": "areaAtuacao",
-                  "tipo": "select",
-                  "opcoes": [
-                    "Engenharia",
-                    "Gestão Pública",
-                    "Infraestrutura",
-                    "Outros"
-                  ]
-                }
-              ]
-            },
-            "dados_acesso": {
-              "campos": [
-                {
-                  "nome": "senha",
-                  "tipo": "password",
-                  "placeholder": "Mínimo 8 caracteres",
-                  "validacao": "mínimo 8 caracteres"
-                },
-                {
-                  "nome": "confirmarSenha",
-                  "tipo": "password",
-                  "placeholder": "Digite novamente"
-                }
-              ]
-            },
-            "endereco": {
-              "campos": [
-                {
-                  "nome": "enderecoCompleto",
-                  "tipo": "texto",
-                  "placeholder": "Rua, número, bairro, cidade - UF"
-                }
-              ]
-            },
-            "aceite_termos": {
-              "opcoes": [
-                "Aceito os termos de uso e política de privacidade do sistema",
-                "Desejo receber notificações sobre atualizações do sistema"
-              ]
-            }
-          },
-          "botoes": [
-            {
-              "nome": "limparFormulario",
-              "texto": "🧹 Limpar Formulário",
-              "cor": "cinza",
-              "acao": "reset()"
-            },
-            {
-              "nome": "cadastrarGestor",
-              "texto": "👤 Cadastrar Gestor",
-              "cor": "verde",
-              "acao": "submit()"
-            }
-          ],
-          "links": {
-            "login": "Já possui uma conta? Faça login aqui",
-            "suporte": "Entre em contato com o suporte técnico"
-          }
-        },
-        "footer": {
-          "texto": "Precisa de ajuda? Entre em contato com o suporte técnico."
-        }
-      },
-      "interacao": {
-        "validacoes": [
-          "Todos os campos obrigatórios devem ser preenchidos",
-          "E-mail válido exigido",
-          "Senhas devem coincidir",
-          "CPF deve seguir formato 000.000.000-00"
-        ],
-        "integracao_api": {
-          "endpoint": "https://api.obraprima.com/gestores",
-          "metodo": "POST",
-          "corpo_exemplo": {
-            "nomeCompleto": "João da Silva",
-            "cpf": "123.456.789-00",
-            "email": "joao@exemplo.com",
-            "telefone": "(31) 99999-9999",
-            "orgaoInstituicao": "Prefeitura Municipal",
-            "cargo": "Gestor de Obras",
-            "experiencia": "4 a 6 anos",
-            "areaAtuacao": "Infraestrutura",
-            "senha": "senha1234",
-            "enderecoCompleto": "Rua das Flores, 123, Centro - MG",
-            "aceitouTermos": true,
-            "receberNotificacoes": false
-          }
-        }
-      }
-    },
-    "gestores": []
-  },
-  "cadastro_pessoas": [
-    {
-      "dadosPessoais": {
-        "nomeCompleto": "Maria Joaquina de Amaral",
-        "cpf": "123.456.789-00",
-        "dataNascimento": "1992-10-25",
-        "genero": "female"
-      },
-      "contato": {
-        "email": "maria.joaquina@exemplo.com",
-        "telefone": "(11) 98765-4321"
-      },
-      "endereco": {
-        "cep": "01001-000",
-        "logradouro": "Rua das Flores",
-        "numero": "123",
-        "complemento": "Apto 10",
-        "bairro": "Jardim Primavera",
-        "cidade": "São Paulo",
-        "estado": "SP"
-      },
-      "id": "d493"
-    }
-  ],
-  "feedbacks": [
-    {
-      "id": "1",
-      "obra": "Construção da Praça Central",
-      "nome": "João Silva",
-      "cpf": "123.456.789-00",
-      "email": "joao.silva@example.com",
-      "tipo": "elogio",
-      "titulo": "Excelente revitalização!",
-      "descricao": "A nova praça ficou muito bonita e funcional. Agradeço pela iluminação e área de lazer.",
-      "dataEnvio": "2025-10-10T14:35:00",
-      "anexo": "img/praca_central.jpg"
-    },
-    {
-      "id": "2",
-      "obra": "Reforma da Escola Municipal",
-      "nome": "Maria Oliveira",
-      "cpf": "987.654.321-00",
-      "email": "maria.oliveira@example.com",
-      "tipo": "reclamacao",
-      "titulo": "Atraso nas obras",
-      "descricao": "A escola ainda não foi entregue e há muito entulho no entorno. Solicito providências.",
-      "dataEnvio": "2025-10-11T09:20:00",
-      "anexo": "img/escola.jpg"
-    },
-    {
-      "id": "3",
-      "obra": "Pavimentação da Rua das Flores",
-      "nome": "Carlos Mendes",
-      "cpf": "321.654.987-00",
-      "email": "carlos.mendes@example.com",
-      "tipo": "sugestao",
-      "titulo": "Melhorar o escoamento de água",
-      "descricao": "Após a pavimentação, a rua ficou com pontos de acúmulo de água. Sugiro pequenas correções.",
-      "dataEnvio": "2025-10-12T16:45:00",
-      "anexo": "img/rua_flores.png"
-    },
-    {
-      "id": "4",
-      "obra": "Ampliação do Hospital Regional",
-      "nome": "Fernanda Rocha",
-      "cpf": "654.987.321-00",
-      "email": "fernanda.rocha@example.com",
-      "tipo": "elogio",
-      "titulo": "Obra essencial para a comunidade",
-      "descricao": "Excelente iniciativa! O hospital ampliado vai ajudar muito no atendimento da região.",
-      "dataEnvio": "2025-10-13T11:10:00",
-      "anexo": "img/hospital.jpg"
-    },
-    {
-      "id": "5",
-      "obra": "Construção da Praça Central",
-      "nome": "Lucas Nascimento",
-      "cpf": "852.963.741-00",
-      "email": "lucas.nascimento@example.com",
-      "tipo": "reclamacao",
-      "titulo": "Falta de acessibilidade",
-      "descricao": "Os bancos da praça ficaram bons, mas faltam rampas de acesso para cadeirantes.",
-      "dataEnvio": "2025-10-14T08:50:00",
-      "anexo": "img/acessibilidade.jpg"
-    },
-    {
-      "id": "6",
-      "obra": "Reforma da Escola Municipal",
-      "nome": "Juliana Torres",
-      "cpf": "741.852.963-00",
-      "email": "juliana.torres@example.com",
-      "tipo": "elogio",
-      "titulo": "Nova estrutura está ótima",
-      "descricao": "A escola reformada ficou moderna, com ótimas salas e área externa para os alunos.",
-      "dataEnvio": "2025-10-15T10:25:00",
-      "anexo": "img/escola_nova.jpg"
-    },
-    {
-      "id": "7",
-      "obra": "Pavimentação da Rua das Flores",
-      "nome": "Ricardo Lima",
-      "cpf": "963.741.852-00",
-      "email": "ricardo.lima@example.com",
-      "tipo": "elogio",
-      "titulo": "Trânsito mais seguro",
-      "descricao": "A pavimentação ajudou muito na fluidez do trânsito, parabéns pela execução.",
-      "dataEnvio": "2025-10-16T13:30:00",
-      "anexo": "img/rua_flores_ok.jpg"
-    },
-    {
-      "id": "8",
-      "obra": "Ampliação do Hospital Regional",
-      "nome": "Camila Duarte",
-      "cpf": "369.258.147-00",
-      "email": "camila.duarte@example.com",
-      "tipo": "sugestao",
-      "titulo": "Área de espera pequena",
-      "descricao": "O novo setor de atendimento ficou bom, mas a recepção ainda é muito pequena.",
-      "dataEnvio": "2025-10-17T09:40:00",
-      "anexo": "img/hospital_sala.jpg"
-    },
-    {
-      "id": "9",
-      "obra": "Construção da Praça Central",
-      "nome": "Paula Souza",
-      "cpf": "159.357.258-00",
-      "email": "paula.souza@example.com",
-      "tipo": "elogio",
-      "titulo": "Espaço para lazer em família",
-      "descricao": "A nova praça é ótima para passear com as crianças, ficou muito agradável.",
-      "dataEnvio": "2025-10-17T14:50:00",
-      "anexo": "img/praca_familia.png"
-    },
-    {
-      "id": "10",
-      "obra": "Reforma da Escola Municipal",
-      "nome": "Eduardo Pereira",
-      "cpf": "258.369.147-00",
-      "email": "eduardo.pereira@example.com",
-      "tipo": "reclamacao",
-      "titulo": "Falta de ventilação nas salas",
-      "descricao": "Apesar da boa reforma, as salas continuam quentes e sem ventiladores suficientes.",
-      "dataEnvio": "2025-10-18T10:25:00",
-      "anexo": "img/escola_ventilacao.jpg"
-    },
-    {
-      "id": "11",
-      "obra": "Pavimentação da Rua das Flores",
-      "nome": "Bruna Costa",
-      "cpf": "753.159.456-00",
-      "email": "bruna.costa@example.com",
-      "tipo": "elogio",
-      "titulo": "Serviço rápido e eficiente",
-      "descricao": "A obra terminou antes do prazo e o resultado ficou ótimo. Parabéns à equipe.",
-      "dataEnvio": "2025-10-18T17:10:00",
-      "anexo": "img/rua_flores_ok2.jpg"
-    },
-    {
-      "id": "12",
-      "obra": "Ampliação do Hospital Regional",
-      "nome": "Gabriel Almeida",
-      "cpf": "456.852.159-00",
-      "email": "gabriel.almeida@example.com",
-      "tipo": "reclamacao",
-      "titulo": "Barulho durante as obras",
-      "descricao": "Os pacientes reclamam do barulho causado pelas obras de ampliação, principalmente à tarde.",
-      "dataEnvio": "2025-10-19T11:50:00",
-      "anexo": "img/ruido_hospital.jpg"
-    },
-    {
-      "id": "13",
-      "obra": "Construção da Praça Central",
-      "nome": "Isabela Martins",
-      "cpf": "147.258.369-00",
-      "email": "isabela.martins@example.com",
-      "tipo": "sugestao",
-      "titulo": "Mais áreas verdes",
-      "descricao": "Seria ótimo se fossem plantadas mais árvores próximas ao coreto da praça.",
-      "dataEnvio": "2025-10-20T09:00:00",
-      "anexo": "img/praca_verde.jpg"
-    },
-    {
-      "id": "14",
-      "obra": "Reforma da Escola Municipal",
-      "nome": "Rafael Gomes",
-      "cpf": "852.147.963-00",
-      "email": "rafael.gomes@example.com",
-      "tipo": "elogio",
-      "titulo": "Aulas retomadas com sucesso",
-      "descricao": "Os alunos voltaram a estudar e a escola está em ótimas condições. Excelente trabalho!",
-      "dataEnvio": "2025-10-20T14:15:00",
-      "anexo": "img/escola_aberta.png"
-    },
-    {
-      "id": "15",
-      "obra": "Pavimentação da Rua das Flores",
-      "nome": "Tatiane Melo",
-      "cpf": "369.147.852-00",
-      "email": "tatiane.melo@example.com",
-      "tipo": "sugestao",
-      "titulo": "Adicionar sinalização",
-      "descricao": "Faltam faixas de pedestres e placas de limite de velocidade após a pavimentação.",
-      "dataEnvio": "2025-10-21T08:45:00",
-      "anexo": "img/sinalizacao.png"
-    },
-    {
-      "id": "16",
-      "obra": "Ampliação do Hospital Regional",
-      "nome": "Henrique Souza",
-      "cpf": "951.753.654-00",
-      "email": "henrique.souza@example.com",
-      "tipo": "elogio",
-      "titulo": "Mais leitos disponíveis",
-      "descricao": "Com a ampliação, o hospital agora atende mais pacientes. Muito positivo!",
-      "dataEnvio": "2025-10-22T10:00:00",
-      "anexo": "img/hospital_leitos.jpg"
-    },
-    {
-      "id": "17",
-      "obra": "Construção da Praça Central",
-      "nome": "Sofia Duarte",
-      "cpf": "258.654.357-00",
-      "email": "sofia.duarte@example.com",
-      "tipo": "elogio",
-      "titulo": "Lindo paisagismo",
-      "descricao": "As plantas e o gramado da nova praça estão impecáveis. Parabéns à equipe de jardinagem.",
-      "dataEnvio": "2025-10-23T12:30:00",
-      "anexo": "img/praca_jardim.jpg"
-    },
-    {
-      "id": "18",
-      "obra": "Reforma da Escola Municipal",
-      "nome": "Diego Freitas",
-      "cpf": "654.357.258-00",
-      "email": "diego.freitas@example.com",
-      "tipo": "reclamacao",
-      "titulo": "Problemas na pintura",
-      "descricao": "A pintura externa começou a descascar poucos dias após a entrega da obra.",
-      "dataEnvio": "2025-10-24T09:50:00",
-      "anexo": "img/escola_pintura.jpg"
-    },
-    {
-      "id": "19",
-      "obra": "Pavimentação da Rua das Flores",
-      "nome": "Natália Campos",
-      "cpf": "357.258.654-00",
-      "email": "natalia.campos@example.com",
-      "tipo": "elogio",
-      "titulo": "Melhorou o acesso ao bairro",
-      "descricao": "Agora o trajeto até minha casa está muito mais rápido e seguro.",
-      "dataEnvio": "2025-10-25T15:10:00",
-      "anexo": "img/acesso_bairro.jpg"
-    },
-    {
-      "id": "20",
-      "obra": "Ampliação do Hospital Regional",
-      "nome": "Rodrigo Fernandes",
-      "cpf": "951.456.357-00",
-      "email": "rodrigo.fernandes@example.com",
-      "tipo": "sugestao",
-      "titulo": "Criar estacionamento coberto",
-      "descricao": "Com o aumento do fluxo, seria interessante construir um estacionamento com cobertura.",
-      "dataEnvio": "2025-10-26T10:30:00",
-      "anexo": "img/estacionamento.jpg"
-    },
-    {
-      "id": "2f26",
-      "obra": "teste1",
-      "nome": "Gustavo Henrique de Lima",
-      "cpf": "178.197.816-61",
-      "email": "gustavohgordiano@gmail.com",
-      "tipo": "reclamacao",
-      "titulo": "TEste de cadastro de obra",
-      "descricao": "teste teste\n\n\nteste",
-      "dataEnvio": "2025-11-16T19:49:23.697Z",
-      "anexo": "img/Captura de tela 2025-10-26 200722.png"
-    },
-    {
-      "id": "21",
-      "obra": "Reforma da Praça Central",
-      "nome": "Ana Paula Santos",
-      "cpf": "111.222.333-44",
-      "email": "ana.paula@example.com",
-      "tipo": "elogio",
-      "titulo": "Praça revitalizada está linda!",
-      "descricao": "A reforma da praça central ficou excelente! O espaço está muito mais agradável para as famílias.",
-      "dataEnvio": "2025-10-28T10:15:00",
-      "anexo": null,
-      "likes": 13,
-      "dislikes": 0
-    },
-    {
-      "id": "22",
-      "obra": "Reforma da Praça Central",
-      "nome": "Roberto Alves",
-      "cpf": "222.333.444-55",
-      "email": "roberto.alves@example.com",
-      "tipo": "sugestao",
-      "titulo": "Sugestão de playground",
-      "descricao": "Seria interessante adicionar um playground para crianças na praça reformada.",
-      "dataEnvio": "2025-10-29T14:30:00",
-      "anexo": null,
-      "likes": 8,
-      "dislikes": 1
-    },
-    {
-      "id": "23",
-      "obra": "Construção do Centro de Saúde Barreiro",
-      "nome": "Mariana Costa",
-      "cpf": "333.444.555-66",
-      "email": "mariana.costa@example.com",
-      "tipo": "elogio",
-      "titulo": "Centro de saúde muito necessário",
-      "descricao": "A construção do centro de saúde no Barreiro é uma excelente iniciativa para a comunidade local.",
-      "dataEnvio": "2025-10-30T09:20:00",
-      "anexo": null,
-      "likes": 15,
-      "dislikes": 1
-    },
-    {
-      "id": "24",
-      "obra": "Construção do Centro de Saúde Barreiro",
-      "nome": "Pedro Henrique",
-      "cpf": "444.555.666-77",
-      "email": "pedro.henrique@example.com",
-      "tipo": "reclamacao",
-      "titulo": "Atraso na entrega",
-      "descricao": "A obra do centro de saúde está atrasada e a comunidade precisa urgentemente deste serviço.",
-      "dataEnvio": "2025-11-01T11:45:00",
-      "anexo": null,
-      "likes": 5,
-      "dislikes": 2
-    },
-    {
-      "id": "25",
-      "obra": "Pavimentação da Rua das Flores",
-      "nome": "Fernanda Lima",
-      "cpf": "555.666.777-88",
-      "email": "fernanda.lima@example.com",
-      "tipo": "sugestao",
-      "titulo": "Manutenção preventiva",
-      "descricao": "Sugiro que seja feita uma manutenção preventiva na pavimentação para evitar problemas futuros.",
-      "dataEnvio": "2025-11-02T16:20:00",
-      "anexo": null,
-      "likes": 7,
-      "dislikes": 0
-    },
-    {
-      "id": "26",
-      "obra": "Construção da Escola Municipal Esperança",
-      "nome": "Carlos Eduardo",
-      "cpf": "666.777.888-99",
-      "email": "carlos.eduardo@example.com",
-      "tipo": "elogio",
-      "titulo": "Escola moderna e bem equipada",
-      "descricao": "A nova escola municipal Esperança está com uma estrutura excelente e bem equipada para os alunos.",
-      "dataEnvio": "2025-11-03T08:30:00",
-      "anexo": null,
-      "likes": 21,
-      "dislikes": 0
-    },
-    {
-      "id": "27",
-      "obra": "Construção da Escola Municipal Esperança",
-      "nome": "Juliana Almeida",
-      "cpf": "777.888.999-00",
-      "email": "juliana.almeida@example.com",
-      "tipo": "reclamacao",
-      "titulo": "Falta de estacionamento",
-      "descricao": "A escola está ótima, mas falta espaço para estacionamento dos pais e professores.",
-      "dataEnvio": "2025-11-04T13:10:00",
-      "anexo": null,
-      "likes": 3,
-      "dislikes": 1
-    },
-    {
-      "id": "28",
-      "obra": "Construção da Escola Municipal Esperança",
-      "nome": "Lucas Mendes",
-      "cpf": "888.999.000-11",
-      "email": "lucas.mendes@example.com",
-      "tipo": "sugestao",
-      "titulo": "Biblioteca com mais livros",
-      "descricao": "Sugiro que a biblioteca da escola receba mais livros didáticos e literários para os alunos.",
-      "dataEnvio": "2025-11-05T10:00:00",
-      "anexo": null,
-      "likes": 9,
-      "dislikes": 0
-    },
-    {
-      "id": "29",
-      "obra": "Revitalização do Viaduto Santa Tereza",
-      "nome": "Patricia Silva",
-      "cpf": "999.000.111-22",
-      "email": "patricia.silva@example.com",
-      "tipo": "elogio",
-      "titulo": "Viaduto muito mais seguro",
-      "descricao": "A revitalização do viaduto Santa Tereza melhorou muito a segurança e a iluminação do local.",
-      "dataEnvio": "2025-11-06T15:25:00",
-      "anexo": null,
-      "likes": 15,
-      "dislikes": 0
-    },
-    {
-      "id": "30",
-      "obra": "Revitalização do Viaduto Santa Tereza",
-      "nome": "Marcos Oliveira",
-      "cpf": "000.111.222-33",
-      "email": "marcos.oliveira@example.com",
-      "tipo": "sugestao",
-      "titulo": "Adicionar ciclovia",
-      "descricao": "Seria interessante adicionar uma ciclovia ao lado do viaduto revitalizado para incentivar o uso de bicicletas.",
-      "dataEnvio": "2025-11-07T11:40:00",
-      "anexo": null,
-      "likes": 11,
-      "dislikes": 1
-    },
-    {
-      "id": "31",
-      "obra": "Ampliação do Hospital Regional Norte",
-      "nome": "Amanda Rocha",
-      "cpf": "111.222.333-44",
-      "email": "amanda.rocha@example.com",
-      "tipo": "elogio",
-      "titulo": "Ampliação muito bem-vinda",
-      "descricao": "A ampliação do hospital regional norte vai melhorar muito o atendimento à população da região.",
-      "dataEnvio": "2025-11-08T09:15:00",
-      "anexo": null,
-      "likes": 18,
-      "dislikes": 0
-    },
-    {
-      "id": "32",
-      "obra": "Ampliação do Hospital Regional Norte",
-      "nome": "Thiago Ferreira",
-      "cpf": "222.333.444-55",
-      "email": "thiago.ferreira@example.com",
-      "tipo": "reclamacao",
-      "titulo": "Obra paralisada há muito tempo",
-      "descricao": "A ampliação do hospital está paralisada há meses. Precisamos que seja retomada urgentemente.",
-      "dataEnvio": "2025-11-09T14:50:00",
-      "anexo": null,
-      "likes": 6,
-      "dislikes": 3
-    },
-    {
-      "id": "33",
-      "obra": "Reforma do Mercado Distrital",
-      "nome": "Beatriz Nunes",
-      "cpf": "333.444.555-66",
-      "email": "beatriz.nunes@example.com",
-      "tipo": "elogio",
-      "titulo": "Mercado renovado está ótimo",
-      "descricao": "A reforma do mercado distrital deixou o local muito mais moderno e organizado para os feirantes e clientes.",
-      "dataEnvio": "2025-11-10T10:30:00",
-      "anexo": null,
-      "likes": 13,
-      "dislikes": 0
-    },
-    {
-      "id": "34",
-      "obra": "Reforma do Mercado Distrital",
-      "nome": "Rafael Souza",
-      "cpf": "444.555.666-77",
-      "email": "rafael.souza@example.com",
-      "tipo": "sugestao",
-      "titulo": "Melhorar a ventilação",
-      "descricao": "Sugiro melhorias no sistema de ventilação do mercado para tornar o ambiente mais agradável.",
-      "dataEnvio": "2025-11-11T16:00:00",
-      "anexo": null,
-      "likes": 8,
-      "dislikes": 0
-    },
-    {
-      "id": "35",
-      "obra": "Construção da Creche Jardim das Rosas",
-      "nome": "Larissa Martins",
-      "cpf": "555.666.777-88",
-      "email": "larissa.martins@example.com",
-      "tipo": "elogio",
-      "titulo": "Creche muito necessária",
-      "descricao": "A construção da creche Jardim das Rosas é essencial para as famílias da região. Excelente iniciativa!",
-      "dataEnvio": "2025-11-12T08:45:00",
-      "anexo": null,
-      "likes": 22,
-      "dislikes": 0
-    },
-    {
-      "id": "36",
-      "obra": "Construção da Creche Jardim das Rosas",
-      "nome": "Felipe Gomes",
-      "cpf": "666.777.888-99",
-      "email": "felipe.gomes@example.com",
-      "tipo": "reclamacao",
-      "titulo": "Atraso na entrega da creche",
-      "descricao": "A creche deveria ter sido entregue há meses. As famílias estão aguardando ansiosamente.",
-      "dataEnvio": "2025-11-13T12:20:00",
-      "anexo": null,
-      "likes": 4,
-      "dislikes": 2
-    },
-    {
-      "id": "37",
-      "obra": "Recapeamento da Avenida dos Andradas",
-      "nome": "Vanessa Campos",
-      "cpf": "777.888.999-00",
-      "email": "vanessa.campos@example.com",
-      "tipo": "elogio",
-      "titulo": "Avenida muito melhor",
-      "descricao": "O recapeamento da Avenida dos Andradas melhorou muito o tráfego e a segurança dos motoristas.",
-      "dataEnvio": "2025-11-14T15:10:00",
-      "anexo": null,
-      "likes": 16,
-      "dislikes": 0
-    },
-    {
-      "id": "38",
-      "obra": "Recapeamento da Avenida dos Andradas",
-      "nome": "André Luiz",
-      "cpf": "888.999.000-11",
-      "email": "andre.luiz@example.com",
-      "tipo": "sugestao",
-      "titulo": "Sinalização mais visível",
-      "descricao": "Sugiro que a sinalização horizontal seja repintada com mais frequência para manter a visibilidade.",
-      "dataEnvio": "2025-11-15T09:35:00",
-      "anexo": null,
-      "likes": 7,
-      "dislikes": 0
-    },
-    {
-      "id": "39",
-      "obra": "Construção da UPA Savassi",
-      "nome": "Cristina Alves",
-      "cpf": "999.000.111-22",
-      "email": "cristina.alves@example.com",
-      "tipo": "elogio",
-      "titulo": "UPA essencial para a região",
-      "descricao": "A construção da UPA em Savassi vai melhorar muito o atendimento de urgência na região.",
-      "dataEnvio": "2025-11-16T11:25:00",
-      "anexo": null,
-      "likes": 19,
-      "dislikes": 0
-    },
-    {
-      "id": "40",
-      "obra": "Construção da UPA Savassi",
-      "nome": "Daniel Pereira",
-      "cpf": "000.111.222-33",
-      "email": "daniel.pereira@example.com",
-      "tipo": "reclamacao",
-      "titulo": "Obra em andamento há muito tempo",
-      "descricao": "A obra da UPA está demorando muito para ser concluída. Precisamos de mais agilidade.",
-      "dataEnvio": "2025-11-17T13:50:00",
-      "anexo": null,
-      "likes": 5,
-      "dislikes": 1
-    },
-    {
-      "id": "41",
-      "obra": "Requalificação da Lagoa da Pampulha",
-      "nome": "Isabela Santos",
-      "cpf": "111.222.333-44",
-      "email": "isabela.santos@example.com",
-      "tipo": "elogio",
-      "titulo": "Lagoa muito mais bonita",
-      "descricao": "A requalificação da Lagoa da Pampulha está deixando o local muito mais bonito e preservado.",
-      "dataEnvio": "2025-11-18T10:00:00",
-      "anexo": null,
-      "likes": 17,
-      "dislikes": 0
-    },
-    {
-      "id": "42",
-      "obra": "Requalificação da Lagoa da Pampulha",
-      "nome": "Gabriel Lima",
-      "cpf": "222.333.444-55",
-      "email": "gabriel.lima@example.com",
-      "tipo": "sugestao",
-      "titulo": "Mais áreas de lazer",
-      "descricao": "Sugiro a criação de mais áreas de lazer e ciclovias ao redor da lagoa requalificada.",
-      "dataEnvio": "2025-11-19T14:20:00",
-      "anexo": null,
-      "likes": 12,
-      "dislikes": 0
-    },
-    {
-      "id": "43",
-      "obra": "Construção da Praça da Juventude",
-      "nome": "Mariana Oliveira",
-      "cpf": "333.444.555-66",
-      "email": "mariana.oliveira@example.com",
-      "tipo": "elogio",
-      "titulo": "Espaço excelente para jovens",
-      "descricao": "A Praça da Juventude é um espaço excelente para os jovens praticarem esportes e atividades culturais.",
-      "dataEnvio": "2025-11-20T09:15:00",
-      "anexo": null,
-      "likes": 21,
-      "dislikes": 0
-    },
-    {
-      "id": "44",
-      "obra": "Construção da Praça da Juventude",
-      "nome": "Bruno Costa",
-      "cpf": "444.555.666-77",
-      "email": "bruno.costa@example.com",
-      "tipo": "reclamacao",
-      "titulo": "Falta de manutenção",
-      "descricao": "A praça da juventude precisa de mais manutenção, principalmente na quadra esportiva.",
-      "dataEnvio": "2025-11-21T16:40:00",
-      "anexo": null,
-      "likes": 3,
-      "dislikes": 2
-    },
-    {
-      "id": "45",
-      "obra": "Reforma do Teatro Municipal",
-      "nome": "Patricia Mendes",
-      "cpf": "555.666.777-88",
-      "email": "patricia.mendes@example.com",
-      "tipo": "elogio",
-      "titulo": "Teatro restaurado está lindo",
-      "descricao": "A reforma do teatro municipal preservou a arquitetura histórica e melhorou muito a acústica.",
-      "dataEnvio": "2025-11-22T11:30:00",
-      "anexo": null,
-      "likes": 24,
-      "dislikes": 0
-    },
-    {
-      "id": "46",
-      "obra": "Reforma do Teatro Municipal",
-      "nome": "Ricardo Almeida",
-      "cpf": "666.777.888-99",
-      "email": "ricardo.almeida@example.com",
-      "tipo": "sugestao",
-      "titulo": "Mais acessibilidade",
-      "descricao": "Sugiro melhorias na acessibilidade do teatro, como mais rampas e elevadores.",
-      "dataEnvio": "2025-11-23T13:15:00",
-      "anexo": null,
-      "likes": 10,
-      "dislikes": 0
-    },
-    {
-      "id": "47",
-      "obra": "Construção do Viaduto Oeste",
-      "nome": "Juliana Rocha",
-      "cpf": "777.888.999-00",
-      "email": "juliana.rocha@example.com",
-      "tipo": "elogio",
-      "titulo": "Viaduto vai melhorar o trânsito",
-      "descricao": "A construção do viaduto oeste vai melhorar significativamente o fluxo de trânsito na região.",
-      "dataEnvio": "2025-11-24T08:50:00",
-      "anexo": null,
-      "likes": 15,
-      "dislikes": 0
-    },
-    {
-      "id": "48",
-      "obra": "Construção do Viaduto Oeste",
-      "nome": "Marcelo Silva",
-      "cpf": "888.999.000-11",
-      "email": "marcelo.silva@example.com",
-      "tipo": "reclamacao",
-      "titulo": "Obra paralisada",
-      "descricao": "A construção do viaduto está paralisada há muito tempo, causando transtornos no trânsito local.",
-      "dataEnvio": "2025-11-25T15:25:00",
-      "anexo": null,
-      "likes": 4,
-      "dislikes": 3
-    },
-    {
-      "id": "49",
-      "obra": "Urbanização do Bairro São Gabriel",
-      "nome": "Camila Ferreira",
-      "cpf": "999.000.111-22",
-      "email": "camila.ferreira@example.com",
-      "tipo": "elogio",
-      "titulo": "Bairro muito mais organizado",
-      "descricao": "A urbanização do bairro São Gabriel melhorou muito a organização e a qualidade de vida dos moradores.",
-      "dataEnvio": "2025-11-26T10:10:00",
-      "anexo": null,
-      "likes": 19,
-      "dislikes": 0
-    },
-    {
-      "id": "50",
-      "obra": "Urbanização do Bairro São Gabriel",
-      "nome": "Leonardo Nunes",
-      "cpf": "000.111.222-33",
-      "email": "leonardo.nunes@example.com",
-      "tipo": "sugestao",
-      "titulo": "Mais pontos de ônibus",
-      "descricao": "Sugiro a instalação de mais pontos de ônibus cobertos no bairro urbanizado.",
-      "dataEnvio": "2025-11-27T14:45:00",
-      "anexo": null,
-      "likes": 8,
-      "dislikes": 0
-    }
-  ],
-  "gestores": [
-    {
-      "id": "8fd7",
-      "nomeCompleto": "Gestor teste",
-      "cpf": "999.999.999-99",
-      "telefone": "(99) 99999-9999",
-      "email": "teste@mail.com",
-      "orgaoInstituicao": "Sim",
-      "cargo": "Sim",
-      "experiencia": "7+ anos",
-      "areaAtuacao": "Gestão Pública",
-      "endereco": {
-        "rua": "",
-        "numero": "",
-        "bairro": "",
-        "cidade": "",
-        "estado": "",
-        "cep": "30431-051"
-      },
-      "senha": "123",
-      "aceitouTermos": true,
-      "receberNotificacoes": true,
-      "criadoEm": "2025-12-02T13:41:33.577Z"
+      ],
+      "feedbacks": []
     }
   ]
 }

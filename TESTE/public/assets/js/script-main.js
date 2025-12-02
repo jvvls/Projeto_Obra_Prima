@@ -100,11 +100,11 @@ function renderGrid(obras) {
     card.classList.add('card');
 
     const imgSrc = Array.isArray(obra.anexos)
-      ? (obra.anexos.find(a => a.tipo === "imagem")?.url || './img/Logo2.png')
-      : './img/Logo2.png';
+      ? (obra.anexos.find(a => a.tipo === "imagem")?.url || '/public/assets/images/Logo2.png')
+      : '/public/assets/images/Logo2.png';
 
     card.innerHTML = `
-      <img src="${imgSrc}" alt="obra" onerror="this.onerror=null; this.src='./img/Logo2.png'">
+      <img src="${imgSrc}" alt="obra" onerror="this.onerror=null; this.src='/public/assets/images/Logo2.png'">
       <h3>${obra.titulo}</h3>
       <button class="detalhesBtn">Ver detalhes</button>
     `;
@@ -135,7 +135,7 @@ function showDetalhesSidebar(obra) {
 
     <div class="tab-content active" id="resumo">
       <div class="detalhes-card">
-        <img src="${obra.anexos?.find(a => a.tipo === "imagem")?.url || './img/Logo2.png'}" />
+        <img src="${obra.anexos?.find(a => a.tipo === "imagem")?.url || '/public/assets/images/Logo2.png'}" />
         <p><strong>Bairro:</strong> ${obra.endereco?.bairro || '-'}</p>
         <p><strong>Construtora:</strong> ${obra.empresaExecutora || '-'}</p>
         <p><strong>Status:</strong> ${obra.status || '-'}</p>

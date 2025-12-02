@@ -1,8 +1,7 @@
-const API = "http://localhost:3000/cidadaos";
-const form = document.getElementById("formCidadao");
+const API = "http://localhost:3000/usuarios";
+const form = document.getElementById("formGestor");
 
-// Toast simples
-function toast(msg, tipo = "sucesso") {
+function mostrarMensagem(msg, tipo = "sucesso") {
     const div = document.createElement("div");
     div.textContent = msg;
     div.style.position = "fixed";
@@ -18,13 +17,16 @@ function toast(msg, tipo = "sucesso") {
     setTimeout(() => div.remove(), 3500);
 }
 
-// MÁSCARAS
-document.getElementById("cpf").addEventListener("input", e => {
-    e.target.value = e.target.value
-        .replace(/\D/g, "")
+// Máscaras
+function mascaraCPF(v) {
+    return v.replace(/\D/g, "")
         .replace(/(\d{3})(\d)/, "$1.$2")
         .replace(/(\d{3})(\d)/, "$1.$2")
         .replace(/(\d{3})(\d{1,2})$/, "$1-$2");
+}
+
+document.getElementById("cpf").addEventListener("input", e => {
+    e.target.value = mascaraCPF(e.target.value);
 });
 
 document.getElementById("telefone").addEventListener("input", e => {
@@ -35,95 +37,95 @@ document.getElementById("telefone").addEventListener("input", e => {
 });
 
 document.getElementById("cep").addEventListener("input", e => {
-    e.target.value = e.target.value
-        .replace(/\D/g, "")
-        .replace(/(\d{5})(\d)/, "$1-$2");
+    e.target.value = e.target.value.replace(/\D/g, "").replace(/(\d{5})(\d)/, "$1-$2");
 });
 
 // SUBMIT
 form.addEventListener("submit", async (e) => {
     e.preventDefault();
 
-    // Aqui está a forma CORRETA de pegar os valores:
     const nomeCompleto = document.getElementById("nomeCompleto").value.trim();
     const cpf = document.getElementById("cpf").value.trim();
-    const dataNascimento = document.getElementById("dataNascimento").value.trim();
-    const genero = document.getElementById("genero").value;
-
-    const email = document.getElementById("email").value.trim();
     const telefone = document.getElementById("telefone").value.trim();
+    const email = document.getElementById("email").value.trim();
 
-    const cep = document.getElementById("cep").value.trim();
-    const logradouro = document.getElementById("logradouro").value.trim();
+    const orgaoInstituicao = document.getElementById("orgaoInstituicao").value.trim();
+    const cargo = document.getElementById("cargo").value.trim();
+    const experiencia = document.getElementById("experiencia").value;
+    const areaAtuacao = document.getElementById("areaAtuacao").value;
+
+    const rua = document.getElementById("rua").value.trim();
     const numero = document.getElementById("numero").value.trim();
-    const complemento = document.getElementById("complemento").value.trim();
     const bairro = document.getElementById("bairro").value.trim();
     const cidade = document.getElementById("cidade").value.trim();
     const estado = document.getElementById("estado").value.trim();
+    const cep = document.getElementById("cep").value.trim();
 
-    const password = document.getElementById("password").value.trim();
+    const senha = document.getElementById("senha").value.trim();
     const confirmarSenha = document.getElementById("confirmarSenha").value.trim();
 
     const aceitouTermos = document.getElementById("aceitouTermos").checked;
+    const receberNotificacoes = document.getElementById("receberNotificacoes").checked;
 
-
-    // VALIDAÇÕES
-    if (!nomeCompleto || !cpf || !email || !password) {
-        toast("Preencha todos os campos obrigatórios!", "erro");
+    if (!nomeCompleto || !cpf || !email || !senha) {
+        mostrarMensagem("Preencha todos os campos obrigatórios!", "erro");
         return;
     }
 
-    if (password !== confirmarSenha) {
-        toast("As senhas não coincidem!", "erro");
+    if (senha !== confirmarSenha) {
+        mostrarMensagem("As senhas não coincidem!", "erro");
         return;
     }
 
     if (!aceitouTermos) {
-        toast("Você deve aceitar os termos.", "erro");
+        mostrarMensagem("Você deve aceitar os termos de uso.", "erro");
         return;
     }
 
-    // OBJETO FINAL — IDÊNTICO AO db.json
-    const dados = {
+    const dadosGestor = {
+        gestor: true,
         dadosPessoais: {
             nomeCompleto,
-            cpf,
-            dataNascimento,
-            genero
+            cpf
         },
         contato: {
             email,
             telefone
         },
         endereco: {
-            cep,
-            logradouro,
+            logradouro: rua,
             numero,
-            complemento,
             bairro,
             cidade,
-            estado
+            estado,
+            cep
+        },
+        dadosProfissionais: {
+            orgaoInstituicao,
+            cargo,
+            experiencia,
+            areaAtuacao
         },
         seguranca: {
-            password
-        }
+            password: senha
+        },
+        aceitouTermos,
+        receberNotificacoes,
+        criadoEm: new Date().toISOString()
     };
 
-    // ENVIO
     try {
-        const res = await fetch(API, {
+        await fetch(API, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(dados)
+            body: JSON.stringify(dadosGestor)
         });
 
-        if (!res.ok) throw new Error(await res.text());
-
-        toast("Cidadão cadastrado com sucesso!");
+        mostrarMensagem("Gestor cadastrado com sucesso!");
         form.reset();
 
-    } catch (e) {
-        toast("Erro ao salvar. Verifique o servidor!", "erro");
-        console.error(e);
+    } catch (erro) {
+        console.error("Erro ao salvar:", erro);
+        mostrarMensagem("Erro ao cadastrar. Verifique o servidor.", "erro");
     }
 });
