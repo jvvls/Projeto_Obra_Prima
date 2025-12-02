@@ -21,15 +21,42 @@ async function carregarObra() {
     }
 }
 
+// 🔧 Função utilitária para formatar valores
+function formatarValor(valor) {
+    if (!valor) return "—";
+
+    // Se já for número, formata direto
+    if (typeof valor === "number") {
+        return valor.toLocaleString("pt-BR", {
+            style: "currency",
+            currency: "BRL"
+        });
+    }
+
+    // Se vier como string, remove "R$" e espaços, troca vírgula por ponto
+    const num = Number(
+        valor.toString().replace(/[R$\s]/g, "").replace(",", ".")
+    );
+
+    if (isNaN(num)) return valor; // fallback: retorna como está
+    return num.toLocaleString("pt-BR", {
+        style: "currency",
+        currency: "BRL"
+    });
+}
+
 function preencherDadosObra(obra) {
     document.getElementById("tituloObra").textContent = obra.titulo;
     document.getElementById("descricaoObra").textContent = obra.descricao;
     document.getElementById("statusObra").textContent = obra.status;
     document.getElementById("bairroObra").textContent = obra.endereco?.bairro || "—";
     document.getElementById("cidadeObra").textContent = obra.endereco?.cidade || "—";
-    document.getElementById("valorObra").textContent = obra.valorContratado.toLocaleString("pt-BR");
-    document.getElementById("dataInicio").textContent = obra.dataInicio;
-    document.getElementById("dataFim").textContent = obra.previsaoTermino;
+
+    // ✅ Usando a função utilitária
+    document.getElementById("valorObra").textContent = formatarValor(obra.valorContratado);
+
+    document.getElementById("dataInicio").textContent = obra.dataInicio || "—";
+    document.getElementById("dataFim").textContent = obra.previsaoTermino || "—";
 }
 
 function montarTimeline(marcos) {

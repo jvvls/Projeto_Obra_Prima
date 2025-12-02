@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Obras – Obra Prima</title>
+
+  <link rel="stylesheet" href="../assets/css/style-obras.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+</head>
+
+<body>
+  <header class="topbar">
+
+    <div class="logo">
+      <img src="../assets/images/Logo.png" alt="Logo">
+    </div>
+
+    <div class="title">OBRA PRIMA – Obras Públicas</div>
+
+    <div class="right">
+      <button class="btn" onclick="window.location.href='index.html'">
+        <i class="fa fa-home"></i> Início
+      </button>
+    </div>
+  </header>
+
+  <div class="container">
+    <aside class="sidebar" id="sidebar">
+      <h3>Filtros</h3>
+
+      <div class="filter">
+        <label>Nome da Obra</label>
+        <input type="text" id="nome" class="input">
+      </div>
+
+      <div class="filter">
+        <label>Status</label>
+        <select id="status" class="input"></select>
+      </div>
+
+      <div class="filter">
+        <label>Bairro</label>
+        <select id="bairro" class="input"></select>
+      </div>
+
+      <div class="filter">
+        <label>Construtora</label>
+        <select id="construtora" class="input"></select>
+      </div>
+
+      <button id="clearFilters" class="btn-secondary">Limpar Filtros</button>
+    </aside>
+
+    <main class="content">
+      <div class="grid" id="obrasGrid">
+        <!-- Cards gerados via JS -->
+      </div>
+
+      <div id="map" class="map hidden"></div>
+    </main>
+  </div>
+
+  <script src="../assets/js/script-obras.js"></script>
+</body>
+</html>
