@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cadastro de Feedback</title>
+    <link rel="stylesheet" href="../css/style.css" /> 
+</head>
+<body>
+  <header class="topbar">
+        <button class="back-button" onclick="window.location.href='feed.html'">← Voltar</button>
+    <div class="logo"><img src="../img/Logo.png" alt="Logo"></div>
+    <div class="title">Obra Prima</div>
+  </header>
+
+  <main class="form-container">
+    <h1>Cadastro de Feedback</h1>
+
+    <form id="feedbackForm">
+      <label for="obra">Obra Relacionada:</label>
+      <select id="obra" required>
+        <option value="">Selecione a obra...</option>
+      </select>
+
+      <label for="nome">Nome do Cidadão:</label>
+      <input type="text" id="nome" placeholder="Digite seu nome completo" required>
+      
+      <label for="cpf">CPF/CNPJ:</label>
+      <input type="text" id="cpf" placeholder="Digite seu CPF ou CNPJ" required>
+
+      <label for="email">E-mail:</label>
+      <input type="email" id="email" placeholder="exemplo@email.com" required>
+
+      <label for="tipo">Tipo de Feedback:</label>
+      <select id="tipo" required>
+        <option value="">Selecione o tipo...</option>
+        <option value="elogio">Elogio</option>
+        <option value="reclamacao">Reclamação</option>
+        <option value="sugestao">Sugestão</option>
+      </select>
+
+      <label for="titulo">Título:</label>
+      <input type="text" id="titulo" placeholder="Resumo do feedback" required>
+
+      <label for="descricao">Descrição:</label>
+      <textarea id="descricao" placeholder="Descreva seu feedback em detalhes" rows="5" required></textarea>
+
+      <label for="anexo">Anexos (opcional):</label>
+      <input type="file" id="anexo">
+
+
+      <button type="submit" class="btn-enviar">Enviar Feedback</button>
+    </form>
+  </main>
+
+    <script src="../js/cadastroFeedback.js"></script>
+</body>
+</html>
