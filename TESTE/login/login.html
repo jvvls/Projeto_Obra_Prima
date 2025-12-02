@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | Obra Prima</title>
+
+    <link rel="stylesheet" href="style-login.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+
+    <header class="topbar">
+        <div class="logo">
+            <a href="../index.html">
+                <img src="img/logo.png" alt="Logo">
+            </a></div>
+        <div class="title">Portal de Login</div>
+    </header>
+
+    <section class="container">
+
+        <div class="card login-card">
+            <h2>Faça seu Login</h2>
+            <p class="muted">Entre para acompanhar obras e enviar feedbacks.</p>
+
+            <form id="formLogin">
+                <div class="field">
+                    <label>Email</label>
+                    <input type="email" id="email" required>
+                </div>
+
+                <div class="field">
+                    <label>Senha</label>
+                    <input type="password" id="senha" required>
+                </div>
+
+                <div class="field">
+                    <label>Tipo de Usuário</label>
+                    <select id="tipo">
+                        <option value="cidadao">Cidadão</option>
+                        <option value="gestor">Gestor</option>
+                    </select>
+                </div>
+
+                <div class="actions">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fa fa-sign-in-alt"></i> Entrar
+                    </button>
+                </div>
+            </form>
+
+            <div class="extras">
+                <p style="color: #27ae60">Não tem uma conta?</p>
+                <br>
+                <a href="../cadastro cidadao/cadastro-cidadao.html">Criar conta de Cidadão</a>
+                <br>
+                <a href="../cadastro gestor/cadastro-gestor.html">Criar conta de Gestor</a>
+            </div>
+        </div>
+
+    </section>
+    <footer style="
+    width:100%;
+    padding:16px;
+    margin-top:24px;
+    background:#27ae60;
+    color:white;
+    text-align:center;
+    font-size:14px;
+    border-top:1px solid #ddd;
+">
+    © 2025 Obra Prima — Todos os direitos reservados.
+  </footer>
+
+    <script src="script-login.js"></script>
+
+</body>
+
+</html>

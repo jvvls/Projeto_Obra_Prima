@@ -1,27 +1,4 @@
 {
-  "usuarios": [
-    {
-      "id": "1",
-      "login": "admin",
-      "senha": "123",
-      "nome": "Administrador do Sistema",
-      "email": "admin@abc.com"
-    },
-    {
-      "id": "2",
-      "login": "user",
-      "senha": "123",
-      "nome": "Usuario Comum",
-      "email": "user@abc.com"
-    },
-    {
-      "id": "3",
-      "login": "rommel",
-      "senha": "123",
-      "nome": "Rommel",
-      "email": "rommel@gmail.com"
-    }
-  ],
   "cidadaos": [
     {
       "id": "b01f",
@@ -71,6 +48,31 @@
       },
       "seguranca": {
         "password": "analuiza"
+      }
+    },
+    {
+      "id": "e581",
+      "dadosPessoais": {
+        "nomeCompleto": "Gui",
+        "cpf": "153.890.766-64",
+        "dataNascimento": "1990-10-05",
+        "genero": ""
+      },
+      "contato": {
+        "email": "teste@gmail.com",
+        "telefone": ""
+      },
+      "endereco": {
+        "cep": "30530-500",
+        "logradouro": "Anel Rodoviário",
+        "numero": "433",
+        "complemento": "",
+        "bairro": "Joao Pinheiro",
+        "cidade": "Belo Horizonte",
+        "estado": "MG"
+      },
+      "seguranca": {
+        "password": "12345678"
       }
     }
   ],
@@ -875,6 +877,7 @@
           "Google Fonts (tipografia)"
         ]
       },
+      "gestores": [],
       "estrutura": {
         "header": {
           "logo": "Logo Obra Prima",
@@ -1727,5 +1730,6 @@
       "likes": 8,
       "dislikes": 0
     }
-  ]
+  ],
+  "gestores": []
 }
