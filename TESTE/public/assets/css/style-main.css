@@ -702,7 +702,6 @@ body.font-large span {
   display: block;
 }
 
-/* Publicações (cards lado a lado ou vertical no mobile) */
 .pub-card {
   background: #f7f7f7;
   border-radius: 8px;
@@ -719,6 +718,3 @@ body.font-large span {
   border-radius: 6px;
   object-fit: cover;
 }
-
-
-
