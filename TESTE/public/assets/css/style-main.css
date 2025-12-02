@@ -156,9 +156,9 @@ body.font-large span {
   height: 40px;
 }
 
-.logo img {
+.logo a img {
   height: 100%;
-  width: auto;
+  width: 80%;
   object-fit: contain;
 }
 
