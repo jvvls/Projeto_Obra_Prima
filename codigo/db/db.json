@@ -1044,7 +1044,7 @@
         {
           "tipo": "imagem",
           "nomeArquivo": "obra-14.jpg",
-          "url": "https://exemplo.com/uploads/obra-14.jpg"
+          "url": null
         },
         {
           "tipo": "documento",
@@ -1098,7 +1098,7 @@
         {
           "tipo": "imagem",
           "nomeArquivo": "obra-15.jpg",
-          "url": "https://exemplo.com/uploads/obra-15.jpg"
+          "url": null
         },
         {
           "tipo": "documento",
