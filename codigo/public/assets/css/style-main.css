@@ -8,6 +8,18 @@
   font-family: Arial, sans-serif;
 }
 
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  margin: 0;
+}
+
+.container {
+  flex: 1; 
+}
+
+
 /* =========================
    ACESSIBILIDADE - AUMENTAR FONTE
 ========================= */
@@ -583,7 +595,7 @@ body.font-large span {
 }
 
 /* =========================
-   SIDEBAR DETALHES OBRA - ESTILO CARD
+   SIDEBAR DETALHES OBRA 
 ========================= */
 .detalhes-sidebar {
   position: fixed;
@@ -638,7 +650,7 @@ body.font-large span {
 }
 
 /* =========================
-   BLOCOS DE INFORMAÇÃO (CARD STYLE)
+   BLOCOS DE INFORMAÇÃO 
 ========================= */
 .detalhes-card {
   background: white;
@@ -685,7 +697,7 @@ body.font-large span {
 }
 
 /* =========================
-   BARRA DE PROGRESSO - TIMELINE
+    TIMELINE
 ========================= */
 
 .progresso-container {
@@ -893,7 +905,6 @@ body.font-large span {
   }
 }
 
-/* Responsividade mobile */
 @media (max-width: 768px) {
   .detalhes-sidebar {
     width: 100%;
@@ -1018,7 +1029,6 @@ body.font-large span {
   color: #333;
 }
 
-/* RESPONSIVIDADE MOBILE */
 @media (max-width: 768px) {
   .pub-card {
     padding: 10px;

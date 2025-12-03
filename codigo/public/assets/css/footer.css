@@ -1,17 +1,15 @@
-/* Estilo base do footer */
 .footer {
   width: 100%;
   padding: 16px 24px;
-  margin-top: 24px;
   background: #27ae60;
   color: white;
   text-align: center;
   font-size: 14px;
   border-top: 1px solid #ddd;
   box-sizing: border-box;
+  margin-top: 0;
 }
 
-/* Responsividade */
 @media (max-width: 768px) {
   .footer {
     font-size: 13px;
@@ -25,3 +23,4 @@
     padding: 10px 12px;
   }
 }
+

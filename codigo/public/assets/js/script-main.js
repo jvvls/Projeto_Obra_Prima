@@ -156,7 +156,7 @@ function getFirstImageUrl(anexos) {
 // ======================================================
 // FUNÇÃO PARA GERAR THUMBNAILS
 // ======================================================
-const thumbCache = new Map(); // cache de thumbs já geradas
+const thumbCache = new Map(); 
 
 async function createThumbnail(url, maxWidth = 400) {
   if (!url) return placeholder;
@@ -164,7 +164,7 @@ async function createThumbnail(url, maxWidth = 400) {
 
   return new Promise((resolve) => {
     const img = new Image();
-    img.crossOrigin = "anonymous"; // evita problemas de CORS
+    img.crossOrigin = "anonymous"; 
     img.onload = () => {
       const scale = maxWidth / img.width;
       const canvas = document.createElement('canvas');
@@ -172,8 +172,8 @@ async function createThumbnail(url, maxWidth = 400) {
       canvas.height = img.height * scale;
       const ctx = canvas.getContext('2d');
       ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-      const thumbData = canvas.toDataURL('image/jpeg', 0.9); // qualidade alta
-      thumbCache.set(url, thumbData); // salva no cache
+      const thumbData = canvas.toDataURL('image/jpeg', 0.9); 
+      thumbCache.set(url, thumbData); 
       resolve(thumbData);
     };
     img.onerror = () => resolve(placeholder);
@@ -198,7 +198,6 @@ async function renderGrid(obras) {
 
     const imgUrl = getFirstImageUrl(obra.anexos);
 
-    // Criar thumbnail e aplicar lazy loading
     const thumbSrc = await createThumbnail(imgUrl);
 
     card.innerHTML = `
@@ -366,27 +365,36 @@ function renderMap(obras) {
       attribution: '&copy; OpenStreetMap contributors'
     }).addTo(mapInstance);
 
-    markersLayer = L.layerGroup().addTo(mapInstance);
+    markersLayer = L.featureGroup().addTo(mapInstance); 
   }
 
-  markersLayer.clearLayers();
+  if (!markersLayer || !markersLayer.clearLayers) {
+    markersLayer = L.featureGroup().addTo(mapInstance); 
+  } else {
+    markersLayer.clearLayers();
+  }
 
   obras.forEach(obra => {
     const lat = parseFloat(obra.latitude);
     const lng = parseFloat(obra.longitude);
 
     if (!isNaN(lat) && !isNaN(lng)) {
-      const marker = L.marker([lat, lng]).addTo(markersLayer);
+      const marker = L.marker([lat, lng]);
       marker.bindPopup(`
         <b>${obra.titulo}</b><br>
         ${obra.endereco?.bairro || ''}<br>
         <small>${obra.status}</small>
       `);
+      markersLayer.addLayer(marker);
     }
   });
 
-  if (markersLayer.getLayers().length > 0) mapInstance.fitBounds(markersLayer.getBounds());
+  if (markersLayer.getLayers().length > 0) {
+    mapInstance.fitBounds(markersLayer.getBounds());
+  }
 }
+
+
 
 // ======================================================
 // LIMPAR FILTROS
@@ -451,28 +459,23 @@ mapsBox.addEventListener('click', () => {
 window.addEventListener("DOMContentLoaded", () => {
   const usuario = JSON.parse(localStorage.getItem("usuarioLogado"));
 
-  // Verifica se o usuário existe e tem dados pessoais
   if (!usuario || !usuario.dadosPessoais || !usuario.dadosPessoais.nomeCompleto) {
     window.location.href = "login.html";
     return;
   }
 
-  // Exibe o primeiro nome no header
   const primeiroNome = usuario.dadosPessoais.nomeCompleto.split(" ")[0];
   const spanUsuario = document.querySelector(".user span");
   if (spanUsuario) spanUsuario.textContent = primeiroNome;
 
-  // Adiciona botão do gestor se for gestor
   if (usuario.gestor) {
     const rightDiv = document.querySelector(".topbar .right");
 
     if (rightDiv) {
-      // Cria o botão
       const gestorBtn = document.createElement("button");
       gestorBtn.textContent = "Painel do Gestor";
       gestorBtn.id = "gestorBtn";
 
-      // Adiciona estilo básico (pode ajustar conforme seu layout)
       gestorBtn.style.marginLeft = "10px";
       gestorBtn.style.padding = "5px 10px";
       gestorBtn.style.cursor = "pointer";
@@ -482,12 +485,10 @@ window.addEventListener("DOMContentLoaded", () => {
       gestorBtn.style.color = "#fff";
       gestorBtn.style.fontWeight = "bold";
 
-      // Redireciona para página do gestor ao clicar
       gestorBtn.addEventListener("click", () => {
         window.location.href = "/codigo/public/modulos/editorObras.html";
       });
 
-      // Adiciona o botão no header
       rightDiv.appendChild(gestorBtn);
     }
   }

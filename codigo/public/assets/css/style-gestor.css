@@ -1,5 +1,3 @@
-/* style-gestor.css - baseado no seu style.css (ajustado p/ formulário de gestor) */
-
 /* RESET */
 * {
     box-sizing: border-box;
@@ -210,20 +208,6 @@ textarea {
 .gestor-meta {
     font-size: 13px;
     color: #555;
-}
-
-/* Ajuste do sino da topbar */
-.bell img {
-    height: 22px;   /* diminui o sino */
-    width: auto;
-    display: block;
-}
-
-.bell {
-    background: transparent;
-    border: none;
-    padding: 0;
-    cursor: pointer;
 }
 
 

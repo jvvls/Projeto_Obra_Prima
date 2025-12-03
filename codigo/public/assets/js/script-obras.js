@@ -98,7 +98,6 @@ function exibirObras(lista) {
   });
 }
 
-// Eventos dos filtros
 document.getElementById("nome").addEventListener("input", aplicarFiltros);
 document.getElementById("status").addEventListener("change", aplicarFiltros);
 document.getElementById("bairro").addEventListener("change", aplicarFiltros);

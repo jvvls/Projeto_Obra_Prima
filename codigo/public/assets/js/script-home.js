@@ -14,16 +14,13 @@ function verificarLogin() {
   const userName = document.getElementById('userName');
 
   if (usuario) {
-    // Usuário está logado
     if (userInfo) userInfo.style.display = 'flex';
     if (loginBtn) loginBtn.style.display = 'none';
     if (userName) userName.textContent = usuario.nomeCompleto?.split(' ')[0] || 'Usuário';
     
-    // Atualizar mensagens de boas-vindas
     if (heroTitle) heroTitle.textContent = `Bem-vindo, ${usuario.nomeCompleto?.split(' ')[0] || 'Usuário'}!`;
     if (heroSubtitle) heroSubtitle.textContent = 'Acompanhe as obras públicas da sua cidade.';
     
-    // Botões para usuário logado
     if (heroButtons) {
       heroButtons.innerHTML = `
         <button class="btn btn-primary" onclick="window.location.href='main.html'">
@@ -35,15 +32,12 @@ function verificarLogin() {
       `;
     }
   } else {
-    // Usuário NÃO está logado - APENAS opção de login
     if (userInfo) userInfo.style.display = 'none';
     if (loginBtn) loginBtn.style.display = 'block';
     
-    // Mensagens padrão
     if (heroTitle) heroTitle.textContent = 'Acompanhe as Obras Públicas da Cidade';
     if (heroSubtitle) heroSubtitle.textContent = 'Faça login para acessar todas as funcionalidades do sistema.';
     
-    // Botões para visitante - APENAS LOGIN
     if (heroButtons) {
       heroButtons.innerHTML = `
         <button class="btn btn-primary" onclick="window.location.href='login.html'">
@@ -61,7 +55,7 @@ function verificarLogin() {
 function logout() {
   if (confirm("Deseja realmente sair?")) {
     localStorage.removeItem("usuarioLogado");
-    window.location.reload(); // Recarrega a página para atualizar o estado
+    window.location.reload(); 
   }
 }
 
@@ -71,10 +65,8 @@ function logout() {
 
 async function carregarDados() {
   try {
-    // Primeiro verifica o login
     verificarLogin();
 
-    // Carrega os dados das obras
     const obrasRes = await fetch(API + "/obras");
 
     if (!obrasRes.ok) {
@@ -83,17 +75,14 @@ async function carregarDados() {
 
     const obras = await obrasRes.json();
 
-    // Total de obras
     document.getElementById("totalObras").textContent = Array.isArray(obras) ? obras.length : 0;
 
-    // Total de feedbacks
     const totalFeedbacks = obras.reduce((acc, obra) => {
       const qtd = Array.isArray(obra.feedbacks) ? obra.feedbacks.length : 0;
       return acc + qtd;
     }, 0);
     document.getElementById("totalFeedbacks").textContent = totalFeedbacks;
 
-    // Contagem por status
     const concluidas = obras.filter(o =>
       String(o.status).toLowerCase().includes("conclu")
     ).length;
@@ -111,7 +100,6 @@ async function carregarDados() {
 
   } catch (error) {
     console.error("Erro ao carregar dados:", error);
-    // Mostra mensagem de erro amigável
     const obrasDestaque = document.getElementById("obrasDestaque");
     if (obrasDestaque) {
       obrasDestaque.innerHTML = `
@@ -136,14 +124,11 @@ function gerarObrasDestaque(obras) {
     return;
   }
 
-  // Ordena por data mais recente ou por valor
   const ordenadas = obras.slice().sort((a, b) => {
-    // Tenta ordenar por data primeiro
     const da = a.dataInicio ? new Date(a.dataInicio).getTime() : 0;
     const db = b.dataInicio ? new Date(b.dataInicio).getTime() : 0;
     if (db !== da) return db - da;
     
-    // Se não tiver data, ordena por valor
     return (b.valorContratado || 0) - (a.valorContratado || 0);
   });
 
@@ -171,10 +156,7 @@ function gerarObrasDestaque(obras) {
     `;
 
     card.addEventListener('click', () => {
-      // Se estiver na main page, pode redirecionar para detalhes
-      // Se estiver na home, redireciona para a main page
       if (window.location.pathname.includes('main.html')) {
-        // Aqui você precisaria implementar a visualização de detalhes
         alert(`Detalhes da obra: ${titulo}\nImplemente a visualização de detalhes aqui.`);
       } else {
         window.location.href = `main.html`;
@@ -231,5 +213,4 @@ function gerarGrafico(concluidas, andamento, paralisadas) {
 // INICIALIZAÇÃO
 // =========================================
 
-// Carrega tudo quando a página é aberta
 document.addEventListener('DOMContentLoaded', carregarDados);

@@ -1,4 +1,3 @@
-// Coleta o parâmetro ID via URL
 const urlParams = new URLSearchParams(window.location.search);
 const obraId = urlParams.get("id");
 
@@ -25,7 +24,6 @@ async function carregarObra() {
 function formatarValor(valor) {
     if (!valor) return "—";
 
-    // Se já for número, formata direto
     if (typeof valor === "number") {
         return valor.toLocaleString("pt-BR", {
             style: "currency",
@@ -33,12 +31,11 @@ function formatarValor(valor) {
         });
     }
 
-    // Se vier como string, remove "R$" e espaços, troca vírgula por ponto
     const num = Number(
         valor.toString().replace(/[R$\s]/g, "").replace(",", ".")
     );
 
-    if (isNaN(num)) return valor; // fallback: retorna como está
+    if (isNaN(num)) return valor; 
     return num.toLocaleString("pt-BR", {
         style: "currency",
         currency: "BRL"
@@ -52,7 +49,6 @@ function preencherDadosObra(obra) {
     document.getElementById("bairroObra").textContent = obra.endereco?.bairro || "—";
     document.getElementById("cidadeObra").textContent = obra.endereco?.cidade || "—";
 
-    // ✅ Usando a função utilitária
     document.getElementById("valorObra").textContent = formatarValor(obra.valorContratado);
 
     document.getElementById("dataInicio").textContent = obra.dataInicio || "—";

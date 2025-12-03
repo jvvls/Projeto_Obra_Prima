@@ -1,14 +1,10 @@
-// script.js
-// ========================
-// ESTADO E HELPERS
-// ========================
 let obras = [];
-let obraSelecionada = null;      // objeto da obra carregada no formulário (clone)
-let obraEditandoId = null;       // id explícito quando estamos editando uma obra
-let editIndex = null;            // índice de marco em edição (modal)
-let timelineAtual = [];          // marcos temporários vinculados ao formulário (síncrono com a obra quando salva)
+let obraSelecionada = null;      
+let obraEditandoId = null;       
+let editIndex = null;            
+let timelineAtual = [];          
 
-const API_URL = 'http://localhost:3000/obras'; // endpoint do JSON Server
+const API_URL = 'http://localhost:3000/obras'; 
 
 const filtros = {
   q: "",
@@ -60,7 +56,7 @@ function slugify(s) {
 }
 
 // ========================
-// API (CRUD) helpers
+// API 
 // ========================
 async function fetchJson(url, opts = {}) {
   const res = await fetch(url, opts);
@@ -78,12 +74,10 @@ async function carregarObras() {
     alert('Não foi possível carregar obras do servidor. Verifique se o JSON Server está rodando em ' + API_URL);
   }
 
-  // popular UI dependente de obras
   popularSelects();
   popularOrgaos();
   popularEmpresas();
 
-  // render inicial (sem filtros aplicados ainda)
   aplicarEAtualizar();
 }
 
@@ -117,20 +111,16 @@ async function excluirObraServer(id) {
 // INICIALIZAÇÃO & BIND UI
 // ========================
 document.addEventListener('DOMContentLoaded', () => {
-  // formulário de obra
   $("#obraForm")?.addEventListener('submit', (e) => { e.preventDefault(); salvarObra(); });
   $("#limpar")?.addEventListener('click', (e) => { e.preventDefault(); limparFormulario(); });
 
-  // timeline buttons
   $("#adicionarMarcoBtn")?.addEventListener('click', (e) => { e.preventDefault(); adicionarMarco(); });
   $("#limparMarcoBtn")?.addEventListener('click', (e) => { e.preventDefault(); limparFormularioMarco(); });
 
-  // modal edit buttons
   $("#salvarEdicaoBtn")?.addEventListener('click', (e) => { e.preventDefault(); salvarEdicao(); });
   $("#cancelarEdicaoBtn")?.addEventListener('click', (e) => { e.preventDefault(); cancelarEdicao(); });
   $("#modalClose")?.addEventListener('click', (e) => { e.preventDefault(); cancelarEdicao(); });
 
-  // filtros UI
   $("#q")?.addEventListener('input', debounce((e) => { filtros.q = e.target.value || ""; }, 300));
   $("#filterStatus")?.addEventListener('change', (e) => { filtros.status = e.target.value || ""; });
   $("#filterCidade")?.addEventListener('change', (e) => { filtros.cidade = e.target.value || ""; });
@@ -138,20 +128,17 @@ document.addEventListener('DOMContentLoaded', () => {
   $("#aplicarFiltros")?.addEventListener('click', (e) => { e.preventDefault(); aplicarEAtualizar(); });
   $("#resetFiltros")?.addEventListener('click', (e) => { e.preventDefault(); resetFiltros(); });
 
-  // dropdown behaviors
   setupOrgaoDropdown();
   setupEmpresaDropdown();
 
-  // set default dates for timeline inputs if present
   if ($("#marcoData")) $("#marcoData").value = new Date().toISOString().split('T')[0];
   if ($("#editData")) $("#editData").value = new Date().toISOString().split('T')[0];
 
-  // carregar do servidor
   carregarObras();
 });
 
 // ========================
-// FORMULÁRIO DE OBRA (coleta / salvar / editar / excluir)
+// FORMULÁRIO DE OBRA (
 // ========================
 function limparFormulario() {
   $("#obraForm")?.reset();
@@ -179,7 +166,6 @@ function coletarDadosDoFormulario() {
     cep: $("#cep")?.value || ''
   };
 
-  // prioriza obraEditandoId quando existente
   const id = obraEditandoId ?? (obraSelecionada ? obraSelecionada.id : undefined);
 
   return {
@@ -257,7 +243,6 @@ async function salvarObra() {
 async function editarObra(id) {
   try {
     const o = await buscarObraPorId(id);
-    // preencher formulário
     $("#titulo").value = o.titulo || "";
     $("#descricao").value = o.descricao || "";
     $("#valorContratado").value = o.valorContratado || "";
@@ -273,8 +258,7 @@ async function editarObra(id) {
     $("#estado").value = o.endereco?.estado || "";
     $("#cep").value = o.endereco?.cep || "";
 
-    // marca edição
-    obraSelecionada = JSON.parse(JSON.stringify(o)); // clone seguro
+    obraSelecionada = JSON.parse(JSON.stringify(o)); 
     obraEditandoId = o.id;
     timelineAtual = Array.isArray(o.marcos) ? o.marcos.slice() : [];
     renderTimeline();
@@ -292,7 +276,6 @@ async function excluirObra(id) {
   try {
     await excluirObraServer(id);
     obras = obras.filter(o => String(o.id) !== String(id));
-    // atualizar UI
     popularSelects();
     popularOrgaos();
     popularEmpresas();
@@ -304,12 +287,11 @@ async function excluirObra(id) {
   }
 }
 
-// expõe funções para compatibilidade com event handlers inline (se existirem)
 window.editarObra = editarObra;
 window.excluirObra = excluirObra;
 
 // ========================
-// TIMELINE (add / edit / delete / render)
+// TIMELINE 
 // ========================
 function adicionarMarco() {
   const titulo = ($("#marcoTitulo")?.value || "").trim();
@@ -373,7 +355,6 @@ function renderTimeline() {
     list.appendChild(div);
   });
 
-  // delegação de eventos
   list.querySelectorAll('[data-action="editar"]').forEach(btn => {
     btn.onclick = (e) => {
       e.preventDefault();
@@ -415,7 +396,6 @@ function salvarEdicao() {
 
   timelineAtual[editIndex] = { ...timelineAtual[editIndex], titulo, descricao, percentual, data };
 
-  // persistir se obra já existe
   if (obraSelecionada && obraSelecionada.id) {
     obraSelecionada.marcos = timelineAtual.slice();
     atualizarObraServer(obraSelecionada).then(atualizada => {
@@ -561,7 +541,6 @@ function popularOrgaos() {
 function atualizarOrgaosSelecionados() {
   filtros.orgaos = Array.from(document.querySelectorAll("#orgaoList input[type=checkbox]:checked")).map(i => i.value);
   atualizarOrgaoToggle();
-  // não auto-aplica para evitar mudanças inesperadas; usuário deve clicar "Aplicar"
 }
 
 function atualizarOrgaoToggle() {
@@ -617,7 +596,6 @@ function popularEmpresas() {
 function atualizarEmpresasSelecionadas() {
   filtros.empresas = Array.from(document.querySelectorAll("#empresaList input[type=checkbox]:checked")).map(i => i.value);
   atualizarEmpresaToggle();
-  // não auto-aplica por padrão
 }
 
 function atualizarEmpresaToggle() {
@@ -631,7 +609,7 @@ function atualizarEmpresaToggle() {
 }
 
 // ========================
-// DROPDOWN behavior (keyboard, positioning)
+// DROPDOWN behavior 
 // ========================
 function setupOrgaoDropdown() {
   const toggle = $("#orgaoToggle");
@@ -760,7 +738,6 @@ function closeAllDropdowns() {
 function filtrarObras(list, f) {
   let result = Array.isArray(list) ? list.slice() : [];
 
-  // busca rápida
   if (f.q && f.q.trim()) {
     const q = f.q.trim().toLowerCase();
     result = result.filter(o => {
@@ -772,23 +749,18 @@ function filtrarObras(list, f) {
     });
   }
 
-  // status
   if (f.status) result = result.filter(o => String(o.status || '') === String(f.status));
 
-  // cidade
   if (f.cidade) result = result.filter(o => (o.endereco?.cidade || '') === f.cidade);
 
-  // orgaos multi
   if (Array.isArray(f.orgaos) && f.orgaos.length > 0) {
     result = result.filter(o => o.orgaoResponsavel && f.orgaos.includes(o.orgaoResponsavel));
   }
 
-  // empresas multi
   if (Array.isArray(f.empresas) && f.empresas.length > 0) {
     result = result.filter(o => o.empresaExecutora && f.empresas.includes(o.empresaExecutora));
   }
 
-  // sort
   if (f.sortBy === 'dataInicio') result.sort((a,b) => new Date(a.dataInicio||0) - new Date(b.dataInicio||0));
   else result.sort((a,b) => (String(a.titulo||'')).localeCompare(String(b.titulo||'')));
 
@@ -859,7 +831,6 @@ container.appendChild(div);
   });
 }
 function aplicarEAtualizar() {
-  // garante q do input está sincronizado
   filtros.q = $("#q")?.value || filtros.q || "";
   const resultados = filtrarObras(obras, filtros);
   renderizarObras(resultados);
@@ -880,7 +851,6 @@ function resetFiltros() {
   aplicarEAtualizar();
 }
 
-// expose apply/reset in case HTML calls them
 window.aplicarFiltros = aplicarFiltros;
 window.resetFiltros = resetFiltros;
 
