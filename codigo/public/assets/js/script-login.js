@@ -1,4 +1,4 @@
-const API = "http://localhost:3000/usuarios"; // endpoint do JSON Server
+const API = "http://localhost:3000/usuarios";
 
 async function fazerLogin(event) {
     event.preventDefault();
@@ -20,21 +20,22 @@ async function fazerLogin(event) {
             u.gestor === isGestor
         );
 
-        if (usuario) {
+    if (usuario) {
+        localStorage.setItem("usuarioLogado", JSON.stringify({
+            id: usuario.id,
+            dadosPessoais: {
+            nomeCompleto: usuario.dadosPessoais.nomeCompleto
+        },
+        gestor: usuario.gestor
+    }));
 
-            localStorage.setItem("usuarioLogado", JSON.stringify({
-                id: usuario.id,
-                nomeCompleto: usuario.dadosPessoais.nomeCompleto,
-                tipo: usuario.gestor ? "gestor" : "colaborador"
-            }));
+    alert(`Login realizado com sucesso! Bem-vindo(a), ${usuario.dadosPessoais.nomeCompleto}`);
+    window.location.href = "../modulos/main.html";
+    return;
+}
 
-            alert(`Login realizado com sucesso! Bem-vindo(a), ${usuario.dadosPessoais.nomeCompleto}`);
 
-            window.location.href = "../modulos/main.html";
-            return;
-        }
-
-        alert("Email ou senha incorretos!");
+    alert("Email ou senha incorretos!");
 
     } catch (e) {
         console.error(e);

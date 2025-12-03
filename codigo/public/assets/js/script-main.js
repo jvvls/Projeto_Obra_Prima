@@ -444,20 +444,52 @@ mapsBox.addEventListener('click', () => {
 
   if (!showingMap && mapInstance) setTimeout(() => mapInstance.invalidateSize(), 200);
 });
-
 // ======================================================
-// Persistencia do login
+// Persistência do login e ajustes do header
 // ======================================================
 
 window.addEventListener("DOMContentLoaded", () => {
   const usuario = JSON.parse(localStorage.getItem("usuarioLogado"));
 
-  if (!usuario) {
+  // Verifica se o usuário existe e tem dados pessoais
+  if (!usuario || !usuario.dadosPessoais || !usuario.dadosPessoais.nomeCompleto) {
     window.location.href = "login.html";
     return;
   }
 
-  const primeiroNome = usuario.nomeCompleto.split(" ")[0];
+  // Exibe o primeiro nome no header
+  const primeiroNome = usuario.dadosPessoais.nomeCompleto.split(" ")[0];
   const spanUsuario = document.querySelector(".user span");
   if (spanUsuario) spanUsuario.textContent = primeiroNome;
+
+  // Adiciona botão do gestor se for gestor
+  if (usuario.gestor) {
+    const rightDiv = document.querySelector(".topbar .right");
+
+    if (rightDiv) {
+      // Cria o botão
+      const gestorBtn = document.createElement("button");
+      gestorBtn.textContent = "Painel do Gestor";
+      gestorBtn.id = "gestorBtn";
+
+      // Adiciona estilo básico (pode ajustar conforme seu layout)
+      gestorBtn.style.marginLeft = "10px";
+      gestorBtn.style.padding = "5px 10px";
+      gestorBtn.style.cursor = "pointer";
+      gestorBtn.style.borderRadius = "5px";
+      gestorBtn.style.border = "none";
+      gestorBtn.style.backgroundColor = "#3498db";
+      gestorBtn.style.color = "#fff";
+      gestorBtn.style.fontWeight = "bold";
+
+      // Redireciona para página do gestor ao clicar
+      gestorBtn.addEventListener("click", () => {
+        window.location.href = "/codigo/public/modulos/editorObras.html";
+      });
+
+      // Adiciona o botão no header
+      rightDiv.appendChild(gestorBtn);
+    }
+  }
 });
+
