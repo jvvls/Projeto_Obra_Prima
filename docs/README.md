@@ -326,12 +326,16 @@ Esta seção apresenta os módulos e APIs utilizados na solução
 
 **Images**:
 
-Todas as imagens foram geradas por meio do Sora do chatGPT e não tem autoria direta.
+Todas as imagens foram obtidas pelo site de imagens sem direito autoral:
+[https://www.pexels.com/pt-br/](https://www.pexels.com/pt-br/)
 
 **Scripts:**
 
 - Leaflet - [http://https://leafletjs.com/](http://https://leafletjs.com/)
 - Chart Js - [https://www.chartjs.org/](https://www.chartjs.org/)
+
+**Fontes**
+-Font Awesome (Ícones) - [https://fontawesome.com/](https://fontawesome.com/)
 
 # Referências
 
