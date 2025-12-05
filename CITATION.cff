@@ -16,20 +16,21 @@ authors:
     given-names: Lucas
   - name-suffix: Professor
     affiliation: PUC Minas
-    family-names: Andrade
-    given-names: Michelle Hanne Soares de
+    family-names: Soares de Andrade
+    given-names: Michelle Hanne
   - name-suffix: Professor
     affiliation: PUC Minas
-    family-names: Lacerda
-    given-names: Lucca Soares de Paiva
+    family-names: Soares de Paiva Lacerda
+    given-names: Lucca
   - name-suffix: Professor
     affiliation: PUC Minas
-    family-names: Pereira
-    given-names: Daniel Machado Osório
+    family-names: Machado Osório Pereira
+    given-names: Daniel
 keywords:
   - obras públicas
   - transparência
-repository-code: https://github.com/ICEI-PUC-Minas-PMGES-TI/pmg-es-2025-2-ti1-2401100-obraspublicas.git
+repository-code: https://github.com/ICEI-PUC-Minas-PMGES-TI/pmg-es-2025-2-ti1-2401100-obraspublicas
 license: CC-BY-4.0
 version: 1.0.0
 date-released: 2025-11-27
+
