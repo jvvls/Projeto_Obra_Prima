@@ -1,4 +1,4 @@
-const API = "https://projeto-obra-prima.onrender.com/api/usuarios";
+const API = "https://projeto-obra-prima.onrender.com/usuarios";
 const form = document.getElementById("formCidadao");
 
 // Toast simples

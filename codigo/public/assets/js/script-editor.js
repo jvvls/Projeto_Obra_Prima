@@ -4,7 +4,7 @@ let obraEditandoId = null;
 let editIndex = null;            
 let timelineAtual = [];          
 
-const API_URL = 'https://projeto-obra-prima.onrender.com/api/obras'; 
+const API_URL = 'https://projeto-obra-prima.onrender.com/obras'; 
 
 const filtros = {
   q: "",
@@ -898,7 +898,7 @@ document.getElementById('homeBtn').addEventListener('click', () => {
 
 document.getElementById('logoutBtn').addEventListener('click', () => {
   localStorage.removeItem('usuarioLogado');
-  window.location.href = 'login.html';
+  window.location.href = 'modulos/login.html';
 });
 
 toggleFontBtn.addEventListener('click', () => {
@@ -914,7 +914,7 @@ window.addEventListener("DOMContentLoaded", () => {
   const usuario = JSON.parse(localStorage.getItem("usuarioLogado"));
 
   if (!usuario) {
-    window.location.href = "login.html";
+    window.location.href = "modulos/login.html";
     return;
   }
 

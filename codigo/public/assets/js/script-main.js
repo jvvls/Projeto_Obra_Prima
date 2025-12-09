@@ -2,8 +2,8 @@
 // CONFIGURAÇÕES E VARIÁVEIS GLOBAIS
 // ======================================================
 
-const API = "https://projeto-obra-prima.onrender.com/api/obras";
-const USUARIOS_API = "https://projeto-obra-prima.onrender.com/api/usuarios";
+const API = "https://projeto-obra-prima.onrender.com/obras";
+const USUARIOS_API = "https://projeto-obra-prima.onrender.com/usuarios";
 
 const sidebar = document.querySelector('.sidebar');
 const toggleSidebarBtn = document.getElementById('toggleSidebar');
@@ -61,12 +61,12 @@ document.addEventListener('click', (e) => {
 });
 
 document.getElementById('homeBtn').addEventListener('click', () => {
-  window.location.href = '/codigo/public/index.html';
+  window.location.href = 'index.html';
 });
 
 document.getElementById('logoutBtn').addEventListener('click', () => {
   localStorage.removeItem('usuarioLogado');
-  window.location.href = 'login.html';
+  window.location.href = 'assets/modulos/login.html';
 });
 
 toggleFontBtn.addEventListener('click', () => {
@@ -761,7 +761,7 @@ window.addEventListener("DOMContentLoaded", () => {
       gestorBtn.style.fontWeight = "bold";
 
       gestorBtn.addEventListener("click", () => {
-        window.location.href = "/codigo/public/modulos/editorObras.html";
+        window.location.href = "modulos/editorObras.html";
       });
 
       rightDiv.appendChild(gestorBtn);
