@@ -40,7 +40,7 @@ function verificarLogin() {
     
     if (heroButtons) {
       heroButtons.innerHTML = `
-        <button class="btn btn-primary" onclick="window.location.href='login.html'">
+        <button class="btn btn-primary" onclick="window.location.href='/codigo/public/modulos/login.html'">
           <i class="fa fa-user"></i> Fazer Login para Acessar
         </button>
       `;
