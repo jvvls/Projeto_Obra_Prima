@@ -215,7 +215,7 @@
           {
             "tipo": "imagem",
             "nomeArquivo": "obra-1.jpg",
-            "url": "/codigo/public/assets/images/obra1.png"
+            "url": "/assets/images/obra1.png"
           }
         ] 
       ],
@@ -299,7 +299,7 @@
         {
           "tipo": "imagem",
           "nomeArquivo": "obra-2.jpg",
-          "url": "/codigo/public/assets/images/obra2.jpg"
+          "url": "/assets/images/obra2.jpg"
         },
         {
           "tipo": "documento",
@@ -353,7 +353,7 @@
         {
           "tipo": "imagem",
           "nomeArquivo": "obra-3.jpg",
-          "url": "/codigo/public/assets/images/obra3.jpg"
+          "url": "/assets/images/obra3.jpg"
         },
         {
           "tipo": "documento",
@@ -441,7 +441,7 @@
         {
           "tipo": "imagem",
           "nomeArquivo": "obra-4.jpg",
-          "url": "/codigo/public/assets/images/obra4.jpg"
+          "url": "/assets/images/obra4.jpg"
         },
         {
           "tipo": "documento",
@@ -529,7 +529,7 @@
         {
           "tipo": "imagem",
           "nomeArquivo": "obra-5.jpg",
-          "url": "/codigo/public/assets/images/obra5.jpg"
+          "url": "/assets/images/obra5.jpg"
         },
         {
           "tipo": "documento",
@@ -581,7 +581,7 @@
         {
           "tipo": "imagem",
           "nomeArquivo": "obra-6.jpg",
-          "url": "/codigo/public/assets/images/obra6.jpg"
+          "url": "/assets/images/obra6.jpg"
         },
         {
           "tipo": "documento",
@@ -666,7 +666,7 @@
         {
           "tipo": "imagem",
           "nomeArquivo": "obra-7.jpg",
-          "url": "/codigo/public/assets/images/obra7.png"
+          "url": "/assets/images/obra7.png"
         },
         {
           "tipo": "documento",
@@ -720,7 +720,7 @@
         {
           "tipo": "imagem",
           "nomeArquivo": "obra-8.jpg",
-          "url": "/codigo/public/assets/images/obra8.jpg"
+          "url": "/assets/images/obra8.jpg"
         },
         {
           "tipo": "documento",
@@ -774,7 +774,7 @@
         {
           "tipo": "imagem",
           "nomeArquivo": "obra-9.jpg",
-          "url": "/codigo/public/assets/images/obra9.jpg"
+          "url": "/assets/images/obra9.jpg"
         },
         {
           "tipo": "documento",
@@ -828,7 +828,7 @@
         {
           "tipo": "imagem",
           "nomeArquivo": "obra-10.jpg",
-          "url": "/codigo/public/assets/images/obra10.jpeg"
+          "url": "/assets/images/obra10.jpeg"
         },
         {
           "tipo": "documento",
@@ -882,7 +882,7 @@
         {
           "tipo": "imagem",
           "nomeArquivo": "obra-11.jpg",
-          "url": "/codigo/public/assets/images/obra11.jpg"
+          "url": "/assets/images/obra11.jpg"
         },
         {
           "tipo": "documento",
@@ -936,7 +936,7 @@
         {
           "tipo": "imagem",
           "nomeArquivo": "obra-12.jpg",
-          "url": "/codigo/public/assets/images/obra12.jpg"
+          "url": "/assets/images/obra12.jpg"
         },
         {
           "tipo": "documento",
@@ -990,7 +990,7 @@
         {
           "tipo": "imagem",
           "nomeArquivo": "obra-13.jpg",
-          "url": "/codigo/public/assets/images/obra13.jpg"
+          "url": "/assets/images/obra13.jpg"
         },
         {
           "tipo": "documento",
