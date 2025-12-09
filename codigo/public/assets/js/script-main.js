@@ -2,8 +2,8 @@
 // CONFIGURAÇÕES E VARIÁVEIS GLOBAIS
 // ======================================================
 
-const API = "http://localhost:3000/obras";
-const USUARIOS_API = "http://localhost:3000/usuarios";
+const API = "https://projeto-obra-prima.onrender.com/api/obras";
+const USUARIOS_API = "https://projeto-obra-prima.onrender.com/api/usuarios";
 
 const sidebar = document.querySelector('.sidebar');
 const toggleSidebarBtn = document.getElementById('toggleSidebar');

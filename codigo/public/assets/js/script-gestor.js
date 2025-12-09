@@ -1,4 +1,4 @@
-const API = "http://localhost:3000/usuarios";
+const API = "https://projeto-obra-prima.onrender.com/api/obras";
 const form = document.getElementById("formGestor");
 
 function mostrarMensagem(msg, tipo = "sucesso") {

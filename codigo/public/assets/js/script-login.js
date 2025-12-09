@@ -1,4 +1,4 @@
-const API = "http://localhost:3000/usuarios";
+const API = "https://projeto-obra-prima.onrender.com/api/usuarios";
 
 async function fazerLogin(event) {
     event.preventDefault();

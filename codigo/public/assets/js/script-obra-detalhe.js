@@ -7,7 +7,7 @@ if (!obraId) {
 
 async function carregarObra() {
     try {
-        const response = await fetch("http://localhost:3000/obras/" + obraId);
+        const response = await fetch("https://projeto-obra-prima.onrender.com/api/obras" + obraId);
         if (!response.ok) throw new Error("Erro ao carregar obra.");
 
         const obra = await response.json();

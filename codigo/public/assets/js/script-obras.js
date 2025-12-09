@@ -1,4 +1,4 @@
-const API = "http://localhost:3000/obras";
+const API = "https://projeto-obra-prima.onrender.com/api/obras";
 
 let obras = [];
 

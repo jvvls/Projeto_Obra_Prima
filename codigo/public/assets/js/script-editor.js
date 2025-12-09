@@ -4,7 +4,7 @@ let obraEditandoId = null;
 let editIndex = null;            
 let timelineAtual = [];          
 
-const API_URL = 'http://localhost:3000/obras'; 
+const API_URL = 'https://projeto-obra-prima.onrender.com/api/obras'; 
 
 const filtros = {
   q: "",
