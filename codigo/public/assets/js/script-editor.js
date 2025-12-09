@@ -898,7 +898,7 @@ document.getElementById('homeBtn').addEventListener('click', () => {
 
 document.getElementById('logoutBtn').addEventListener('click', () => {
   localStorage.removeItem('usuarioLogado');
-  window.location.href = 'modulos/login.html';
+  window.location.href = '/modulos/login.html';
 });
 
 toggleFontBtn.addEventListener('click', () => {
@@ -914,7 +914,7 @@ window.addEventListener("DOMContentLoaded", () => {
   const usuario = JSON.parse(localStorage.getItem("usuarioLogado"));
 
   if (!usuario) {
-    window.location.href = "modulos/login.html";
+    window.location.href = "/modulos/login.html";
     return;
   }
 

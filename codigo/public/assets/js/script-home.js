@@ -23,10 +23,10 @@ function verificarLogin() {
     
     if (heroButtons) {
       heroButtons.innerHTML = `
-        <button class="btn btn-primary" onclick="window.location.href='modulos/main.html'">
+        <button class="btn btn-primary" onclick="window.location.href='/modulos/main.html'">
           <i class="fa fa-road"></i> Ver Todas as Obras
         </button>
-        <button class="btn btn-ghost" onclick="window.location.href='modulos/feedback.html'">
+        <button class="btn btn-ghost" onclick="window.location.href='/modulos/feedback.html'">
           <i class="fa fa-message"></i> Enviar Feedback
         </button>
       `;

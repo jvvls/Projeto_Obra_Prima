@@ -30,7 +30,7 @@ async function fazerLogin(event) {
     }));
 
     alert(`Login realizado com sucesso! Bem-vindo(a), ${usuario.dadosPessoais.nomeCompleto}`);
-    window.location.href = "modulos/main.html";
+    window.location.href = "/modulos/main.html";
     return;
 }
 
