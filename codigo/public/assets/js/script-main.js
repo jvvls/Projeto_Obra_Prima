@@ -33,7 +33,7 @@ let obrasData = [];
 let mapInstance = null;
 let markersLayer = null;
 
-const placeholder = '/codigo/public/assets/images/Logo2.png';
+const placeholder = 'assets/images/Logo2.png';
 const formatCurrency = (value) => 'R$ ' + Number(value).toLocaleString('pt-BR');
 const normalize = (str) =>
   str ? str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").trim().toLowerCase() : '';
