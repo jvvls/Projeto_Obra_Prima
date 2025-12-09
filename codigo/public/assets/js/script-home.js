@@ -1,4 +1,4 @@
-const API = "http://localhost:3000";
+const API = "https://projeto-obra-prima.onrender.com";
 
 // =========================================
 // VERIFICAÇÃO DE LOGIN
