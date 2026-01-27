@@ -4,6 +4,8 @@ O projeto tem como objetivo criar uma plataforma digital que centralize informa�
 
 Além de informar, a plataforma busca aproximar moradores e gestores públicos, permitindo acompanhamento em tempo real e espaço para denúncias ou relatos de quem é diretamente impactado. Assim, promove-se maior transparência, fortalece-se o controle social e contribui-se para que as obras avancem de forma mais eficiente e organizada.
 
+O projeto está disponível em https://projeto-obra-prima.onrender.com/
+
 ## Alunos integrantes da equipe
 
 * Cezar Augusto Azevedo Nunes
@@ -106,17 +108,6 @@ Empresas e órgãos públicos responsáveis pelas obras, que terão um canal mod
 #### Tela de atualização de obra
 ![HomePage2](docs/images/AtualizarObra.png)
 
-## Instruções de utilização 
-
-> **IMPORTANTE: APAGUE ESSA SEÇÃO DE INSTRUÇÕES ANTES DE ENTREGAR SEU TRABALHO**
-
-No desenvolvimento desse trabalho, o grupo deverá utilizar esse repositório como local para entrega de todos os artefatos a serem produzidos. Em especial, o grupo deverá providenciar a alteração dos seguintes arquivos:
-
-* **Capa do projeto** (Esse arquivo aqui): Informação básica sobre o projeto, alunos do grupo e professores responsáveis;
-* **Arquivo CITATION.cff**: descritor do projeto, utilizado para geração do certificado ao final da disciplina.
-* **Pasta código**: todos os arquivos resultantes da programação do software.
-* **Pasta docs --> arquivo README.md**: Documentação completa do projeto.
-* **Pasta video**: video de apresentação do projeto.
 
 Toda a documentação do projeto é estruturada por meio da linguagem Markdown adotada pelo GitHub e por diversas outras plataformas. Aprenda Markdown e use para documentar o projeto:
 
