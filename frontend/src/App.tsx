@@ -7,10 +7,7 @@ import CadastroGestor from "./pages/CadastroGestor";
 import Obras from "./pages/Obras";
 import ObraDetalhe from "./pages/ObraDetalhe";
 import Main from "./pages/Main";
-
-function Placeholder({ nome }: { nome: string }) {
-  return <div className="p-8 text-neutral-900">{nome}</div>;
-}
+import EditorObras from "./pages/EditorObras";
 
 export default function App() {
   return (
@@ -24,7 +21,7 @@ export default function App() {
           <Route path="/obras" element={<Obras />} />
           <Route path="/obras/:id" element={<ObraDetalhe />} />
           <Route path="/main" element={<Main />} />
-          <Route path="/editor" element={<Placeholder nome="Editor" />} />
+          <Route path="/editor" element={<EditorObras />} />
         </Routes>
       </BrowserRouter>
     </AuthProvider>
