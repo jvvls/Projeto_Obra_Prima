@@ -3,6 +3,7 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 import mongoose from "mongoose";
 import authRoutes from "./routes/auth";
+import usuariosRoutes from "./routes/usuarios";
 
 const PORT = Number(process.env.PORT) || 4000;
 const MONGO_URI = process.env.MONGO_URI || "mongodb://mongo:27017/obraprima";
@@ -14,6 +15,7 @@ app.use(express.json());
 app.use(cookieParser());
 
 app.use("/api/auth", authRoutes);
+app.use("/api/usuarios", usuariosRoutes);
 
 app.get("/api/health", (_req, res) => res.json({ status: "ok" }));
 
