@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext";
 import Home from "./pages/Home";
+import Login from "./pages/Login";
 
 function Placeholder({ nome }: { nome: string }) {
   return <div className="p-8 text-neutral-900">{nome}</div>;
@@ -12,7 +13,7 @@ export default function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Placeholder nome="Login" />} />
+          <Route path="/login" element={<Login />} />
           <Route path="/cadastro/cidadao" element={<Placeholder nome="Cadastro Cidadão" />} />
           <Route path="/cadastro/gestor" element={<Placeholder nome="Cadastro Gestor" />} />
           <Route path="/obras" element={<Placeholder nome="Obras" />} />
