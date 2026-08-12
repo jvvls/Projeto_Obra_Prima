@@ -54,7 +54,7 @@ export default function ObraPainelGestao({ obra, modo, salvando, erroSalvar, onS
         ))}
       </div>
 
-      {aba === "editar" && (
+      <div className={aba === "editar" ? "" : "hidden"}>
         <ObraFormularioTab
           key={obra?._id ?? "novo"}
           obra={obra}
@@ -63,9 +63,13 @@ export default function ObraPainelGestao({ obra, modo, salvando, erroSalvar, onS
           onSalvar={onSalvar}
           onExcluir={modo === "edicao" ? onExcluir : undefined}
         />
-      )}
-      {aba === "linha-do-tempo" && <ObraLinhaDoTempoTab obra={obra} />}
-      {aba === "feedbacks" && <ObraFeedbacksTab obra={obra} />}
+      </div>
+      <div className={aba === "linha-do-tempo" ? "" : "hidden"}>
+        <ObraLinhaDoTempoTab obra={obra} />
+      </div>
+      <div className={aba === "feedbacks" ? "" : "hidden"}>
+        <ObraFeedbacksTab obra={obra} />
+      </div>
     </div>
   );
 }
