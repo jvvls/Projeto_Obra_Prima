@@ -21,6 +21,7 @@ export default function GestaoObras() {
 
   const [salvando, setSalvando] = useState(false);
   const [erroSalvar, setErroSalvar] = useState<string | null>(null);
+  const [formSujo, setFormSujo] = useState(false);
 
   useEffect(() => {
     if (carregando) return;
@@ -77,6 +78,17 @@ export default function GestaoObras() {
   const modo: "vazio" | "novo" | "edicao" = selecaoId === null ? "vazio" : selecaoId === "novo" ? "novo" : "edicao";
   const obraSelecionada = selecaoId && selecaoId !== "novo" ? obras.find((o) => o._id === selecaoId) ?? null : null;
 
+  function confirmarTrocaSeSujo() {
+    if (!formSujo) return true;
+    return window.confirm("Há alterações não salvas nesta obra. Deseja descartá-las?");
+  }
+
+  function irParaNovaObra() {
+    if (!confirmarTrocaSeSujo()) return;
+    setFormSujo(false);
+    setSelecaoId("novo");
+  }
+
   async function handleSalvarObra(payload: Partial<Obra>) {
     setSalvando(true);
     setErroSalvar(null);
@@ -85,10 +97,12 @@ export default function GestaoObras() {
         const atualizada = await atualizarObra(selecaoId, payload);
         setObras((prev) => prev.map((o) => (o._id === atualizada._id ? atualizada : o)));
         setSelecaoId(atualizada._id);
+        setFormSujo(false);
       } else {
         const criada = await criarObra(payload);
         setObras((prev) => [...prev, criada]);
         setSelecaoId(criada._id);
+        setFormSujo(false);
       }
     } catch (err) {
       setErroSalvar((err as Error).message);
@@ -172,8 +186,12 @@ export default function GestaoObras() {
           onFiltroCidadeChange={setFiltroCidade}
           ordenarPor={ordenarPor}
           onOrdenarPorChange={setOrdenarPor}
-          onSelecionar={(id) => setSelecaoId(id)}
-          onNovaObra={() => setSelecaoId("novo")}
+          onSelecionar={(id) => {
+            if (!confirmarTrocaSeSujo()) return;
+            setFormSujo(false);
+            setSelecaoId(id);
+          }}
+          onNovaObra={irParaNovaObra}
         />
 
         <ObraPainelGestao
@@ -184,7 +202,8 @@ export default function GestaoObras() {
           erroSalvar={erroSalvar}
           onSalvar={handleSalvarObra}
           onExcluir={handleExcluirObra}
-          onNovaObra={() => setSelecaoId("novo")}
+          onNovaObra={irParaNovaObra}
+          onSujoChange={setFormSujo}
         />
       </main>
     </div>

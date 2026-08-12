@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { Marco, Obra } from "../../api/types";
 
 interface Props {
@@ -7,6 +7,7 @@ interface Props {
   erroSalvar: string | null;
   onSalvar: (payload: Partial<Obra>) => void;
   onExcluir?: () => void;
+  onSujoChange?: (sujo: boolean) => void;
 }
 
 const STATUS_OPCOES = ["Planejada", "Em andamento", "Paralisada", "Concluída"];
@@ -58,12 +59,21 @@ function calcularProgresso(marcos: Marco[]) {
 const inputClass = "w-full rounded-xl border border-surface-border px-3 py-2 text-sm shadow-sm";
 const labelClass = "mb-1 block text-sm font-semibold text-primary";
 
-export default function ObraFormularioTab({ obra, salvando, erroSalvar, onSalvar, onExcluir }: Props) {
+export default function ObraFormularioTab({ obra, salvando, erroSalvar, onSalvar, onExcluir, onSujoChange }: Props) {
   const [form, setForm] = useState<FormObra>(() => obraParaForm(obra));
   const [marcos, setMarcos] = useState<Marco[]>(() => (obra?.marcos ? [...obra.marcos] : []));
   const [marcoForm, setMarcoForm] = useState(MARCO_VAZIO);
   const [marcoEditIndex, setMarcoEditIndex] = useState<number | null>(null);
   const [erroLocal, setErroLocal] = useState<string | null>(null);
+
+  const primeiraRenderizacao = useRef(true);
+  useEffect(() => {
+    if (primeiraRenderizacao.current) {
+      primeiraRenderizacao.current = false;
+      return;
+    }
+    onSujoChange?.(true);
+  }, [form, marcos]);
 
   const progresso = calcularProgresso(marcos);
 

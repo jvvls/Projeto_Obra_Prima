@@ -12,6 +12,7 @@ interface Props {
   onSalvar: (payload: Partial<Obra>) => void;
   onExcluir: () => void;
   onNovaObra: () => void;
+  onSujoChange: (sujo: boolean) => void;
 }
 
 type Aba = "editar" | "linha-do-tempo" | "feedbacks";
@@ -22,7 +23,7 @@ const ABAS: [Aba, string][] = [
   ["feedbacks", "Feedbacks"],
 ];
 
-export default function ObraPainelGestao({ obra, modo, salvando, erroSalvar, onSalvar, onExcluir, onNovaObra }: Props) {
+export default function ObraPainelGestao({ obra, modo, salvando, erroSalvar, onSalvar, onExcluir, onNovaObra, onSujoChange }: Props) {
   const [aba, setAba] = useState<Aba>("editar");
 
   if (modo === "vazio") {
@@ -62,6 +63,7 @@ export default function ObraPainelGestao({ obra, modo, salvando, erroSalvar, onS
           erroSalvar={erroSalvar}
           onSalvar={onSalvar}
           onExcluir={modo === "edicao" ? onExcluir : undefined}
+          onSujoChange={onSujoChange}
         />
       </div>
       <div className={aba === "linha-do-tempo" ? "" : "hidden"}>
