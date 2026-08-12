@@ -122,7 +122,7 @@ export default function Main() {
         </div>
         {usuario.gestor && (
           <button
-            onClick={() => navigate("/editor")}
+            onClick={() => navigate("/gestor")}
             className="rounded-lg bg-blue-500 px-3 py-1.5 font-bold text-white"
           >
             Painel do Gestor

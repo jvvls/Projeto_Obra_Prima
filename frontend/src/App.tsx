@@ -7,7 +7,6 @@ import CadastroGestor from "./pages/CadastroGestor";
 import Obras from "./pages/Obras";
 import ObraDetalhe from "./pages/ObraDetalhe";
 import Main from "./pages/Main";
-import EditorObras from "./pages/EditorObras";
 import GestaoObras from "./pages/GestaoObras";
 
 export default function App() {
@@ -22,7 +21,6 @@ export default function App() {
           <Route path="/obras" element={<Obras />} />
           <Route path="/obras/:id" element={<ObraDetalhe />} />
           <Route path="/main" element={<Main />} />
-          <Route path="/editor" element={<EditorObras />} />
           <Route path="/gestor" element={<GestaoObras />} />
         </Routes>
       </BrowserRouter>
