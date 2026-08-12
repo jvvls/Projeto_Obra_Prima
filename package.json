@@ -1,30 +1,18 @@
 {
   "name": "pmg-es-2025-2-ti1-2401100-obraspublicas",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "O projeto tem como objetivo criar uma plataforma digital que centralize informações sobre obras públicas em Belo Horizonte, reunindo dados como prazos, custos, status de execução e responsáveis. A ideia é transformar informações que hoje são dispersas e burocráticas em algo acessível, transparente e fácil de entender pela população.",
-  "main": "index.js",
-  "directories": {
-    "doc": "docs"
-  },
+  "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "docker compose up --build"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ICEI-PUC-Minas-PMGES-TI/pmg-es-2025-2-ti1-2401100-obraspublicas.git"
   },
-  "keywords": [],
-  "author": "",
   "license": "ISC",
-  "type": "commonjs",
   "bugs": {
     "url": "https://github.com/ICEI-PUC-Minas-PMGES-TI/pmg-es-2025-2-ti1-2401100-obraspublicas/issues"
   },
-  "homepage": "https://github.com/ICEI-PUC-Minas-PMGES-TI/pmg-es-2025-2-ti1-2401100-obraspublicas#readme",
-  "dependencies": {
-    "cors": "^2.8.5",
-    "express": "^5.1.0",
-    "json-server": "^1.0.0-beta.3",
-    "path": "^0.12.7"
-  }
+  "homepage": "https://github.com/ICEI-PUC-Minas-PMGES-TI/pmg-es-2025-2-ti1-2401100-obraspublicas#readme"
 }
