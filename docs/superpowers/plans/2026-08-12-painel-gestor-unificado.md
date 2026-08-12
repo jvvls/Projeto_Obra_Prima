@@ -15,6 +15,7 @@
 - No backend/API changes — reuse `listarObras`, `criarObra`, `atualizarObra`, `excluirObra` from `frontend/src/api/obras.ts` exactly as they are.
 - Visual style per the design spec (`docs/superpowers/specs/2026-08-12-painel-gestor-unificado-design.md`): keep the existing `primary` green palette from `frontend/tailwind.config.ts`; use `rounded-xl`/`rounded-2xl` corners and `shadow-sm` consistently (an evolution of the current look, not a repaint); status badges get per-status colors (Concluída=emerald, Em andamento=amber, Paralisada=red, Planejada=neutral) instead of the flat primary badge used everywhere today.
 - Seeded test accounts (from `backend/src/seed/data.json`, available once `docker compose up --build` seeds the empty database): gestor login is `carlos.gestor@prefeitura.gov` / `gestor123` (tipo "Gestor"); citizen login is `gustavohgordiano@gmail.com` / `gustavo21hl` (tipo "Cidadão").
+- Small per-file helpers (`calcularProgresso`, `formatarMoeda`) are intentionally duplicated locally in each new component rather than extracted into a shared `lib`/`utils` module. This matches the codebase's existing convention — `Main.tsx`, `EditorObras.tsx`, `ObraDetalhesPanel.tsx`, and `Home.tsx` each already define their own local copies of equivalent formatters instead of sharing one. This is a deliberate style choice, not a DRY defect to fix.
 
 ---
 
