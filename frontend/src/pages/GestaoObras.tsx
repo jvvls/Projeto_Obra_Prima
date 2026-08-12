@@ -66,6 +66,14 @@ export default function GestaoObras() {
     return resultado;
   }, [obras, busca, filtroStatus, filtroCidade, ordenarPor]);
 
+  const stats = useMemo(() => {
+    const total = obras.length;
+    const andamento = obras.filter((o) => o.status === "Em andamento").length;
+    const concluidas = obras.filter((o) => o.status === "Concluída").length;
+    const feedbacks = obras.reduce((acc, o) => acc + (o.feedbacks?.length ?? 0), 0);
+    return { total, andamento, concluidas, feedbacks };
+  }, [obras]);
+
   const modo: "vazio" | "novo" | "edicao" = selecaoId === null ? "vazio" : selecaoId === "novo" ? "novo" : "edicao";
   const obraSelecionada = selecaoId && selecaoId !== "novo" ? obras.find((o) => o._id === selecaoId) ?? null : null;
 
@@ -133,6 +141,20 @@ export default function GestaoObras() {
           Sair
         </button>
       </header>
+
+      <section className="grid grid-cols-2 gap-3 px-5 pt-5 sm:grid-cols-4">
+        {[
+          { label: "Total de obras", valor: stats.total },
+          { label: "Em andamento", valor: stats.andamento },
+          { label: "Concluídas", valor: stats.concluidas },
+          { label: "Feedbacks recebidos", valor: stats.feedbacks },
+        ].map((item) => (
+          <div key={item.label} className="rounded-2xl border border-surface-border bg-white p-4 text-center shadow-sm">
+            <p className="text-2xl font-bold text-primary">{item.valor}</p>
+            <p className="text-sm text-neutral-600">{item.label}</p>
+          </div>
+        ))}
+      </section>
 
       {erroCarregar && <p className="px-5 pt-4 text-red-600">Erro ao buscar obras: {erroCarregar}</p>}
 
