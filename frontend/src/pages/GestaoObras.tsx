@@ -118,6 +118,7 @@ export default function GestaoObras() {
       await excluirObra(selecaoId);
       setObras((prev) => prev.filter((o) => o._id !== selecaoId));
       setSelecaoId(null);
+      setFormSujo(false);
     } catch (err) {
       setErroSalvar((err as Error).message);
     }
