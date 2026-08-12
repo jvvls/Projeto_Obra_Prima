@@ -6,6 +6,7 @@ import CadastroCidadao from "./pages/CadastroCidadao";
 import CadastroGestor from "./pages/CadastroGestor";
 import Obras from "./pages/Obras";
 import ObraDetalhe from "./pages/ObraDetalhe";
+import Main from "./pages/Main";
 
 function Placeholder({ nome }: { nome: string }) {
   return <div className="p-8 text-neutral-900">{nome}</div>;
@@ -22,7 +23,7 @@ export default function App() {
           <Route path="/cadastro/gestor" element={<CadastroGestor />} />
           <Route path="/obras" element={<Obras />} />
           <Route path="/obras/:id" element={<ObraDetalhe />} />
-          <Route path="/main" element={<Placeholder nome="Main" />} />
+          <Route path="/main" element={<Main />} />
           <Route path="/editor" element={<Placeholder nome="Editor" />} />
         </Routes>
       </BrowserRouter>
