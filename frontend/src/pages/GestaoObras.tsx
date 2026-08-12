@@ -1,9 +1,10 @@
 import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
-import { listarObras } from "../api/obras";
+import { atualizarObra, criarObra, excluirObra, listarObras } from "../api/obras";
 import type { Obra } from "../api/types";
 import ObraListaGestao from "../components/gestor/ObraListaGestao";
+import ObraPainelGestao from "../components/gestor/ObraPainelGestao";
 
 export default function GestaoObras() {
   const { usuario, carregando, logout } = useAuth();
@@ -17,6 +18,9 @@ export default function GestaoObras() {
   const [filtroStatus, setFiltroStatus] = useState("");
   const [filtroCidade, setFiltroCidade] = useState("");
   const [ordenarPor, setOrdenarPor] = useState<"titulo" | "dataInicio">("titulo");
+
+  const [salvando, setSalvando] = useState(false);
+  const [erroSalvar, setErroSalvar] = useState<string | null>(null);
 
   useEffect(() => {
     if (carregando) return;
@@ -64,6 +68,38 @@ export default function GestaoObras() {
 
   const modo: "vazio" | "novo" | "edicao" = selecaoId === null ? "vazio" : selecaoId === "novo" ? "novo" : "edicao";
   const obraSelecionada = selecaoId && selecaoId !== "novo" ? obras.find((o) => o._id === selecaoId) ?? null : null;
+
+  async function handleSalvarObra(payload: Partial<Obra>) {
+    setSalvando(true);
+    setErroSalvar(null);
+    try {
+      if (selecaoId && selecaoId !== "novo") {
+        const atualizada = await atualizarObra(selecaoId, payload);
+        setObras((prev) => prev.map((o) => (o._id === atualizada._id ? atualizada : o)));
+        setSelecaoId(atualizada._id);
+      } else {
+        const criada = await criarObra(payload);
+        setObras((prev) => [...prev, criada]);
+        setSelecaoId(criada._id);
+      }
+    } catch (err) {
+      setErroSalvar((err as Error).message);
+    } finally {
+      setSalvando(false);
+    }
+  }
+
+  async function handleExcluirObra() {
+    if (!selecaoId || selecaoId === "novo") return;
+    if (!window.confirm("Deseja excluir esta obra?")) return;
+    try {
+      await excluirObra(selecaoId);
+      setObras((prev) => prev.filter((o) => o._id !== selecaoId));
+      setSelecaoId(null);
+    } catch (err) {
+      setErroSalvar((err as Error).message);
+    }
+  }
 
   async function handleLogout() {
     await logout();
@@ -118,11 +154,16 @@ export default function GestaoObras() {
           onNovaObra={() => setSelecaoId("novo")}
         />
 
-        <div className="flex flex-1 flex-col items-center justify-center rounded-2xl border border-dashed border-surface-border bg-white p-10 text-center text-neutral-600 shadow-sm">
-          {modo === "vazio" && "Selecione uma obra na lista ao lado ou cadastre uma nova."}
-          {modo === "novo" && "Modo de criação selecionado (formulário chega na próxima etapa)."}
-          {modo === "edicao" && `Obra selecionada: ${obraSelecionada?.titulo ?? selecaoId}`}
-        </div>
+        <ObraPainelGestao
+          key={selecaoId ?? "vazio"}
+          obra={obraSelecionada}
+          modo={modo}
+          salvando={salvando}
+          erroSalvar={erroSalvar}
+          onSalvar={handleSalvarObra}
+          onExcluir={handleExcluirObra}
+          onNovaObra={() => setSelecaoId("novo")}
+        />
       </main>
     </div>
   );
