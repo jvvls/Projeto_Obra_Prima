@@ -6,6 +6,26 @@ Além de informar, a plataforma busca aproximar moradores e gestores públicos, 
 
 O projeto está disponível em https://projeto-obra-prima.onrender.com/
 
+## Refatoração da stack (2026)
+
+O projeto foi containerizado e migrado para uma stack moderna, mantendo a identidade visual e as funcionalidades originais:
+
+- **Orquestração:** Docker Compose — todo o ambiente (frontend, backend e banco) sobe com um único comando.
+- **Frontend:** React + TypeScript + Tailwind CSS (antes: HTML/CSS/JS vanilla).
+- **Backend:** Node.js + TypeScript + Express, responsável pela autenticação (login com senha hasheada e JWT em cookie httpOnly) e por todas as requisições ao banco (antes: json-server).
+- **Banco de dados:** MongoDB (antes: arquivo `db.json`).
+
+### Como rodar localmente
+
+```bash
+docker compose up --build
+```
+
+- Frontend: http://localhost:5173
+- Backend (API): http://localhost:4000/api
+
+Na primeira subida, o banco é populado automaticamente com os dados de exemplo já usados no projeto.
+
 ## Alunos integrantes da equipe
 
 * Cezar Augusto Azevedo Nunes
