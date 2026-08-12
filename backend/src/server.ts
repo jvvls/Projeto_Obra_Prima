@@ -5,6 +5,7 @@ import mongoose from "mongoose";
 import authRoutes from "./routes/auth";
 import usuariosRoutes from "./routes/usuarios";
 import obrasRoutes from "./routes/obras";
+import { seedIfEmpty } from "./seed";
 
 const PORT = Number(process.env.PORT) || 4000;
 const MONGO_URI = process.env.MONGO_URI || "mongodb://mongo:27017/obraprima";
@@ -23,6 +24,7 @@ app.get("/api/health", (_req, res) => res.json({ status: "ok" }));
 
 async function start() {
   await mongoose.connect(MONGO_URI);
+  await seedIfEmpty();
   app.listen(PORT, () => console.log(`Backend rodando na porta ${PORT}`));
 }
 
